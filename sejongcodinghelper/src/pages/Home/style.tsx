@@ -1,0 +1,157 @@
+import styled from "@emotion/styled";
+
+export const Title = styled.div`
+    display: flex;
+    flex-direction: column;
+    font-family: Pretendard;
+    font-size: 28pt;
+    font-weight: 700;
+    line-height: 1.5;
+    padding-top: 36px;
+    padding-left: 24px;
+    color: #28424F;
+`;
+
+export const SearchButton = styled.div`
+    display: flex;
+    flex-direction: column;
+    font-family: Pretendard;
+    font-size: 16pt;
+    font-weight: 700;
+    color: #C8001E;
+    padding-top: 36px;
+    padding-left: 24px;
+`
+
+export const SimilarProblem = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-direction: column;
+    font-family: Pretendard;
+    font-size: 16pt;
+    font-weight: 700;
+    line-height: 120%;
+    color: #28424F;
+    padding: 32px;
+    background: linear-gradient(216deg, rgba(191, 191, 191, 0.40) 1%, rgba(191, 191, 191, 0.60) 57%, #BFBFBF 100%);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+    margin-top: 60px;
+    margin-left: 24px;
+    width: 180px;
+    height: 200px;
+`
+
+export const ExamPractice = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-direction: column;
+    font-family: Pretendard;
+    font-size: 16pt;
+    font-weight: 700;
+    line-height: 120%;
+    color: #EDEDE0;
+    padding: 32px;
+    background: linear-gradient(44deg, #C3002F 0%, rgba(195, 0, 47, 0.60) 83%, rgba(195, 0, 47, 0.40) 100%);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+    margin-top: 60px;
+    margin-left: 40px;
+    width: 180px;
+    height: 200px;
+`
+
+export const RoadmapProblem = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-direction: column;
+    font-family: Pretendard;
+    font-size: 16pt;
+    font-weight: 700;
+    line-height: 120%;
+    color: #28424F;
+    padding: 32px;
+    background: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+    margin-top: 60px;
+    margin-left: 40px;
+    width: 180px;
+    height: 200px;
+`
+
+export const SejongRanking = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-direction: column;
+    font-family: Pretendard;
+    font-size: 16pt;
+    font-weight: 700;
+    line-height: 120%;
+    color: #28424F;
+    padding: 32px;
+    background: linear-gradient(37deg, #FDDA57 0%, rgba(253, 218, 87, 0.60) 53%, rgba(253, 218, 87, 0.40) 100%);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+    margin-top: 60px;
+    margin-left: 40px;
+    width: 180px;
+    height: 200px;
+`
+
+export const ClusteringProblemTitle = styled.div`
+    display: flex;
+    flex-direction: column;
+    font-family: Pretendard;
+    font-size: 20pt;
+    font-weight: 700;
+    line-height: 1.5;
+    padding-top: 60px;
+    padding-left: 24px;
+    color: #28424F;
+`;
+
+export const ClusteringProblem = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: Pretendard;
+    color: #28424F;
+    padding: 24px;
+    background: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+    margin-top: 32px;
+    margin-right: 40px;
+    width: 200px;
+    height: 220px;
+`
+
+export const Tag = styled.div`
+    display: flex;
+    flex-direction: column;
+    font-size: 10pt;
+    font-weight: 600;
+    color: #28424F;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 12px;
+    padding-right: 12px;
+    background: #E9E9E9;
+    border-radius: 20px;
+    margin-right: 16px;
+    height: 10pt;
+`
+
+export const ProblemTitle = styled.div`
+    display: flex;
+    flex-direction: column;
+    font-size: 16pt;
+    font-weight: 700;
+    color: #28424F;
+    padding-top: 20px;
+`
