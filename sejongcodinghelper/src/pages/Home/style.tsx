@@ -8,7 +8,7 @@ export const Title = styled.div`
     font-weight: 700;
     line-height: 1.5;
     padding-top: 36px;
-    padding-left: 24px;
+    padding-left: calc(-268.46154px + 28.36538vw + 24px);
     color: #28424F;
 `;
 
@@ -20,7 +20,7 @@ export const SearchButton = styled.div`
     font-weight: 700;
     color: #C8001E;
     padding-top: 36px;
-    padding-left: 24px;
+    padding-left: calc(-268.46154px + 28.36538vw + 24px);
 `
 
 export const SimilarProblem = styled.div`
@@ -39,8 +39,9 @@ export const SimilarProblem = styled.div`
     border-radius: 30px;
     margin-top: 60px;
     margin-left: 24px;
-    width: 180px;
-    height: 200px;
+    margin-bottom: 10px;
+    min-width: 180px;
+    min-height: 200px;
 `
 
 export const ExamPractice = styled.div`
@@ -55,12 +56,13 @@ export const ExamPractice = styled.div`
     color: #EDEDE0;
     padding: 32px;
     background: linear-gradient(44deg, #C3002F 0%, rgba(195, 0, 47, 0.60) 83%, rgba(195, 0, 47, 0.40) 100%);
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 10px rgba(0, 0, 0, 0.1);
     border-radius: 30px;
     margin-top: 60px;
     margin-left: 40px;
-    width: 180px;
-    height: 200px;
+    margin-bottom: 10px;
+    min-width: 180px;
+    min-height: 200px;
 `
 
 export const RoadmapProblem = styled.div`
@@ -79,8 +81,9 @@ export const RoadmapProblem = styled.div`
     border-radius: 30px;
     margin-top: 60px;
     margin-left: 40px;
-    width: 180px;
-    height: 200px;
+    margin-bottom: 10px;
+    min-width: 180px;
+    min-height: 200px;
 `
 
 export const SejongRanking = styled.div`
@@ -99,8 +102,9 @@ export const SejongRanking = styled.div`
     border-radius: 30px;
     margin-top: 60px;
     margin-left: 40px;
-    width: 180px;
-    height: 200px;
+    margin-bottom: 10px;
+    min-width: 180px;
+    min-height: 200px;
 `
 
 export const ClusteringProblemTitle = styled.div`
@@ -111,7 +115,7 @@ export const ClusteringProblemTitle = styled.div`
     font-weight: 700;
     line-height: 1.5;
     padding-top: 60px;
-    padding-left: 24px;
+    padding-left: calc(-268.46154px + 28.36538vw + 24px);
     color: #28424F;
 `;
 
@@ -127,8 +131,10 @@ export const ClusteringProblem = styled.div`
     border-radius: 30px;
     margin-top: 32px;
     margin-right: 40px;
-    width: 200px;
-    height: 220px;
+    margin-bottom: 10px;
+    min-width: 200px;
+    min-height: 220px;
+    scroll-snap-align: start;
 `
 
 export const Tag = styled.div`

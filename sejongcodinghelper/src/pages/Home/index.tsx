@@ -14,6 +14,10 @@ import {
 import HStack from '../../components/HStack';
 import VStack from '../../components/VStack';
 import Spacer from '../../components/Spacer';
+import { useMediaQuery } from 'react-responsive';
+import {
+    
+} from '../../assets/Image/*.svg'
 
 interface ButtonInfo {
     title: string,
@@ -69,24 +73,19 @@ function SejongRankingButton({buttonInfo}: {buttonInfo: ButtonInfo}): React.Reac
 
 function ClusteringProblems({problems}: {problems: Problem[]}): React.ReactElement {
     return (
-        <VStack style={{paddingLeft: '24px'}}>
-            <ClusteringProblemTitle>
-                종이들이 많이 찾는 문제
-            </ClusteringProblemTitle>
-
-            <HStack>
-                {problems.map((problem: Problem): React.ReactElement => <ClusteringProblemButton problem={problem} />)}
-            </HStack>
-        </VStack>
+        <HStack style={{overscrollBehaviorX: 'contain', overflowX: 'scroll', paddingLeft: 'calc(-268.46154px + 28.36538vw + 24px)'}}>
+            {problems.map((problem: Problem): React.ReactElement => <ClusteringProblemButton problem={problem} />)}
+        </HStack>
     );
 }
 
 function ClusteringProblemButton({problem}: {problem: Problem}): React.ReactElement {
     return (
-        <ClusteringProblem>
+        <ClusteringProblem style={{marginLeft: '10px'}}>
             <VStack>
                 <HStack>
-                    <img style={{width: '20px', height: '20px', aspectRatio: '1 / 1'}} alt={problem.tier} src={require(`../../assets/Image/${problem.tier}.svg`).default}></img>
+                    <p dangerouslySetInnerHTML={{ __html: '../../assets/Image/${problem.tier}.svg' }} ></p>
+                    {/* <img style={{width: '20px', height: '20px', aspectRatio: '1 / 1'}} alt={problem.tier} src={require(`../../assets/Image/${problem.tier}.svg`).default}></img> */}
                     <p style={{marginLeft: '16px'}}>{problem.number}</p>
                 </HStack>
 
@@ -146,11 +145,92 @@ function Home(): React.ReactElement {
                 "#구현",
                 "#문자열"
             ]
+        },
+        {
+            title: "카드 팩 구매하기",
+            number: "15823",
+            tier: "14",
+            tags: [
+                "#구현",
+                "#문자열"
+            ]
+        },
+        {
+            title: "카드 팩 구매하기",
+            number: "15823",
+            tier: "14",
+            tags: [
+                "#구현",
+                "#문자열"
+            ]
+        },
+        {
+            title: "카드 팩 구매하기",
+            number: "15823",
+            tier: "14",
+            tags: [
+                "#구현",
+                "#문자열"
+            ]
+        },
+        {
+            title: "카드 팩 구매하기",
+            number: "15823",
+            tier: "14",
+            tags: [
+                "#구현",
+                "#문자열"
+            ]
+        },
+        {
+            title: "카드 팩 구매하기",
+            number: "15823",
+            tier: "14",
+            tags: [
+                "#구현",
+                "#문자열"
+            ]
+        },
+        {
+            title: "카드 팩 구매하기",
+            number: "15823",
+            tier: "14",
+            tags: [
+                "#구현",
+                "#문자열"
+            ]
+        },
+        {
+            title: "카드 팩 구매하기",
+            number: "15823",
+            tier: "14",
+            tags: [
+                "#구현",
+                "#문자열"
+            ]
+        },
+        {
+            title: "카드 팩 구매하기",
+            number: "15823",
+            tier: "14",
+            tags: [
+                "#구현",
+                "#문자열"
+            ]
+        },
+        {
+            title: "카드 팩 구매하기",
+            number: "15823",
+            tier: "14",
+            tags: [
+                "#구현",
+                "#문자열"
+            ]
         }
     ])
-
+    
     return (
-        <VStack>
+        <VStack style={{overflow: 'hidden'}}>
             <Title>
                 수업에서 배운 내용을 알려주세요!<br />
                 문제를 추천해 드릴게요
@@ -158,8 +238,8 @@ function Home(): React.ReactElement {
             <SearchButton>
                 검색하러 가기
             </SearchButton>
-            
-            <HStack>
+
+            <HStack style={{ overscrollBehaviorX: 'contain', overflowX: 'scroll', paddingLeft: 'calc(-268.46154px + 28.36538vw + 24px)', maxWidth: '1200px'}}>
                 <SimilarProblemButton buttonInfo={{
                     title: '문제 추천 받으러 가기',
                     description: <p>
@@ -195,6 +275,10 @@ function Home(): React.ReactElement {
                     </p>
                 }} />
             </HStack>
+
+                <ClusteringProblemTitle>
+                    종이들이 많이 찾는 문제
+                </ClusteringProblemTitle>
 
             <ClusteringProblems problems={problems} />
         </VStack>
