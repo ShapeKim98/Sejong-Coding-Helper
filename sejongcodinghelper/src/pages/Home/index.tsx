@@ -15,9 +15,6 @@ import HStack from '../../components/HStack';
 import VStack from '../../components/VStack';
 import Spacer from '../../components/Spacer';
 import { useMediaQuery } from 'react-responsive';
-import {
-    
-} from '../../assets/Image/*.svg'
 
 interface ButtonInfo {
     title: string,
@@ -84,8 +81,7 @@ function ClusteringProblemButton({problem}: {problem: Problem}): React.ReactElem
         <ClusteringProblem style={{marginLeft: '10px'}}>
             <VStack>
                 <HStack>
-                    <p dangerouslySetInnerHTML={{ __html: '../../assets/Image/${problem.tier}.svg' }} ></p>
-                    {/* <img style={{width: '20px', height: '20px', aspectRatio: '1 / 1'}} alt={problem.tier} src={require(`../../assets/Image/${problem.tier}.svg`).default}></img> */}
+                    <img style={{width: '20px', height: '20px', aspectRatio: '1 / 1'}} alt={problem.tier} src={require(`../../assets/Image/${problem.tier}.svg`).default}></img>
                     <p style={{marginLeft: '16px'}}>{problem.number}</p>
                 </HStack>
 
