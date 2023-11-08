@@ -10,7 +10,7 @@ export const Title = styled.div`
     padding-top: 36px;
     padding-left: calc(-268.46154px + 28.36538vw + 24px);
     color: #28424F;
-`;
+`
 
 export const SearchButton = styled.div`
     display: flex;
@@ -38,7 +38,6 @@ export const SimilarProblem = styled.div`
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     border-radius: 30px;
     margin-top: 60px;
-    margin-left: 24px;
     margin-bottom: 10px;
     min-width: 180px;
     min-height: 200px;

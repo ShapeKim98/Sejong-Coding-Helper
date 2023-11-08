@@ -1,6 +1,7 @@
 import React, { ReactElement, useEffect } from 'react';
 import GlobalStyle from './style/globalStyle';
 import Home from './pages/Home'
+import ProblemResult from './pages/ProblemResult'
 import logo from './logo.svg';
 import './App.css';
 import Spacer from './components/Spacer';
@@ -33,7 +34,8 @@ function App() {
       <GlobalStyle />
       <VStack>
         <HeaderBar />
-        <Home />
+        {/* <Home /> */}
+        <ProblemResult />
       </VStack>
         
     </div>

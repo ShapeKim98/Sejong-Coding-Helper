@@ -1,78 +1,47 @@
 import React, { useCallback, useState} from 'react';
 import {
+    ResultProblem,
+    ProblemTitle,
+    Tag,
     Title,
     SearchButton,
-    SimilarProblem,
-    ExamPractice,
-    RoadmapProblem,
-    SejongRanking,
-    ClusteringProblemTitle,
-    ClusteringProblem,
-    Tag,
-    ProblemTitle
+    ResultProblemTitle,
+    DirectSearch,
+    RelativeKeyword,
+    RoadmapButton
 } from './style';
 import HStack from '../../components/HStack';
 import VStack from '../../components/VStack';
-import Spacer from '../../components/Spacer';
-import { useMediaQuery } from 'react-responsive';
 import Problem from '../../models/model';
+import Spacer from '../../components/Spacer';
 
-interface ButtonInfo {
-    title: string,
-    description: React.ReactElement
-}
-
-function SimilarProblemButton({buttonInfo}: {buttonInfo: ButtonInfo}): React.ReactElement {
+function RelativeKeywordButton({keyword}: {keyword: string}): React.ReactElement {
     return (
-        <SimilarProblem>
-            <p>{buttonInfo.description}</p>
-
-            <p style={{fontSize: '12pt', fontWeight: '600'}}>{buttonInfo.title}</p>
-        </SimilarProblem>
+        <RelativeKeyword>
+            {keyword}
+        </RelativeKeyword>
     );
 }
 
-function ExamPracticeButton({buttonInfo}: {buttonInfo: ButtonInfo}): React.ReactElement {
+function RelativeKeywords({relativeKeywords}: {relativeKeywords: string[]}): React.ReactElement {
     return (
-        <ExamPractice>
-            <p>{buttonInfo.description}</p>
-
-            <p style={{fontSize: '12pt', fontWeight: '600'}}>{buttonInfo.title}</p>
-        </ExamPractice>
+        <VStack style={{height: '240px', display: 'flex', flexDirection: 'column', flexWrap: 'wrap'}}>
+            {relativeKeywords.map((relativeKeyword: string): React.ReactElement => <RelativeKeywordButton keyword={relativeKeyword} /> )}
+        </VStack>
     );
 }
 
-function RoadmapProblemButton({buttonInfo}: {buttonInfo: ButtonInfo}): React.ReactElement {
-    return (
-        <RoadmapProblem>
-            <p>{buttonInfo.description}</p>
-
-            <p style={{fontSize: '12pt', fontWeight: '600'}}>{buttonInfo.title}</p>
-        </RoadmapProblem>
-    )
-}
-
-function SejongRankingButton({buttonInfo}: {buttonInfo: ButtonInfo}): React.ReactElement {
-    return (
-        <SejongRanking>
-            <p>{buttonInfo.description}</p>
-
-            <p style={{fontSize: '12pt', fontWeight: '600'}}>{buttonInfo.title}</p>
-        </SejongRanking>
-    )
-}
-
-function ClusteringProblems({problems}: {problems: Problem[]}): React.ReactElement {
+function ResultProblems({problems}: {problems: Problem[]}): React.ReactElement {
     return (
         <HStack style={{overscrollBehaviorX: 'contain', overflowX: 'scroll', paddingLeft: 'calc(-268.46154px + 28.36538vw + 24px)'}}>
-            {problems.map((problem: Problem): React.ReactElement => <ClusteringProblemButton problem={problem} />)}
+            {problems.map((problem: Problem): React.ReactElement => <ResultProblemButton problem={problem} />)}
         </HStack>
     );
 }
 
-function ClusteringProblemButton({problem}: {problem: Problem}): React.ReactElement {
+function ResultProblemButton({problem}: {problem: Problem}): React.ReactElement {
     return (
-        <ClusteringProblem>
+        <ResultProblem>
             <VStack>
                 <HStack>
                     <img style={{width: '20px', height: '20px', aspectRatio: '1 / 1'}} alt={problem.tier} src={require(`../../assets/Image/${problem.tier}.svg`).default}></img>
@@ -85,11 +54,11 @@ function ClusteringProblemButton({problem}: {problem: Problem}): React.ReactElem
             <HStack>
                 {problem.tags.map((tag: string): React.ReactElement => <Tag>{tag}</Tag>)}
             </HStack>
-        </ClusteringProblem>
+        </ResultProblem>
     );
 }
 
-function Home(): React.ReactElement {
+function ProblemResult(): React.ReactElement {
     const [problems] = useState<Problem[]>([
         {
             title: "우승자는 누구?",
@@ -218,61 +187,76 @@ function Home(): React.ReactElement {
             ]
         }
     ])
-    
+    const [relativeKeywords] = useState<string[]>([
+        "BFS",
+        "그래프",
+        "그래프 순회",
+        "벡트래킹",
+        "다익스트라"
+    ])
+    const [relativeRoadmaps] = useState<string[]>([
+        "우선순위 큐",
+        "힙",
+        "힙 정렬",
+        "합병 정렬과 퀵 정렬",
+        "사전",
+        "탐색트리",
+        "해시 테이블",
+        "그래프",
+        "그래프 순회",
+        "방향 그래프",
+        "최소 신장 트리",
+        "최단 경로",
+        "그래프 응용"
+    ])
+
     return (
         <VStack style={{overflow: 'hidden'}}>
             <Title>
-                수업에서 배운 내용을 알려주세요!<br />
-                문제를 추천해 드릴게요
+                <p style={{color: '#C8001E'}}>
+                    "깊이 우선 탐색을 배웠어"
+                </p>
+                에 대한 결과에요.
             </Title>
             <SearchButton>
                 검색하러 가기
             </SearchButton>
 
-            <HStack style={{ overscrollBehaviorX: 'contain', overflowX: 'scroll', paddingLeft: 'calc(-268.46154px + 28.36538vw + 24px)', maxWidth: '1200px'}}>
-                <SimilarProblemButton buttonInfo={{
-                    title: '문제 추천 받으러 가기',
-                    description: <p>
-                        연습하고 싶은<br />
-                        알고리즘이<br />
-                        있나요?<br />
-                        </p>
-                }} />
+            <ResultProblemTitle style={{marginLeft: 'calc(-268.46154px + 28.36538vw + 24px)'}}>
+                <p style={{color: '#C8001E'}}>DFS</p>
+                에 대한 문제를 찾았어요.
+            </ResultProblemTitle>
 
-                <ExamPracticeButton buttonInfo={{
-                    title: '연습하러 가기',
-                    description: <p>
-                        시험때만 되면<br />
-                        실수 하시나요?<br />
-                        </p>
-                }} />
+            <ResultProblems problems={problems} />
 
-                <RoadmapProblemButton buttonInfo={{
-                    title: '과목별 문제 로드맵 보러가기',
-                    description: <p>
-                        어떤 문제부터<br />
-                        풀어야 할지<br />
-                        막막하신가요?<br />
-                    </p>
-                }} />
+            <HStack style={{marginLeft: 'calc(-268.46154px + 28.36538vw + 24px)'}}>
+                <VStack style={{marginRight: '60px'}}>
+                    <ResultProblemTitle>
+                        <p style={{color: '#C8001E'}}>DFS</p>와 관련있는 주제에요.
+                    </ResultProblemTitle>
+                    <DirectSearch>
+                        바로 검색하기
+                    </DirectSearch>
+                    <RelativeKeywords relativeKeywords={relativeKeywords} />
+                </VStack>
 
-                <SejongRankingButton buttonInfo={{
-                    title: '세종대 랭킹 보러가기',
-                    description: <p>
-                        나의 실력이<br />
-                        어느정도인지<br />
-                        궁금하신가요?<br />
-                    </p>
-                }} />
+                <VStack>
+                    <HStack style={{justifyContent: 'space-between'}}>
+                        <ResultProblemTitle>
+                            혹시 <p style={{color: '#C8001E'}}>알고리즘</p> 과목을 수강하고 계신가요?
+                        </ResultProblemTitle>
+                        <RoadmapButton>
+                            과목별 로드맵 보러가기
+                        </RoadmapButton>
+                    </HStack>
+                    <DirectSearch>
+                        바로 검색하기
+                    </DirectSearch>
+                    <RelativeKeywords relativeKeywords={relativeRoadmaps} />
+                </VStack>
             </HStack>
-
-                <ClusteringProblemTitle>
-                    종이들이 많이 찾는 문제
-                </ClusteringProblemTitle>
-
-            <ClusteringProblems problems={problems} />
         </VStack>
     );
 }
 
-export default Home;
+export default ProblemResult;
