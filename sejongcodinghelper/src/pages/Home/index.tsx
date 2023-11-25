@@ -1,4 +1,4 @@
-import React, { useCallback, useState} from 'react';
+import React, { useCallback, useState, useEffect} from 'react';
 import {
     Title,
     SearchButton,
@@ -13,9 +13,8 @@ import {
 } from './style';
 import HStack from '../../components/HStack';
 import VStack from '../../components/VStack';
-import Spacer from '../../components/Spacer';
-import { useMediaQuery } from 'react-responsive';
-import Problem from '../../models/model';
+import Problem from '../../models/Problem';
+import { Link } from 'react-router-dom';
 
 interface ButtonInfo {
     title: string,
@@ -71,11 +70,16 @@ function ClusteringProblems({problems}: {problems: Problem[]}): React.ReactEleme
 }
 
 function ClusteringProblemButton({problem}: {problem: Problem}): React.ReactElement {
+    const [imageUrl, setImageUrl] = useState('');
+    useEffect(() => {
+          setImageUrl(`https://static.solved.ac/tier_small/${problem.tier}.svg`);
+      }, [problem]);
+
     return (
         <ClusteringProblem>
             <VStack>
                 <HStack>
-                    <img style={{width: '20px', height: '20px', aspectRatio: '1 / 1'}} alt={problem.tier} src={require(`../../assets/Image/${problem.tier}.svg`).default}></img>
+                    <img style={{width: '20px', height: '20px', aspectRatio: '1 / 1'}} alt={problem.tier} src={imageUrl}></img>
                     <p style={{marginLeft: '16px'}}>{problem.number}</p>
                 </HStack>
 
@@ -220,7 +224,7 @@ function Home(): React.ReactElement {
     ])
     
     return (
-        <VStack style={{overflow: 'hidden'}}>
+        <VStack style={{overflow: 'hidden', paddingTop: '80px'}}>
             <Title>
                 수업에서 배운 내용을 알려주세요!<br />
                 문제를 추천해 드릴게요
@@ -247,14 +251,16 @@ function Home(): React.ReactElement {
                         </p>
                 }} />
 
-                <RoadmapProblemButton buttonInfo={{
-                    title: '과목별 문제 로드맵 보러가기',
-                    description: <p>
-                        어떤 문제부터<br />
-                        풀어야 할지<br />
-                        막막하신가요?<br />
-                    </p>
-                }} />
+                <Link to={'/roadmap'}>
+                    <RoadmapProblemButton buttonInfo={{
+                        title: '과목별 문제 로드맵 보러가기',
+                        description: <p>
+                            어떤 문제부터<br />
+                            풀어야 할지<br />
+                            막막하신가요?<br />
+                        </p>
+                    }} />
+                </Link>
 
                 <SejongRankingButton buttonInfo={{
                     title: '세종대 랭킹 보러가기',

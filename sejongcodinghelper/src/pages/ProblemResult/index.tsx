@@ -1,4 +1,4 @@
-import React, { useCallback, useState} from 'react';
+import React, { useCallback, useState, useEffect} from 'react';
 import {
     ResultProblem,
     ProblemTitle,
@@ -12,8 +12,7 @@ import {
 } from './style';
 import HStack from '../../components/HStack';
 import VStack from '../../components/VStack';
-import Problem from '../../models/model';
-import Spacer from '../../components/Spacer';
+import Problem from '../../models/Problem';
 
 function RelativeKeywordButton({keyword}: {keyword: string}): React.ReactElement {
     return (
@@ -40,11 +39,16 @@ function ResultProblems({problems}: {problems: Problem[]}): React.ReactElement {
 }
 
 function ResultProblemButton({problem}: {problem: Problem}): React.ReactElement {
+    const [imageUrl, setImageUrl] = useState('');
+    useEffect(() => {
+          setImageUrl(`https://static.solved.ac/tier_small/${problem.tier}.svg`);
+      }, [problem]);
+
     return (
         <ResultProblem>
             <VStack>
                 <HStack>
-                    <img style={{width: '20px', height: '20px', aspectRatio: '1 / 1'}} alt={problem.tier} src={require(`../../assets/Image/${problem.tier}.svg`).default}></img>
+                    <img style={{width: '20px', height: '20px', aspectRatio: '1 / 1'}} alt={problem.tier} src={imageUrl}></img>
                     <p style={{marginLeft: '16px'}}>{problem.number}</p>
                 </HStack>
 
@@ -211,7 +215,7 @@ function ProblemResult(): React.ReactElement {
     ])
 
     return (
-        <VStack style={{overflow: 'hidden'}}>
+        <VStack style={{overflow: 'hidden', paddingTop: '80px'}}>
             <Title>
                 <p style={{color: '#C8001E'}}>
                     "깊이 우선 탐색을 배웠어"

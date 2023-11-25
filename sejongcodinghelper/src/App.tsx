@@ -1,43 +1,30 @@
-import React, { ReactElement, useEffect } from 'react';
+import React, { ReactElement, useEffect, useRef, useState } from 'react';
 import GlobalStyle from './style/globalStyle';
 import Home from './pages/Home'
 import ProblemResult from './pages/ProblemResult'
-import logo from './logo.svg';
+import HeaderBar from './pages/Header'
 import './App.css';
-import Spacer from './components/Spacer';
-import HStack from './components/HStack';
-import VStack from './components/VStack';
-import Header from './components/Header'
-
-function HeaderButton({title}: {title: string}): React.ReactElement {
-  return (
-    <p style={{marginRight: '40px'}}>{title}</p>
-  );
-}
-
-function HeaderBar() {
-  return (
-    <Header>
-      <HStack>
-        <HeaderButton title={'문제 추천'} />
-        <HeaderButton title={'시험 연습'} />
-        <HeaderButton title={'랭킹'} />
-        <HeaderButton title={'검색하기'} />
-      </HStack>
-    </Header>
-  );
-}
+import Roadmap from './pages/Roadmap';
+import RoadmapDetail from './pages/RoadmapDetail';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 function App() {
   return (
-    <div style={{width: '100%', height: '100vh', background: 'linear-gradient(0deg, white 0%, white 100%), linear-gradient(270deg, rgba(195, 0, 47, 0.05) 0%, rgba(195, 0, 47, 0) 100%)'}}>
+    <div style={{position: 'relative', 
+                width: '100%', 
+                height: '100%', 
+                background: 'linear-gradient(270deg, rgba(200, 0, 30, 0.05) 0%, rgba(200, 0, 30, 0.00) 100%) #FFF'}}>
       <GlobalStyle />
-      <VStack>
-        <HeaderBar />
-        {/* <Home /> */}
-        <ProblemResult />
-      </VStack>
-        
+      <HeaderBar />
+      <BrowserRouter>
+        <Routes>
+          <Route path='/home' element={<Home />} />
+          <Route path='/problemresult' element={<ProblemResult />} />
+          <Route path='/roadmap' element={<Roadmap />} />
+          <Route path='/roadmapdetail' element={<RoadmapDetail />} />
+          <Route path='*' element={<Navigate to='/home' />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

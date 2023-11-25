@@ -12,7 +12,16 @@ export const Title = styled.div`
     color: #28424F;
 `
 
-export const ResultProblem = styled.div`
+export const Week = styled.div`
+    font-family: Pretendard;
+    font-size: 32px;
+    font-weight: 700;
+    margin-right: 20ox;
+    width: 90px;
+    height: 90px;
+`
+
+export const RoadmapProblem = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -27,7 +36,6 @@ export const ResultProblem = styled.div`
     margin-bottom: 10px;
     min-width: 200px;
     min-height: 220px;
-    scroll-snap-align: start;
 `
 
 export const ProblemTitle = styled.div`
@@ -53,54 +61,4 @@ export const Tag = styled.div`
     border-radius: 20px;
     margin-right: 16px;
     height: 10pt;
-`
-
-export const SearchButton = styled.div`
-    display: flex;
-    flex-direction: column;
-    font-family: Pretendard;
-    font-size: 16pt;
-    font-weight: 700;
-    color: #E3808E;
-    padding-top: 36px;
-    padding-left: calc(-268.46154px + 28.36538vw + 24px);
-`
-
-export const ResultProblemTitle = styled.div`
-    display: flex;
-    // flex-direction: column;
-    font-family: Pretendard;
-    font-size: 20pt;
-    font-weight: 700;
-    line-height: 1.5;
-    margin-top: 60px;
-    color: #28424F;
-`
-
-export const DirectSearch = styled.div`
-    color: #76979C;
-    font-size: 12pt;
-    font-family: Pretendard;
-    font-weight: 400;
-    margin-top: 16px;
-    margin-bottom: 20px;
-`
-
-export const RelativeKeyword = styled.div`
-    color: #28424F;
-    font-size: 16pt;
-    font-family: Pretendard;
-    font-weight: 600;
-    margin-bottom: 20px;
-    margin-right: 100px;
-`
-
-export const RoadmapButton = styled.div`
-    color: #C8001E;
-    font-size: 12pt;
-    font-family: Pretendard;
-    font-weight: 600;
-    margin-top: 76px;
-    margin-bottom: 20px;
-    margin-left: 64px;
 `

@@ -35,7 +35,7 @@ export const SimilarProblem = styled.div`
     color: #28424F;
     padding: 32px;
     background: linear-gradient(216deg, rgba(191, 191, 191, 0.40) 1%, rgba(191, 191, 191, 0.60) 57%, #BFBFBF 100%);
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
     border-radius: 30px;
     margin-top: 60px;
     margin-bottom: 10px;
@@ -55,7 +55,7 @@ export const ExamPractice = styled.div`
     color: #EDEDE0;
     padding: 32px;
     background: linear-gradient(44deg, #C3002F 0%, rgba(195, 0, 47, 0.60) 83%, rgba(195, 0, 47, 0.40) 100%);
-    box-shadow: 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 10px rgba(0, 0, 0, 0.05);
     border-radius: 30px;
     margin-top: 60px;
     margin-left: 40px;
@@ -97,7 +97,7 @@ export const SejongRanking = styled.div`
     color: #28424F;
     padding: 32px;
     background: linear-gradient(37deg, #FDDA57 0%, rgba(253, 218, 87, 0.60) 53%, rgba(253, 218, 87, 0.40) 100%);
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
     border-radius: 30px;
     margin-top: 60px;
     margin-left: 40px;
@@ -126,7 +126,7 @@ export const ClusteringProblem = styled.div`
     color: #28424F;
     padding: 24px;
     background: white;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
     border-radius: 30px;
     margin-top: 32px;
     margin-right: 40px;
