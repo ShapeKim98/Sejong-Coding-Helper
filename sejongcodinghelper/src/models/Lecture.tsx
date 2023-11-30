@@ -1,6 +1,7 @@
 interface Lecture {
-    title: string,
-    id: string,
+    name: string,
+    id: number,
+    lectureId: string,
     tags: string[]
 }
 
