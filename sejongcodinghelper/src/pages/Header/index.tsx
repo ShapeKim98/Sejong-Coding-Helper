@@ -2,7 +2,6 @@ import React, { useCallback, useState} from 'react';
 import HStack from '../../components/HStack';
 import VStack from '../../components/VStack';
 import { Link } from 'react-router-dom';
-import { AnimatePresence, motion, useAnimationControls } from "framer-motion";
 import {
     Header
 } from './style';
