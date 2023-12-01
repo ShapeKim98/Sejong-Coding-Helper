@@ -1,7 +1,8 @@
 interface Problem {
-    title: string,
-    number: string,
-    tier: string,
+    titleKo: string,
+    isSolvable: boolean,
+    level: number,
+    problemId: string,
     tags: string[]
 }
 

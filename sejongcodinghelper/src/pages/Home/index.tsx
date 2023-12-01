@@ -72,18 +72,18 @@ function ClusteringProblems({problems}: {problems: Problem[]}): React.ReactEleme
 function ClusteringProblemButton({problem}: {problem: Problem}): React.ReactElement {
     const [imageUrl, setImageUrl] = useState('');
     useEffect(() => {
-          setImageUrl(`https://static.solved.ac/tier_small/${problem.tier}.svg`);
+          setImageUrl(`https://static.solved.ac/tier_small/${problem.level}.svg`);
       }, [problem]);
 
     return (
         <ClusteringProblem>
             <VStack>
                 <HStack>
-                    <img style={{width: '20px', height: '20px', aspectRatio: '1 / 1'}} alt={problem.tier} src={imageUrl}></img>
-                    <p style={{marginLeft: '16px'}}>{problem.number}</p>
+                    <img style={{width: '20px', height: '20px', aspectRatio: '1 / 1'}} alt={problem.titleKo} src={imageUrl}></img>
+                    <p style={{marginLeft: '16px'}}>{problem.problemId}</p>
                 </HStack>
 
-                <ProblemTitle>{problem.title}</ProblemTitle>
+                <ProblemTitle>{problem.titleKo}</ProblemTitle>
             </VStack>
 
             <HStack>
@@ -94,134 +94,7 @@ function ClusteringProblemButton({problem}: {problem: Problem}): React.ReactElem
 }
 
 function Home(): React.ReactElement {
-    const [problems] = useState<Problem[]>([
-        {
-            title: "우승자는 누구?",
-            number: "5179",
-            tier: "8",
-            tags: [
-                "#구현",
-                "#문자열"
-            ]
-        },
-        {
-            title: "아침 태권도",
-            number: "29197",
-            tier: "9",
-            tags: [
-                "#구현",
-                "#문자열"
-            ]
-        },
-        {
-            title: "Haven",
-            number: "20503",
-            tier: "22",
-            tags: [
-                "#구현",
-                "#문자열"
-            ]
-        },
-        {
-            title: "뒤집기",
-            number: "1439",
-            tier: "7",
-            tags: [
-                "#구현",
-                "#문자열"
-            ]
-        },
-        {
-            title: "카드 팩 구매하기",
-            number: "15823",
-            tier: "14",
-            tags: [
-                "#구현",
-                "#문자열"
-            ]
-        },
-        {
-            title: "카드 팩 구매하기",
-            number: "15823",
-            tier: "14",
-            tags: [
-                "#구현",
-                "#문자열"
-            ]
-        },
-        {
-            title: "카드 팩 구매하기",
-            number: "15823",
-            tier: "14",
-            tags: [
-                "#구현",
-                "#문자열"
-            ]
-        },
-        {
-            title: "카드 팩 구매하기",
-            number: "15823",
-            tier: "14",
-            tags: [
-                "#구현",
-                "#문자열"
-            ]
-        },
-        {
-            title: "카드 팩 구매하기",
-            number: "15823",
-            tier: "14",
-            tags: [
-                "#구현",
-                "#문자열"
-            ]
-        },
-        {
-            title: "카드 팩 구매하기",
-            number: "15823",
-            tier: "14",
-            tags: [
-                "#구현",
-                "#문자열"
-            ]
-        },
-        {
-            title: "카드 팩 구매하기",
-            number: "15823",
-            tier: "14",
-            tags: [
-                "#구현",
-                "#문자열"
-            ]
-        },
-        {
-            title: "카드 팩 구매하기",
-            number: "15823",
-            tier: "14",
-            tags: [
-                "#구현",
-                "#문자열"
-            ]
-        },
-        {
-            title: "카드 팩 구매하기",
-            number: "15823",
-            tier: "14",
-            tags: [
-                "#구현",
-                "#문자열"
-            ]
-        },
-        {
-            title: "카드 팩 구매하기",
-            number: "15823",
-            tier: "14",
-            tags: [
-                "#구현",
-                "#문자열"
-            ]
-        }
-    ])
+    const [problems] = useState<Problem[] | null>(null);
     
     return (
         <VStack style={{overflow: 'hidden', paddingTop: '80px'}}>
@@ -276,7 +149,7 @@ function Home(): React.ReactElement {
                     종이들이 많이 찾는 문제
                 </ClusteringProblemTitle>
 
-            <ClusteringProblems problems={problems} />
+            {problems && <ClusteringProblems problems={problems} />}
         </VStack>
     );
 }

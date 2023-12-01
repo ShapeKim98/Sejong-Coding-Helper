@@ -8,7 +8,8 @@ import {
     Graduate
 } from './style';
 import Lecture from '../../models/Lecture';
-import { getRoadmapSearchAll } from '../../api/Roadmap/RoadmapAPI';
+import { GetRoadmapSearchAll } from '../../api/Roadmap/RoadmapAPI';
+import { Link } from 'react-router-dom';
 
 function Tags({lecture}: {lecture: Lecture}): React.ReactElement {
     return (
@@ -33,19 +34,24 @@ function LectureButtons({lectures}: {lectures: Lecture[]}): React.ReactElement {
     return (
         <HStack style={{overscrollBehaviorX: 'contain', overflowX: 'scroll', paddingLeft: 'calc(-268.46154px + 28.36538vw + 24px)'}}>
             {lectures.map((lecture: Lecture): React.ReactElement => 
+            <Link to={'/roadmapdetail'} state={{roadmapID: lecture.id}}>
             <LectureButton>
                 <LectureTitle lecture={lecture} />
                 <Tags lecture={lecture} />
-            </LectureButton>)}
+            </LectureButton>
+            </Link>)}
         </HStack>
     );
 }
 
 function Roadmap(): React.ReactElement {
-    const [roadmap, setRoadmap] = useState<Lecture[] | null>([])
-    useEffect(() => {
-        getRoadmapSearchAll(setRoadmap);
-    }, []);
+    const [roadmap, setRoadmap] = useState<Lecture[] | null>(null);
+
+    const hadleRoadmap = (data: Lecture[] | null) => {
+        setRoadmap(data);
+    }
+
+    GetRoadmapSearchAll(hadleRoadmap)
 
     return (
         <VStack style={{paddingTop: '80px'}}>

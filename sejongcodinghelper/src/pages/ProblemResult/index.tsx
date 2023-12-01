@@ -41,18 +41,18 @@ function ResultProblems({problems}: {problems: Problem[]}): React.ReactElement {
 function ResultProblemButton({problem}: {problem: Problem}): React.ReactElement {
     const [imageUrl, setImageUrl] = useState('');
     useEffect(() => {
-          setImageUrl(`https://static.solved.ac/tier_small/${problem.tier}.svg`);
+          setImageUrl(`https://static.solved.ac/tier_small/${problem.level}.svg`);
       }, [problem]);
 
     return (
         <ResultProblem>
             <VStack>
                 <HStack>
-                    <img style={{width: '20px', height: '20px', aspectRatio: '1 / 1'}} alt={problem.tier} src={imageUrl}></img>
-                    <p style={{marginLeft: '16px'}}>{problem.number}</p>
+                    <img style={{width: '20px', height: '20px', aspectRatio: '1 / 1'}} alt={problem.titleKo} src={imageUrl}></img>
+                    <p style={{marginLeft: '16px'}}>{problem.problemId}</p>
                 </HStack>
 
-                <ProblemTitle>{problem.title}</ProblemTitle>
+                <ProblemTitle>{problem.titleKo}</ProblemTitle>
             </VStack>
 
             <HStack>
@@ -63,134 +63,7 @@ function ResultProblemButton({problem}: {problem: Problem}): React.ReactElement 
 }
 
 function ProblemResult(): React.ReactElement {
-    const [problems] = useState<Problem[]>([
-        {
-            title: "우승자는 누구?",
-            number: "5179",
-            tier: "8",
-            tags: [
-                "#구현",
-                "#문자열"
-            ]
-        },
-        {
-            title: "아침 태권도",
-            number: "29197",
-            tier: "9",
-            tags: [
-                "#구현",
-                "#문자열"
-            ]
-        },
-        {
-            title: "Haven",
-            number: "20503",
-            tier: "22",
-            tags: [
-                "#구현",
-                "#문자열"
-            ]
-        },
-        {
-            title: "뒤집기",
-            number: "1439",
-            tier: "7",
-            tags: [
-                "#구현",
-                "#문자열"
-            ]
-        },
-        {
-            title: "카드 팩 구매하기",
-            number: "15823",
-            tier: "14",
-            tags: [
-                "#구현",
-                "#문자열"
-            ]
-        },
-        {
-            title: "카드 팩 구매하기",
-            number: "15823",
-            tier: "14",
-            tags: [
-                "#구현",
-                "#문자열"
-            ]
-        },
-        {
-            title: "카드 팩 구매하기",
-            number: "15823",
-            tier: "14",
-            tags: [
-                "#구현",
-                "#문자열"
-            ]
-        },
-        {
-            title: "카드 팩 구매하기",
-            number: "15823",
-            tier: "14",
-            tags: [
-                "#구현",
-                "#문자열"
-            ]
-        },
-        {
-            title: "카드 팩 구매하기",
-            number: "15823",
-            tier: "14",
-            tags: [
-                "#구현",
-                "#문자열"
-            ]
-        },
-        {
-            title: "카드 팩 구매하기",
-            number: "15823",
-            tier: "14",
-            tags: [
-                "#구현",
-                "#문자열"
-            ]
-        },
-        {
-            title: "카드 팩 구매하기",
-            number: "15823",
-            tier: "14",
-            tags: [
-                "#구현",
-                "#문자열"
-            ]
-        },
-        {
-            title: "카드 팩 구매하기",
-            number: "15823",
-            tier: "14",
-            tags: [
-                "#구현",
-                "#문자열"
-            ]
-        },
-        {
-            title: "카드 팩 구매하기",
-            number: "15823",
-            tier: "14",
-            tags: [
-                "#구현",
-                "#문자열"
-            ]
-        },
-        {
-            title: "카드 팩 구매하기",
-            number: "15823",
-            tier: "14",
-            tags: [
-                "#구현",
-                "#문자열"
-            ]
-        }
-    ])
+    const [problems] = useState<Problem[] | null>(null)
     const [relativeKeywords] = useState<string[]>([
         "BFS",
         "그래프",
@@ -231,7 +104,7 @@ function ProblemResult(): React.ReactElement {
                 에 대한 문제를 찾았어요.
             </ResultProblemTitle>
 
-            <ResultProblems problems={problems} />
+            {problems && <ResultProblems problems={problems} />}
 
             <HStack style={{marginLeft: 'calc(-268.46154px + 28.36538vw + 24px)'}}>
                 <VStack style={{marginRight: '60px'}}>

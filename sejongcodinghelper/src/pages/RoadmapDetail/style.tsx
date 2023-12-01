@@ -16,9 +16,13 @@ export const Week = styled.div`
     font-family: Pretendard;
     font-size: 32px;
     font-weight: 700;
-    margin-right: 20ox;
     width: 90px;
     height: 90px;
+    display: flex;
+    text-align : center;
+    justify-content: center;
+    align-items : center;
+    margin-right: 20px;
 `
 
 export const RoadmapProblem = styled.div`
