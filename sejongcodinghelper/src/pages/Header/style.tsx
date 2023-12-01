@@ -18,3 +18,14 @@ export const Header = styled.div`
     transition-property: width, height;
     transition-duration: 1s, 1s;
 `
+
+export const Title = styled.div`
+    color: #28424F;
+    font-family: Pretendard;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    cursor: pointer;
+    margin-right: 80px;
+`

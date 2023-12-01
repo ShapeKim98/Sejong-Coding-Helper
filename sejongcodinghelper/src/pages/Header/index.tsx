@@ -1,11 +1,12 @@
 import React, { useCallback, useState} from 'react';
 import HStack from '../../components/HStack';
 import VStack from '../../components/VStack';
-import { Link } from 'react-router-dom';
+import { Link, NavigateFunction } from 'react-router-dom';
 import {
-    Header
+    Header, Title
 } from './style';
 import { SimilarProblem } from '../Home/style';
+import { useNavigate } from 'react-router-dom';
 
 interface HeaderButtonInfo {
     title: string
@@ -25,6 +26,7 @@ interface RecomendProblemMenuButtonInfo {
     title: string
     currentHover: RecomendProblemMenuElements | undefined
     handleHover: () => void
+    path: string
 }
 
 enum HeaderElements {
@@ -40,9 +42,15 @@ enum RecomendProblemMenuElements {
     PracticeProblem = '실습문제와 비슷한 문제 찾기'
 }
   
-function RecomendProblemMenu({title, currentHover, handleHover}: RecomendProblemMenuButtonInfo): React.ReactElement {
+function RecomendProblemMenu({title, currentHover, handleHover, path}: RecomendProblemMenuButtonInfo): React.ReactElement {
+    const navigate = useNavigate();
+
+    const onClick = () => {
+        navigate(path)
+    }
+
     return (
-        <VStack onMouseOver={handleHover}>
+        <VStack onMouseOver={handleHover} onClick={onClick} style={{cursor: 'pointer'}}>
             <span style={{color: currentHover == title ? '#C8001E' : '#28424F'}}>{title}</span>
             <span style={{borderBottom: '1px solid #EDEDED', marginBottom: '15px', marginTop: '15px'}} />
         </VStack>
@@ -51,7 +59,7 @@ function RecomendProblemMenu({title, currentHover, handleHover}: RecomendProblem
 
 function HeaderButton({title, currentHover, handleHover}: HeaderButtonInfo): React.ReactElement {
     return (
-      <p style={{marginRight: '40px', color: currentHover == title ? '#C8001E' : '#28424F'}} onMouseOver={handleHover}>{title}</p>
+      <p style={{marginRight: '40px', color: currentHover == title ? '#C8001E' : '#28424F', cursor: 'pointer'}} onMouseOver={handleHover}>{title}</p>
     );
 }
 
@@ -77,7 +85,10 @@ function HeaderBarElements({
 
         function Elements(): React.ReactElement {
             return (
-                <HStack>
+                <HStack style={{alignItems: 'center'}}>
+                    <Link to={'/'}>
+                    <Title>Solved Sejong</Title>
+                    </Link>
                     <HeaderButton title={'문제 추천'} currentHover={hover} handleHover={setRecomendProblem} />
                     <HeaderButton title={'시험 연습'} currentHover={hover} handleHover={setTestPractice} />
                     <HeaderButton title={'랭킹'} currentHover={hover} handleHover={setRanking} />
@@ -92,9 +103,9 @@ function HeaderBarElements({
                 <VStack>
                    <Elements /> 
                     <span style={{paddingTop: '40px'}} onMouseOver={setRecomendProblem}>
-                        <RecomendProblemMenu title='과목별 문제 로드맵 보러가기' currentHover={recomendProblemMenuHover} handleHover={setRoadmap} />
-                        <RecomendProblemMenu title='비슷한 문제 풀어보기' currentHover={recomendProblemMenuHover} handleHover={setSimilarProblem} />
-                        <RecomendProblemMenu title='실습문제와 비슷한 문제 찾기' currentHover={recomendProblemMenuHover} handleHover={setPracticeProblem} />
+                        <RecomendProblemMenu title='과목별 문제 로드맵 보러가기' currentHover={recomendProblemMenuHover} handleHover={setRoadmap} path='/roadmap' />
+                        <RecomendProblemMenu title='비슷한 문제 풀어보기' currentHover={recomendProblemMenuHover} handleHover={setSimilarProblem} path='' />
+                        <RecomendProblemMenu title='실습문제와 비슷한 문제 찾기' currentHover={recomendProblemMenuHover} handleHover={setPracticeProblem} path='' />
                     </span>
                 </VStack>
             );

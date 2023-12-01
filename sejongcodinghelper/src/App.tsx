@@ -10,13 +10,11 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 function App() {
   return (
-    <div style={{position: 'relative', 
-                width: '100%', 
-                height: '100%', 
-                background: 'linear-gradient(270deg, rgba(200, 0, 30, 0.05) 0%, rgba(200, 0, 30, 0.00) 100%) #FFF'}}>
+    <div style={{width: '100%', 
+                height: '100%'}}>
       <GlobalStyle />
-      <HeaderBar />
       <BrowserRouter>
+          <HeaderBar />
         <Routes>
           <Route path='/home' element={<Home />} />
           <Route path='/problemresult' element={<ProblemResult />} />
