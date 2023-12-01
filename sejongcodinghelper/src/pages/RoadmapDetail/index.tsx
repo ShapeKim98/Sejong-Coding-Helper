@@ -87,7 +87,8 @@ function RoadmapDetail(): React.ReactElement {
             <Title>
                 {roadmap?.name}
             </Title>
-            <HStack style={{flexWrap: 'wrap', paddingTop: '60px', marginLeft: 'calc(-268.46154px + 28.36538vw + 24px)'}}>
+            <VStack style={{alignItems: 'center'}}>
+            <HStack style={{flexWrap: 'wrap', paddingTop: '60px'}}>
                 {Array.from({ length: 15 }, (_, index) => index + 1).map((week: number): React.ReactElement =>
                 {return(<Week style={{color: (currentWeek === week) ? '#ffffff' : '#28424F', 
                                     borderRadius: '50%', 
@@ -100,6 +101,7 @@ function RoadmapDetail(): React.ReactElement {
                                 >{week}주</Week>);}
                 )}
             </HStack>
+            </VStack>
             <ProblemList currentWeek={currentWeek} />
         </VStack>
     );
