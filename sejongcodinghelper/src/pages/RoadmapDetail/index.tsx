@@ -15,7 +15,7 @@ import {
     GetRoadmapProblemSearchWeek
 } from '../../api/Roadmap/RoadmapAPI';
 import { RoadmapProblemModel } from '../../models/RoadmapProblem';
-import { GetProblemFindID } from '../../api/Roadmap/ProblemAPI';
+import { GetProblemFindID } from '../../api/Problem/ProblemAPI';
 import Problem from '../../models/Problem';
 
 
