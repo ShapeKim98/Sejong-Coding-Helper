@@ -7,6 +7,7 @@ import axios from 'axios'
 import { logoutProc } from './api/Auth/Auth';
 import { Provider } from 'react-redux';
 import Store from './redux/Store';
+import { logout } from './redux/User';
 
 // axios설정
 axios.defaults.withCredentials = true;

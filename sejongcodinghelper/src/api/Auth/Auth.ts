@@ -1,11 +1,10 @@
 import Cookies from 'universal-cookie';
-import axios, { Axios, AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { isEmpty } from 'lodash';
 import { refreshToken, parseBoj } from '../User/User';
 import { logout, setUser } from '../../redux/User';
 import { RefreshToken } from '../../models/Token';
-import { config } from 'process';
-import { ActionCreatorWithPayload, AnyAction, Dispatch } from '@reduxjs/toolkit';
+import { AnyAction, Dispatch } from '@reduxjs/toolkit';
 
 const JWT_EXPIRY_TIME = 60 * 1000; // 만료 시간: 1분
 const cookies = new Cookies();
@@ -59,6 +58,7 @@ export function onSilentRefresh(dispatch: Dispatch<AnyAction>) {
         return;
       }
       axios.defaults.headers.common['Access_Token'] = accessToken;
+      console.log(accessToken)
       // 재발급 성공 시 refresh_token으로 사용자 정보를 다시 가져온다.
       getUserBojHandle(dispatch);
       setTimeout(() => {

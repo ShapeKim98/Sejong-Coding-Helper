@@ -1,19 +1,21 @@
 import React, { useEffect, useState} from 'react';
 import axios from 'axios';
 import Problem from '../../models/Problem';
+import { error } from 'console';
 
 export const GetProblemFindID = (params: number, handleProblem: (data: Problem | null) => void) => {
+    console.log(axios.defaults.headers.common['Access_Token'])
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get<Problem | null>('http://127.0.0.1:8080/api/v1/problem/find?problemId=' + params);
-                handleProblem(response.data);
-            } catch (error) {
-                console.error('GetProblemFindID -> ', error);
-                handleProblem(null);
+        axios.get<Problem | null>('https://univps.kr/api/v1/problem/find?problemId=' + params)
+        .then(result => {
+            if(result.status == 200) {
+                handleProblem(result.data)
+            } else {
+                handleProblem(null)
             }
-        }
-
-       fetchData();
+        })
+        .catch(error => {
+            console.error(error);
+        })
     }, [params]);
 }
