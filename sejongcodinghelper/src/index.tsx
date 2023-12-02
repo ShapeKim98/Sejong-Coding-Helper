@@ -4,6 +4,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import axios from 'axios'
+import { logoutProc } from './api/Auth/Auth';
+import { Provider } from 'react-redux';
+import Store from './redux/Store';
 
 // axios설정
 axios.defaults.withCredentials = true;
@@ -14,7 +17,7 @@ axios.interceptors.response.use(
   (error) => {
     // 응답 코드가 403일경우 리프레쉬 토큰 만료: 로그아웃 처리
     if (error.response?.status === 403) {
-      // logoutProc();
+      logoutProc(null);
     }
     return Promise.reject(error);
   },
@@ -24,9 +27,9 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  // <React.StrictMode>
+  <Provider store={Store}>
     <App />
-  // </React.StrictMode>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

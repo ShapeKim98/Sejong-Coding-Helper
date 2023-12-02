@@ -1,13 +1,16 @@
 import Cookies from 'universal-cookie';
-import axios from 'axios';
+import axios, { Axios, AxiosResponse } from 'axios';
 import { isEmpty } from 'lodash';
-import { refreshToken, parseBoj } from 'api/user';
-import { logout, setUser } from 'redux/user';
+import { refreshToken, parseBoj } from '../User/User';
+import { logout, setUser } from '../../redux/User';
+import { RefreshToken } from '../../models/Token';
+import { config } from 'process';
+import { ActionCreatorWithPayload, AnyAction, Dispatch } from '@reduxjs/toolkit';
 
 const JWT_EXPIRY_TIME = 60 * 1000; // 만료 시간: 1분
 const cookies = new Cookies();
 
-export function setRefreshTokenToCookie(refreshToken) {
+export function setRefreshTokenToCookie(refreshToken: Promise<AxiosResponse<any, any>>) {
   cookies.set('refresh_token', refreshToken, { sameSite: 'strict' });
 }
 
@@ -15,7 +18,7 @@ export function getRefreshTokenToCookie() {
   return cookies.get('refresh_token');
 }
 
-export function getHeaderRefreshTokenConfing() {
+export function getHeaderRefreshTokenConfing(): RefreshToken | null {
   const token = getRefreshTokenToCookie();
   if (isEmpty(token)) return null;
   return {
@@ -25,19 +28,19 @@ export function getHeaderRefreshTokenConfing() {
   };
 }
 
-export function getUserBojHandle(dispatch) {
+export function getUserBojHandle(dispatch: Dispatch<AnyAction>) {
   const refreshConfig = getHeaderRefreshTokenConfing();
-  parseBoj(refreshConfig)
+  refreshConfig && parseBoj(refreshConfig)
     .then((response) => {
-      const { claim, manager } = response.data;
-      dispatch(setUser({ bojHandle: claim, isAdmin: manager }));
+      const data: { claim: string, manager: boolean } = response.data;
+      dispatch(setUser({ bojHandle: data.claim, isAdmin: data.manager }));
     })
     .catch((e) => {
       logoutProc(dispatch);
     });
 }
 
-export function onSilentRefresh(dispatch) {
+export function onSilentRefresh(dispatch: Dispatch<AnyAction>) {
   const token = getRefreshTokenToCookie();
   if (isEmpty(token)) return null;
   const refreshConfig = {
@@ -73,7 +76,7 @@ export function onSilentRefresh(dispatch) {
  * 2. redux에 저장된 사용자 정보 삭제
  * 3. axios 헤더에 설정해둔 access 토큰 삭제
  */
-export function logoutProc(dispatch) {
+export function logoutProc(dispatch: Dispatch<AnyAction> | null) {
   cookies.remove('refresh_token');
   if (dispatch) dispatch(logout());
   axios.defaults.headers.common['Access_Token'] = '.';
