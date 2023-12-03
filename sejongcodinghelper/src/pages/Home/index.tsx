@@ -15,6 +15,7 @@ import HStack from '../../components/HStack';
 import VStack from '../../components/VStack';
 import Problem from '../../models/Problem';
 import { Link } from 'react-router-dom';
+import TagModel from '../../models/Tag';
 
 interface ButtonInfo {
     title: string,
@@ -87,7 +88,7 @@ function ClusteringProblemButton({problem}: {problem: Problem}): React.ReactElem
             </VStack>
 
             <HStack>
-                {problem.tags.map((tag: string): React.ReactElement => <Tag>{tag}</Tag>)}
+                {problem.tags.map((tag: TagModel): React.ReactElement => <Tag>{tag.name}</Tag>)}
             </HStack>
         </ClusteringProblem>
     );

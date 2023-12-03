@@ -15,8 +15,9 @@ import {
     GetRoadmapProblemSearchWeek
 } from '../../api/Roadmap/RoadmapAPI';
 import { RoadmapProblemModel } from '../../models/RoadmapProblem';
-import { GetProblemFindID } from '../../api/Roadmap/ProblemAPI';
+import { GetProblemFindID } from '../../api/Problem/ProblemAPI';
 import Problem from '../../models/Problem';
+import TagModel from '../../models/Tag';
 
 
 function ProblemButton({problemId}: {problemId: number}): React.ReactElement {
@@ -45,7 +46,7 @@ function ProblemButton({problemId}: {problemId: number}): React.ReactElement {
                 </VStack>
 
                 <HStack>
-                    {problem.tags.map((tag: string): React.ReactElement => <Tag>{tag}</Tag>)}
+                    {problem.tags.map((tag: TagModel): React.ReactElement => <Tag>{tag.name}</Tag>)}
                 </HStack>
             </RoadmapProblem>}
         </p>

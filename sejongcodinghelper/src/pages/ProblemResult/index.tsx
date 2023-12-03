@@ -13,6 +13,7 @@ import {
 import HStack from '../../components/HStack';
 import VStack from '../../components/VStack';
 import Problem from '../../models/Problem';
+import TagModel from '../../models/Tag';
 
 function RelativeKeywordButton({keyword}: {keyword: string}): React.ReactElement {
     return (
@@ -56,7 +57,7 @@ function ResultProblemButton({problem}: {problem: Problem}): React.ReactElement 
             </VStack>
 
             <HStack>
-                {problem.tags.map((tag: string): React.ReactElement => <Tag>{tag}</Tag>)}
+                {problem.tags.map((tag: TagModel): React.ReactElement => <Tag>{tag.name}</Tag>)}
             </HStack>
         </ResultProblem>
     );
