@@ -5,7 +5,7 @@ import {
 } from '../../models/Token';
 import Login from '../../models/Login';
 
-const PREFIX_URL = 'https://univps.kr/api/v1/user';
+const PREFIX_URL = '/api/v1/user';
 
 /**
  * 모든 유저 정보를 조회한다.

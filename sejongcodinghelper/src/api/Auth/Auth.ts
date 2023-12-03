@@ -58,6 +58,7 @@ export function onSilentRefresh(dispatch: Dispatch<AnyAction>) {
         return;
       }
       axios.defaults.headers.common['Access_Token'] = accessToken;
+      axios.defaults.headers.common['Refresh_Token'] = token
       console.log(accessToken)
       // 재발급 성공 시 refresh_token으로 사용자 정보를 다시 가져온다.
       getUserBojHandle(dispatch);

@@ -10,6 +10,7 @@ import Store from './redux/Store';
 import { logout } from './redux/User';
 
 // axios설정
+axios.defaults.baseURL = 'http://127.0.0.1:8080'
 axios.defaults.withCredentials = true;
 axios.interceptors.response.use(
   (response) => {

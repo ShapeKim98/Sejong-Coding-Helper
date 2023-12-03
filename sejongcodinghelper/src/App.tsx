@@ -39,13 +39,13 @@ function App() {
                 height: '100%'}}>
       <GlobalStyle />
       <BrowserRouter>
+      <HeaderBar />
         <Routes>
             <Route element={<PrivateRoute userAuthentication={false} />}>
                 <Route path="/login" element={<Login />} />
             </Route>
 
             <Route element={<PrivateRoute userAuthentication={true} />}>
-              <Route element={<HeaderBar />} />
               <Route path='/home' element={<Home />} />
               <Route path='/problemresult' element={<ProblemResult />} />
               <Route path='/roadmap' element={<Roadmap />} />
