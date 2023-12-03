@@ -16,6 +16,9 @@ import VStack from '../../components/VStack';
 import Problem from '../../models/Problem';
 import { Link } from 'react-router-dom';
 import TagModel from '../../models/Tag';
+import ClusteringProblemModel from '../../models/ClusteringProblem';
+import { GetProblemFindID } from '../../api/Problem/ProblemAPI';
+import { GetMostSolvedProblem } from '../../api/ClusteringProblem/ClusteringProblemAPI';
 
 interface ButtonInfo {
     title: string,
@@ -62,40 +65,54 @@ function SejongRankingButton({buttonInfo}: {buttonInfo: ButtonInfo}): React.Reac
     )
 }
 
-function ClusteringProblems({problems}: {problems: Problem[]}): React.ReactElement {
+function ClusteringProblems({problems}: {problems: ClusteringProblemModel[]}): React.ReactElement {
     return (
         <HStack style={{overscrollBehaviorX: 'contain', overflowX: 'scroll', paddingLeft: 'calc(-268.46154px + 28.36538vw + 24px)'}}>
-            {problems.map((problem: Problem): React.ReactElement => <ClusteringProblemButton problem={problem} />)}
+            {problems.map((problem: ClusteringProblemModel): React.ReactElement => <ClusteringProblemButton problemID={problem.problemId} />)}
         </HStack>
     );
 }
 
-function ClusteringProblemButton({problem}: {problem: Problem}): React.ReactElement {
+function ClusteringProblemButton({problemID}: {problemID: number}): React.ReactElement {
+    const [problem, setProblem] = useState<Problem | null>(null);
     const [imageUrl, setImageUrl] = useState('');
+    
+    const handleProblem = (data: Problem | null) => {
+        setProblem(data)
+    }
+
+    GetProblemFindID(problemID, handleProblem);
+
     useEffect(() => {
-          setImageUrl(`https://static.solved.ac/tier_small/${problem.level}.svg`);
+          setImageUrl(`https://static.solved.ac/tier_small/${problem?.level}.svg`);
       }, [problem]);
 
     return (
         <ClusteringProblem>
             <VStack>
                 <HStack>
-                    <img style={{width: '20px', height: '20px', aspectRatio: '1 / 1'}} alt={problem.titleKo} src={imageUrl}></img>
-                    <p style={{marginLeft: '16px'}}>{problem.problemId}</p>
+                    <img style={{width: '20px', height: '20px', aspectRatio: '1 / 1'}} alt={problem?.titleKo} src={imageUrl}></img>
+                    <p style={{marginLeft: '16px'}}>{problem?.problemId}</p>
                 </HStack>
 
-                <ProblemTitle>{problem.titleKo}</ProblemTitle>
+                <ProblemTitle>{problem?.titleKo}</ProblemTitle>
             </VStack>
 
             <HStack>
-                {problem.tags.map((tag: TagModel): React.ReactElement => <Tag>{tag.name}</Tag>)}
+                {problem?.tags.map((tag: string): React.ReactElement => <Tag>{tag}</Tag>)}
             </HStack>
         </ClusteringProblem>
     );
 }
 
 function Home(): React.ReactElement {
-    const [problems] = useState<Problem[] | null>(null);
+    const [clusteringProblems, setClusteringProblems] = useState<ClusteringProblemModel[] | null>(null);
+
+    const handleClusteringProblem = (data: ClusteringProblemModel[] | null) => {
+        setClusteringProblems(data);
+    }
+
+    // GetMostSolvedProblem(handleClusteringProblem);
     
     return (
         <VStack style={{overflow: 'hidden', paddingTop: '80px'}}>
@@ -136,21 +153,23 @@ function Home(): React.ReactElement {
                     }} />
                 </Link>
 
-                <SejongRankingButton buttonInfo={{
-                    title: '세종대 랭킹 보러가기',
-                    description: <p>
-                        나의 실력이<br />
-                        어느정도인지<br />
-                        궁금하신가요?<br />
-                    </p>
-                }} />
+                <Link to={'/ranking'}>
+                    <SejongRankingButton buttonInfo={{
+                        title: '세종대 랭킹 보러가기',
+                        description: <p>
+                            나의 실력이<br />
+                            어느정도인지<br />
+                            궁금하신가요?<br />
+                        </p>
+                    }} />
+                </Link>
             </HStack>
 
                 <ClusteringProblemTitle>
                     종이들이 많이 찾는 문제
                 </ClusteringProblemTitle>
 
-            {problems && <ClusteringProblems problems={problems} />}
+            {clusteringProblems && <ClusteringProblems problems={clusteringProblems} />}
         </VStack>
     );
 }

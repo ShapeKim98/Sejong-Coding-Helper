@@ -13,6 +13,7 @@ import { isEmpty } from 'lodash';
 import User from './models/User';
 import PrivateRoute from './components/PrivateRoute';
 import Login from './pages/Login';
+import Ranking from './pages/Ranking';
 
 function App() {
   const dispatch = useDispatch();
@@ -39,17 +40,18 @@ function App() {
                 height: '100%'}}>
       <GlobalStyle />
       <BrowserRouter>
+      <HeaderBar />
         <Routes>
             <Route element={<PrivateRoute userAuthentication={false} />}>
                 <Route path="/login" element={<Login />} />
             </Route>
 
             <Route element={<PrivateRoute userAuthentication={true} />}>
-              <Route element={<HeaderBar />} />
               <Route path='/home' element={<Home />} />
               <Route path='/problemresult' element={<ProblemResult />} />
               <Route path='/roadmap' element={<Roadmap />} />
               <Route path='/roadmapdetail' element={<RoadmapDetail />} />
+              <Route path='/ranking' element={<Ranking />} />
               <Route path='*' element={<Navigate to='/home' />} />
             </Route>
           </Routes>

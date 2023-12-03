@@ -10,12 +10,13 @@ import {
 import Lecture from '../../models/Lecture';
 import { GetRoadmapSearchAll } from '../../api/Roadmap/RoadmapAPI';
 import { Link } from 'react-router-dom';
+import TagModel from '../../models/Tag';
 
 function Tags({lecture}: {lecture: Lecture}): React.ReactElement {
     return (
         <HStack style={{flexWrap: 'wrap'}}>
-            {lecture.tags.map((tag: string): React.ReactElement =>
-                <Tag>{tag}</Tag>
+            {lecture.tags.map((tag: TagModel): React.ReactElement =>
+                <Tag>{tag.name}</Tag>
             )}
         </HStack>
     );
@@ -25,7 +26,7 @@ function LectureTitle({lecture}: {lecture: Lecture}): React.ReactElement {
     return (
         <VStack style={{fontFamily: 'Pretendard', fontWeight: '700'}}>
             <p style={{fontSize: '20px'}}>{lecture.name}</p>
-            <p style={{fontSize: '16px', color: '#5E717B', paddingTop: '8px'}}>{lecture.id}</p>
+            <p style={{fontSize: '16px', color: '#5E717B', paddingTop: '8px'}}>{lecture.lectureId}</p>
         </VStack>
     );
 }
@@ -60,7 +61,7 @@ function Roadmap(): React.ReactElement {
                 주차 별로 문제를 추천해 드릴게요
             </Title>
             <Graduate>
-                과목
+                1학년
             </Graduate>
             {roadmap && <LectureButtons lectures={roadmap} />}
         </VStack>

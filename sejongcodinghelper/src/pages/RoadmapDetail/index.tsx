@@ -22,12 +22,17 @@ import TagModel from '../../models/Tag';
 
 function ProblemButton({problemId}: {problemId: number}): React.ReactElement {
     const [problem, setProblem] = useState<Problem | null>(null);
+    const [imageUrl, setImageUrl] = useState('');
 
     const handleProblem = (data: Problem | null) => {
         setProblem(data);
     }
 
     GetProblemFindID(problemId, handleProblem);
+
+    useEffect(() => {
+        setImageUrl(`https://static.solved.ac/tier_small/${problem?.level}.svg`);
+    }, [problem]);
 
     const openNewTab = () => {
         window.open('https://www.acmicpc.net/problem/' + problemId)
@@ -38,7 +43,12 @@ function ProblemButton({problemId}: {problemId: number}): React.ReactElement {
             {problem && <RoadmapProblem key={problem.problemId} onClick={openNewTab} style={{cursor: 'pointer'}}>
                 <VStack>
                     <HStack>
-                        <img style={{width: '20px', height: '20px', aspectRatio: '1 / 1'}} alt={problem.titleKo} src={require(`../../assets/Image/${problem.level}.svg`).default}></img>
+                        <img style={{
+                            width: '20px', 
+                            height: '20px', 
+                            aspectRatio: '1 / 1'}} 
+                            alt={problem.titleKo} 
+                            src={imageUrl}></img>
                         <p style={{marginLeft: '16px'}}>{problem.problemId}</p>
                     </HStack>
 
@@ -46,7 +56,7 @@ function ProblemButton({problemId}: {problemId: number}): React.ReactElement {
                 </VStack>
 
                 <HStack>
-                    {problem.tags.map((tag: TagModel): React.ReactElement => <Tag>{tag.name}</Tag>)}
+                    {problem.tags.map((tag: string): React.ReactElement => <Tag>{tag}</Tag>)}
                 </HStack>
             </RoadmapProblem>}
         </p>
