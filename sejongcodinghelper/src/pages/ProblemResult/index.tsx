@@ -57,7 +57,7 @@ function ResultProblemButton({problem}: {problem: Problem}): React.ReactElement 
             </VStack>
 
             <HStack>
-                {problem.tags.map((tag: TagModel): React.ReactElement => <Tag>{tag.name}</Tag>)}
+                {problem.tags.map((tag: string): React.ReactElement => <Tag>{tag}</Tag>)}
             </HStack>
         </ResultProblem>
     );

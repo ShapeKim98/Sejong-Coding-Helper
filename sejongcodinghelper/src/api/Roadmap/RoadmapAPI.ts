@@ -1,9 +1,7 @@
 import React, { useEffect} from 'react';
-import axios, { AxiosRequestConfig } from 'axios';
+import axios from 'axios';
 import Lecture from '../../models/Lecture';
 import { RoadmapProblemModel } from '../../models/RoadmapProblem';
-import { logoutProc } from '../Auth/Auth';
-import { error } from 'console';
 
 export const GetRoadmapSearchAll = (handleRoadmap: (data: Lecture[] | null) => void) => {
     useEffect(() => {

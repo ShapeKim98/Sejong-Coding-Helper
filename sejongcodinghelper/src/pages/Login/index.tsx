@@ -37,7 +37,7 @@ function TextField(info: {
                 onChange={info.onChange} 
                 value={info.text}
                 type={info.isPassword ? 'password' : ''} 
-                placeholder={'백준 ' + info.title} />
+                placeholder={info.isPassword ? '' : '백준 ' + info.title} />
         </VStack>
     )
 }

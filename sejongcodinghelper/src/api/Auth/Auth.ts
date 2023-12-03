@@ -1,6 +1,6 @@
 import Cookies from 'universal-cookie';
 import axios, { AxiosResponse } from 'axios';
-import { isEmpty } from 'lodash';
+import { isEmpty, result } from 'lodash';
 import { refreshToken, parseBoj } from '../User/User';
 import { logout, setUser } from '../../redux/User';
 import { RefreshToken } from '../../models/Token';
@@ -58,7 +58,6 @@ export function onSilentRefresh(dispatch: Dispatch<AnyAction>) {
         return;
       }
       axios.defaults.headers.common['Access_Token'] = accessToken;
-      axios.defaults.headers.common['Refresh_Token'] = token
       console.log(accessToken)
       // 재발급 성공 시 refresh_token으로 사용자 정보를 다시 가져온다.
       getUserBojHandle(dispatch);

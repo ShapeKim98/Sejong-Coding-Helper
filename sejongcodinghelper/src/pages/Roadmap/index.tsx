@@ -10,12 +10,13 @@ import {
 import Lecture from '../../models/Lecture';
 import { GetRoadmapSearchAll } from '../../api/Roadmap/RoadmapAPI';
 import { Link } from 'react-router-dom';
+import TagModel from '../../models/Tag';
 
 function Tags({lecture}: {lecture: Lecture}): React.ReactElement {
     return (
         <HStack style={{flexWrap: 'wrap'}}>
-            {lecture.tags.map((tag: string): React.ReactElement =>
-                <Tag>{tag}</Tag>
+            {lecture.tags.map((tag: TagModel): React.ReactElement =>
+                <Tag>{tag.name}</Tag>
             )}
         </HStack>
     );
