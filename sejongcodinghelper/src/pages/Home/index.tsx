@@ -112,7 +112,7 @@ function Home(): React.ReactElement {
         setClusteringProblems(data);
     }
 
-    // GetMostSolvedProblem(handleClusteringProblem);
+    GetMostSolvedProblem(handleClusteringProblem);
     
     return (
         <VStack style={{overflow: 'hidden', paddingTop: '80px'}}>
