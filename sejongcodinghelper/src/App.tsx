@@ -40,7 +40,7 @@ function App() {
                 height: '100%'}}>
       <GlobalStyle />
       <BrowserRouter>
-      <HeaderBar />
+        {!isEmpty(refreshToken) && <HeaderBar />}
         <Routes>
             <Route element={<PrivateRoute userAuthentication={false} />}>
                 <Route path="/login" element={<Login />} />

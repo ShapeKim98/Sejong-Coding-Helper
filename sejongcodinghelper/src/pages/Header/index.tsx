@@ -3,7 +3,8 @@ import HStack from '../../components/HStack';
 import VStack from '../../components/VStack';
 import { Link, NavigateFunction } from 'react-router-dom';
 import {
-    Header, Title
+    Header, 
+    Title
 } from './style';
 import { SimilarProblem } from '../Home/style';
 import { useNavigate } from 'react-router-dom';
@@ -52,7 +53,7 @@ function RecomendProblemMenu({title, currentHover, handleHover, path}: RecomendP
     return (
         <VStack onMouseOver={handleHover} onClick={onClick} style={{cursor: 'pointer'}}>
             <span style={{color: currentHover == title ? '#C8001E' : '#28424F'}}>{title}</span>
-            <span style={{borderBottom: '1px solid #EDEDED', marginBottom: '15px', marginTop: '15px'}} />
+            <span style={{borderBottom: '1px solid #EDEDED', marginBottom: '12px', marginTop: '12px'}} />
         </VStack>
     );
 }
@@ -87,11 +88,13 @@ function HeaderBarElements({
             return (
                 <HStack style={{alignItems: 'center'}}>
                     <Link to={'/'}>
-                    <Title>Solved Sejong</Title>
+                        <Title>Univps</Title>
                     </Link>
                     <HeaderButton title={'문제 추천'} currentHover={hover} handleHover={setRecomendProblem} />
                     <HeaderButton title={'시험 연습'} currentHover={hover} handleHover={setTestPractice} />
-                    <HeaderButton title={'랭킹'} currentHover={hover} handleHover={setRanking} />
+                    <Link to={'/ranking'}>
+                        <HeaderButton title={'랭킹'} currentHover={hover} handleHover={setRanking} />
+                    </Link>
                     <HeaderButton title={'검색하기'} currentHover={hover} handleHover={setSearch} />
                 </HStack>
             );

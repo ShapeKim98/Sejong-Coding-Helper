@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect} from 'react';
+import React, { useState, useEffect} from 'react';
 import {
     Title,
     SearchButton,
@@ -6,19 +6,18 @@ import {
     ExamPractice,
     RoadmapProblem,
     SejongRanking,
-    ClusteringProblemTitle,
-    ClusteringProblem,
-    Tag,
-    ProblemTitle
+    ClusteringProblemTitle
 } from './style';
 import HStack from '../../components/HStack';
 import VStack from '../../components/VStack';
 import Problem from '../../models/Problem';
 import { Link } from 'react-router-dom';
-import TagModel from '../../models/Tag';
 import ClusteringProblemModel from '../../models/ClusteringProblem';
 import { GetProblemFindID } from '../../api/Problem/ProblemAPI';
 import { GetMostSolvedProblem } from '../../api/ClusteringProblem/ClusteringProblemAPI';
+import ProblemCell from '../../components/ProblemCell';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/Store';
 
 interface ButtonInfo {
     title: string,
@@ -28,9 +27,9 @@ interface ButtonInfo {
 function SimilarProblemButton({buttonInfo}: {buttonInfo: ButtonInfo}): React.ReactElement {
     return (
         <SimilarProblem>
-            <p>{buttonInfo.description}</p>
+            <span>{buttonInfo.description}</span>
 
-            <p style={{fontSize: '12pt', fontWeight: '600'}}>{buttonInfo.title}</p>
+            <span style={{fontSize: '16px', fontWeight: '600'}}>{buttonInfo.title}</span>
         </SimilarProblem>
     );
 }
@@ -38,9 +37,9 @@ function SimilarProblemButton({buttonInfo}: {buttonInfo: ButtonInfo}): React.Rea
 function ExamPracticeButton({buttonInfo}: {buttonInfo: ButtonInfo}): React.ReactElement {
     return (
         <ExamPractice>
-            <p>{buttonInfo.description}</p>
+            <span>{buttonInfo.description}</span>
 
-            <p style={{fontSize: '12pt', fontWeight: '600'}}>{buttonInfo.title}</p>
+            <span style={{fontSize: '16px', fontWeight: '600'}}>{buttonInfo.title}</span>
         </ExamPractice>
     );
 }
@@ -48,9 +47,9 @@ function ExamPracticeButton({buttonInfo}: {buttonInfo: ButtonInfo}): React.React
 function RoadmapProblemButton({buttonInfo}: {buttonInfo: ButtonInfo}): React.ReactElement {
     return (
         <RoadmapProblem>
-            <p>{buttonInfo.description}</p>
+            <span>{buttonInfo.description}</span>
 
-            <p style={{fontSize: '12pt', fontWeight: '600'}}>{buttonInfo.title}</p>
+            <span style={{fontSize: '16px', fontWeight: '600', flexWrap: 'wrap'}}>{buttonInfo.title}</span>
         </RoadmapProblem>
     )
 }
@@ -58,50 +57,25 @@ function RoadmapProblemButton({buttonInfo}: {buttonInfo: ButtonInfo}): React.Rea
 function SejongRankingButton({buttonInfo}: {buttonInfo: ButtonInfo}): React.ReactElement {
     return (
         <SejongRanking>
-            <p>{buttonInfo.description}</p>
+            <span>{buttonInfo.description}</span>
 
-            <p style={{fontSize: '12pt', fontWeight: '600'}}>{buttonInfo.title}</p>
+            <span style={{fontSize: '16px', fontWeight: '600'}}>{buttonInfo.title}</span>
         </SejongRanking>
     )
 }
 
 function ClusteringProblems({problems}: {problems: ClusteringProblemModel[]}): React.ReactElement {
+    const user = useSelector((state: RootState) => state.user)
+
     return (
-        <HStack style={{overscrollBehaviorX: 'contain', overflowX: 'scroll', paddingLeft: 'calc(-268.46154px + 28.36538vw + 24px)'}}>
-            {problems.map((problem: ClusteringProblemModel): React.ReactElement => <ClusteringProblemButton problemID={problem.problemId} />)}
+        <HStack style={{
+            overscrollBehaviorX: 'contain', 
+            overflowX: 'scroll', 
+            paddingLeft: 'calc(-268.46154px + 28.36538vw + 24px)'
+            }}>
+            {problems.map((problem: ClusteringProblemModel): React.ReactElement => 
+            <ProblemCell key={problem.problemId} bojHandle={user.bojHandle ?? ''} problemID={problem.problemId} />)}
         </HStack>
-    );
-}
-
-function ClusteringProblemButton({problemID}: {problemID: number}): React.ReactElement {
-    const [problem, setProblem] = useState<Problem | null>(null);
-    const [imageUrl, setImageUrl] = useState('');
-    
-    const handleProblem = (data: Problem | null) => {
-        setProblem(data)
-    }
-
-    GetProblemFindID(problemID, handleProblem);
-
-    useEffect(() => {
-          setImageUrl(`https://static.solved.ac/tier_small/${problem?.level}.svg`);
-      }, [problem]);
-
-    return (
-        <ClusteringProblem>
-            <VStack>
-                <HStack>
-                    <img style={{width: '20px', height: '20px', aspectRatio: '1 / 1'}} alt={problem?.titleKo} src={imageUrl}></img>
-                    <p style={{marginLeft: '16px'}}>{problem?.problemId}</p>
-                </HStack>
-
-                <ProblemTitle>{problem?.titleKo}</ProblemTitle>
-            </VStack>
-
-            <HStack>
-                {problem?.tags.map((tag: string): React.ReactElement => <Tag>{tag}</Tag>)}
-            </HStack>
-        </ClusteringProblem>
     );
 }
 
@@ -124,7 +98,11 @@ function Home(): React.ReactElement {
                 검색하러 가기
             </SearchButton>
 
-            <HStack style={{ overscrollBehaviorX: 'contain', overflowX: 'scroll', paddingLeft: 'calc(-268.46154px + 28.36538vw + 24px)', maxWidth: '1200px'}}>
+            <HStack style={{ 
+                overscrollBehaviorX: 'contain', 
+                overflowX: 'scroll', 
+                paddingLeft: 'calc(-268.46154px + 28.36538vw + 24px)', 
+                maxWidth: '1200px'}}>
                 <SimilarProblemButton buttonInfo={{
                     title: '문제 추천 받으러 가기',
                     description: <p>
@@ -165,9 +143,9 @@ function Home(): React.ReactElement {
                 </Link>
             </HStack>
 
-                <ClusteringProblemTitle>
-                    종이들이 많이 찾는 문제
-                </ClusteringProblemTitle>
+            <ClusteringProblemTitle>
+                종이들이 많이 찾는 문제
+            </ClusteringProblemTitle>
 
             {clusteringProblems && <ClusteringProblems problems={clusteringProblems} />}
         </VStack>

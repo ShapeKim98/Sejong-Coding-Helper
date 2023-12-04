@@ -16,7 +16,7 @@ function Tags({lecture}: {lecture: Lecture}): React.ReactElement {
     return (
         <HStack style={{flexWrap: 'wrap'}}>
             {lecture.tags.map((tag: TagModel): React.ReactElement =>
-                <Tag>{tag.name}</Tag>
+                <Tag key={tag.name}>{tag.name}</Tag>
             )}
         </HStack>
     );
@@ -24,7 +24,7 @@ function Tags({lecture}: {lecture: Lecture}): React.ReactElement {
 
 function LectureTitle({lecture}: {lecture: Lecture}): React.ReactElement {
     return (
-        <VStack style={{fontFamily: 'Pretendard', fontWeight: '700'}}>
+        <VStack style={{fontFamily: 'Pretendard', fontWeight: '700', marginBottom: '16px'}}>
             <p style={{fontSize: '20px'}}>{lecture.name}</p>
             <p style={{fontSize: '16px', color: '#5E717B', paddingTop: '8px'}}>{lecture.lectureId}</p>
         </VStack>
@@ -35,7 +35,7 @@ function LectureButtons({lectures}: {lectures: Lecture[]}): React.ReactElement {
     return (
         <HStack style={{overscrollBehaviorX: 'contain', overflowX: 'scroll', paddingLeft: 'calc(-268.46154px + 28.36538vw + 24px)'}}>
             {lectures.map((lecture: Lecture): React.ReactElement => 
-            <Link to={'/roadmapdetail'} state={{roadmapID: lecture.id}}>
+            <Link key={lecture.id} to={'/roadmapdetail'} state={{roadmapID: lecture.id}}>
             <LectureButton>
                 <LectureTitle lecture={lecture} />
                 <Tags lecture={lecture} />

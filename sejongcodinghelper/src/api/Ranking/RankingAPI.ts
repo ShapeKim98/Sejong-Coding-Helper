@@ -18,7 +18,7 @@ export const GetRankMostSolved = (params: number, handleUserProfile: (data: {
             }
         })
         .catch(error => {
-            console.error(error);
+            console.log(error);
         })
     }, [params])
 }

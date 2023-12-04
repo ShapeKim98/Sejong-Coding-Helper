@@ -14,7 +14,7 @@ export const GetMostSolvedProblem = ( handleProblem: (data: ClusteringProblem[] 
             }
         })
         .catch(error => {
-            console.error(error);
+            console.log(error);
         })
     }, []);
 }

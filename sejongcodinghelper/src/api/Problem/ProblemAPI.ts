@@ -3,7 +3,6 @@ import axios from 'axios';
 import Problem from '../../models/Problem';
 
 export const GetProblemFindID = (params: number, handleProblem: (data: Problem | null) => void) => {
-    console.log(axios.defaults.headers.common['Access_Token'])
     useEffect(() => {
         axios.get<Problem | null>('/api/v1/problem/find?problemId=' + params)
         .then(result => {
@@ -14,7 +13,27 @@ export const GetProblemFindID = (params: number, handleProblem: (data: Problem |
             }
         })
         .catch(error => {
-            console.error(error);
+            console.log(error);
         })
     }, [params]);
+}
+
+export const GetProblemFindBojHandleID = (
+    params: {
+        bojHandle: string,
+        problemID: number}, 
+    handleProblem: (data: Problem | null) => void) => {
+    useEffect(() => {
+        axios.get<Problem | null>(`/api/v1/problem/user/find?bojHandle=${params.bojHandle}&problemId=${params.problemID}`)
+        .then(result => {
+            if (result.status == 200) {
+                handleProblem(result.data)
+            } else {
+                handleProblem(null)
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }, [params])
 }
