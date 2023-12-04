@@ -4,7 +4,7 @@ export const Title = styled.div`
     display: flex;
     // flex-direction: column;
     font-family: Pretendard;
-    font-size: 28pt;
+    font-size: 28px;
     font-weight: 700;
     line-height: 1.5;
     padding-top: 36px;
@@ -14,15 +14,15 @@ export const Title = styled.div`
 
 export const Week = styled.div`
     font-family: Pretendard;
-    font-size: 32px;
+    font-size: 24px;
     font-weight: 700;
-    width: 90px;
-    height: 90px;
+    min-width: 60px;
+    min-height: 60px;
     display: flex;
-    text-align : center;
     justify-content: center;
     align-items : center;
     margin-right: 20px;
+    scroll-snap-align: start;
 `
 
 export const RoadmapProblem = styled.div`
@@ -38,14 +38,14 @@ export const RoadmapProblem = styled.div`
     margin-top: 32px;
     margin-right: 40px;
     margin-bottom: 10px;
-    min-width: 200px;
-    min-height: 220px;
+    width: 180px;
+    height: 200px;
 `
 
 export const ProblemTitle = styled.div`
     display: flex;
     flex-direction: column;
-    font-size: 16pt;
+    font-size: 16px;
     font-weight: 700;
     color: #28424F;
     padding-top: 20px;
@@ -54,7 +54,7 @@ export const ProblemTitle = styled.div`
 export const Tag = styled.div`
     display: flex;
     flex-direction: column;
-    font-size: 10pt;
+    font-size: 12px;
     font-weight: 600;
     color: #28424F;
     padding-top: 8px;
@@ -63,6 +63,17 @@ export const Tag = styled.div`
     padding-right: 12px;
     background: #E9E9E9;
     border-radius: 20px;
-    margin-right: 16px;
+    margin-right: 8px;
+    margin-top: 8px;
     height: 10pt;
+`
+
+export const ProblemID = styled.div`
+    color: #28424F;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
 `

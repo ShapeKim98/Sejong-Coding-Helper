@@ -8,11 +8,11 @@ export const Header = styled.div`
     -webkit-backdrop-filter: blur(50px);
     border: 1px solid rgba(255, 255, 255, 0.16);
     color: '#28424F';
-    font-size: 20px;
+    font-size: 16px;
     font-family: Pretendard;
     font-weight: 500;
-    padding-top: 24px;
-    padding-bottom: 24px;
+    padding-top: 16px;
+    padding-bottom: 16px;
     padding-left: calc(-268.46154px + 28.36538vw + 24px);
     width: 100%;
     transition-property: width, height;
@@ -22,7 +22,7 @@ export const Header = styled.div`
 export const Title = styled.div`
     color: #28424F;
     font-family: Pretendard;
-    font-size: 24px;
+    font-size: 20px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;

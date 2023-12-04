@@ -6,7 +6,8 @@ import {
     Week,
     RoadmapProblem,
     ProblemTitle,
-    Tag
+    Tag,
+    ProblemID
 } from './style'
 import Lecture from '../../models/Lecture';
 import { useLocation } from "react-router-dom";
@@ -49,13 +50,13 @@ function ProblemButton({problemId}: {problemId: number}): React.ReactElement {
                             aspectRatio: '1 / 1'}} 
                             alt={problem.titleKo} 
                             src={imageUrl}></img>
-                        <p style={{marginLeft: '16px'}}>{problem.problemId}</p>
+                        <ProblemID style={{marginLeft: '16px'}}>{problem.problemId}</ProblemID>
                     </HStack>
 
                     <ProblemTitle>{problem.titleKo}</ProblemTitle>
                 </VStack>
 
-                <HStack>
+                <HStack style={{flexWrap: 'wrap'}}>
                     {problem.tags.map((tag: string): React.ReactElement => <Tag>{tag}</Tag>)}
                 </HStack>
             </RoadmapProblem>}
@@ -74,7 +75,9 @@ function ProblemList({currentWeek}: {currentWeek: number}): React.ReactElement {
     GetRoadmapProblemSearchWeek({roadmapId: roadmapID, week: currentWeek}, handleRoadmapProblem);
 
     return (
-        <HStack style={{flexWrap: 'wrap', marginLeft: 'calc(-268.46154px + 28.36538vw - 12px)'}}>
+        <HStack style={{
+            flexWrap: 'wrap', 
+            marginLeft: 'calc(-268.46154px + 28.36538vw + 24px)'}}>
             {roadmapProblems && roadmapProblems.map((problem: RoadmapProblemModel): React.ReactElement =>
                 problem && <ProblemButton problemId={problem.problemId} />
             )}
@@ -94,25 +97,30 @@ function RoadmapDetail(): React.ReactElement {
     GetRoadmapSearchID(roadmapID, hadleRoadmap);
 
     return (
-        <VStack style={{paddingTop: '80px'}}>
+        <VStack style={{overflow: 'hidden', paddingTop: '80px'}}>
             <Title>
                 {roadmap?.name}
             </Title>
-            <VStack style={{alignItems: 'center'}}>
-            <HStack style={{flexWrap: 'wrap', paddingTop: '60px'}}>
+
+            <HStack style={{
+                marginTop: '60px',
+                overscrollBehaviorX: 'contain', 
+                overflowX: 'scroll',
+                paddingLeft: 'calc(-268.46154px + 28.36538vw + 24px)'}}>
                 {Array.from({ length: 15 }, (_, index) => index + 1).map((week: number): React.ReactElement =>
-                {return(<Week style={{color: (currentWeek === week) ? '#ffffff' : '#28424F', 
-                                    borderRadius: '50%', 
-                                    backgroundColor: (currentWeek === week) ? '#C8001E' : 'transparent',
-                                    cursor: 'pointer'
-                                }}
-                                onClick={ () => {
-                                    setWeek(week)
-                                }}
-                                >{week}주</Week>);}
+                    <Week style={{
+                        color: (currentWeek === week) ? '#ffffff' : '#28424F', 
+                        borderRadius: '50%', 
+                        backgroundColor: (currentWeek === week) ? '#C8001E' : 'transparent',
+                        cursor: 'pointer'}}
+                        onClick={ () => {
+                            setWeek(week)
+                        }}>
+                        {week}주
+                    </Week>
                 )}
             </HStack>
-            </VStack>
+
             <ProblemList currentWeek={currentWeek} />
         </VStack>
     );

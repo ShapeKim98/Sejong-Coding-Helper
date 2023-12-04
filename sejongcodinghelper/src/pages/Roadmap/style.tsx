@@ -13,13 +13,13 @@ export const LectureButton = styled.div`
     margin-top: 32px;
     margin-right: 40px;
     margin-bottom: 10px;
-    width: 280px;
+    width: 260px;
     min-height: 220px;
     scroll-snap-align: start;
 `
 
 export const Tag = styled.div`
-    font-size: 10pt;
+    font-size: 12px;
     font-weight: 600;
     color: #28424F;
     padding-top: 8px;
@@ -28,7 +28,7 @@ export const Tag = styled.div`
     padding-right: 12px;
     background: #E9E9E9;
     border-radius: 20px;
-    margin-right: 16px;
+    margin-right: 8px;
     margin-top: 8px;
     height: 10pt;
 `
@@ -37,7 +37,7 @@ export const Title = styled.div`
     display: flex;
     // flex-direction: column;
     font-family: Pretendard;
-    font-size: 28pt;
+    font-size: 28px;
     font-weight: 700;
     line-height: 1.5;
     padding-top: 36px;

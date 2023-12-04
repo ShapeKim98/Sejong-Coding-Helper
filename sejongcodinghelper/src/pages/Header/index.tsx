@@ -52,7 +52,7 @@ function RecomendProblemMenu({title, currentHover, handleHover, path}: RecomendP
     return (
         <VStack onMouseOver={handleHover} onClick={onClick} style={{cursor: 'pointer'}}>
             <span style={{color: currentHover == title ? '#C8001E' : '#28424F'}}>{title}</span>
-            <span style={{borderBottom: '1px solid #EDEDED', marginBottom: '15px', marginTop: '15px'}} />
+            <span style={{borderBottom: '1px solid #EDEDED', marginBottom: '12px', marginTop: '12px'}} />
         </VStack>
     );
 }

@@ -9,13 +9,13 @@ import {
     ClusteringProblemTitle,
     ClusteringProblem,
     Tag,
-    ProblemTitle
+    ProblemTitle,
+    ProblemID
 } from './style';
 import HStack from '../../components/HStack';
 import VStack from '../../components/VStack';
 import Problem from '../../models/Problem';
 import { Link } from 'react-router-dom';
-import TagModel from '../../models/Tag';
 import ClusteringProblemModel from '../../models/ClusteringProblem';
 import { GetProblemFindID } from '../../api/Problem/ProblemAPI';
 import { GetMostSolvedProblem } from '../../api/ClusteringProblem/ClusteringProblemAPI';
@@ -50,7 +50,7 @@ function RoadmapProblemButton({buttonInfo}: {buttonInfo: ButtonInfo}): React.Rea
         <RoadmapProblem>
             <p>{buttonInfo.description}</p>
 
-            <p style={{fontSize: '12pt', fontWeight: '600'}}>{buttonInfo.title}</p>
+            <p style={{fontSize: '12pt', fontWeight: '600', flexWrap: 'wrap'}}>{buttonInfo.title}</p>
         </RoadmapProblem>
     )
 }
@@ -67,7 +67,11 @@ function SejongRankingButton({buttonInfo}: {buttonInfo: ButtonInfo}): React.Reac
 
 function ClusteringProblems({problems}: {problems: ClusteringProblemModel[]}): React.ReactElement {
     return (
-        <HStack style={{overscrollBehaviorX: 'contain', overflowX: 'scroll', paddingLeft: 'calc(-268.46154px + 28.36538vw + 24px)'}}>
+        <HStack style={{
+            overscrollBehaviorX: 'contain', 
+            overflowX: 'scroll', 
+            paddingLeft: 'calc(-268.46154px + 28.36538vw + 24px)'
+            }}>
             {problems.map((problem: ClusteringProblemModel): React.ReactElement => <ClusteringProblemButton problemID={problem.problemId} />)}
         </HStack>
     );
@@ -96,7 +100,7 @@ function ClusteringProblemButton({problemID}: {problemID: number}): React.ReactE
             <VStack>
                 <HStack style={{alignItems: 'center'}}>
                     <img style={{width: '20px', height: '20px', aspectRatio: '1 / 1'}} alt={problem?.titleKo} src={imageUrl}></img>
-                    <p style={{marginLeft: '16px'}}>{problem?.problemId}</p>
+                    <ProblemID style={{marginLeft: '16px'}}>{problem?.problemId}</ProblemID>
                 </HStack>
 
                 <ProblemTitle>{problem?.titleKo}</ProblemTitle>
@@ -128,7 +132,11 @@ function Home(): React.ReactElement {
                 검색하러 가기
             </SearchButton>
 
-            <HStack style={{ overscrollBehaviorX: 'contain', overflowX: 'scroll', paddingLeft: 'calc(-268.46154px + 28.36538vw + 24px)', maxWidth: '1200px'}}>
+            <HStack style={{ 
+                overscrollBehaviorX: 'contain', 
+                overflowX: 'scroll', 
+                paddingLeft: 'calc(-268.46154px + 28.36538vw + 24px)', 
+                maxWidth: '1200px'}}>
                 <SimilarProblemButton buttonInfo={{
                     title: '문제 추천 받으러 가기',
                     description: <p>
@@ -169,9 +177,9 @@ function Home(): React.ReactElement {
                 </Link>
             </HStack>
 
-                <ClusteringProblemTitle>
-                    종이들이 많이 찾는 문제
-                </ClusteringProblemTitle>
+            <ClusteringProblemTitle>
+                종이들이 많이 찾는 문제
+            </ClusteringProblemTitle>
 
             {clusteringProblems && <ClusteringProblems problems={clusteringProblems} />}
         </VStack>
