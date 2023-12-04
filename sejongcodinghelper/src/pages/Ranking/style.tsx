@@ -4,7 +4,7 @@ export const Title = styled.div`
     display: flex;
     flex-direction: column;
     font-family: Pretendard;
-    font-size: 28pt;
+    font-size: 24px;
     font-weight: 700;
     line-height: 1.5;
     padding-top: 36px;
@@ -20,10 +20,10 @@ export const Background = styled.div`
 export const RankerRanking = styled.p`
     border-radius: 50%;
     color: #FFF;
-    width: 50px;
-    height: 50px;
+    width: 32px;
+    height: 32px;
     font-family: Pretendard;
-    font-size: 24px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
@@ -37,7 +37,7 @@ export const RankerRanking = styled.p`
 export const RankerName = styled.div`
     color: #28424F;
     font-family: Pretendard;
-    font-size: 24px;
+    font-size: 20px;
     font-style: normal;
     font-weight: 700;
     line-height: 24px;
@@ -47,7 +47,7 @@ export const RankerName = styled.div`
 export const SolvedCount = styled.div`
     color: #5E717B;
     font-family: Pretendard;
-    font-size: 16px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;

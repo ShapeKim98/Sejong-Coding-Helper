@@ -30,14 +30,14 @@ function TextField(info: {
 }): React.ReactElement {
     return (
         <VStack style={{marginBottom: '52px'}}>
-            <TextFieldTitle style={{marginBottom: '28px'}}>
+            <TextFieldTitle style={{marginBottom: '16px'}}>
                 {info.title}
             </TextFieldTitle>
             <TextFieldStyle
                 onChange={info.onChange} 
                 value={info.text}
                 type={info.isPassword ? 'password' : ''} 
-                placeholder={info.isPassword ? '' : '백준 ' + info.title} />
+                placeholder={(info.isPassword ? '' : '백준 ') + info.title} />
         </VStack>
     )
 }
@@ -101,17 +101,29 @@ function Login(): React.ReactElement {
   );
 
     return (
-        <VStack style={{alignItems: 'center'}}>
+        <VStack style={{
+          alignItems: 'center', 
+          justifyContent: 'center'
+          }}>
           <Title style={{marginBottom: '76px'}}>
               Univps
           </Title>
 
-          <form onSubmit={loginProc}>
-            <TextField title='아이디' text={id} isPassword={false} onChange={changeId} />
-            <TextField title='비밀번호' text={password} isPassword={true} onChange={changePassword} />
-            <LoginButton style={{marginTop: '66px'}}>
-                로그인
-            </LoginButton>
+          <form onSubmit={loginProc} style={{
+            alignItems: 'center', 
+            justifyContent: 'center'
+          }}>
+            <VStack style={{
+              alignItems: 'center', 
+              justifyContent: 'center'
+            }}>
+              <TextField title='아이디' text={id} isPassword={false} onChange={changeId} />
+              <TextField title='비밀번호' text={password} isPassword={true} onChange={changePassword} />
+              <LoginButton style={{
+                marginTop: '66px'}}>
+                  로그인
+              </LoginButton>
+            </VStack>
           </form>
         </VStack>
     )

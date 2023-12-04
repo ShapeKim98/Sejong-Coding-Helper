@@ -4,7 +4,7 @@ export const Title = styled.div`
     display: flex;
     flex-direction: column;
     font-family: Pretendard;
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 700;
     line-height: 1.5;
     padding-top: 28px;
@@ -16,7 +16,7 @@ export const SearchButton = styled.div`
     display: flex;
     flex-direction: column;
     font-family: Pretendard;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 700;
     color: #C8001E;
     padding-top: 36px;
@@ -29,7 +29,7 @@ export const SimilarProblem = styled.div`
     justify-content: space-between;
     flex-direction: column;
     font-family: Pretendard;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     line-height: 120%;
     color: #28424F;
@@ -39,8 +39,8 @@ export const SimilarProblem = styled.div`
     border-radius: 30px;
     margin-top: 60px;
     margin-bottom: 10px;
-    width: 160px;
-    height: 180px;
+    width: 140px;
+    height: 160px;
 `
 
 export const ExamPractice = styled.div`
@@ -49,7 +49,7 @@ export const ExamPractice = styled.div`
     justify-content: space-between;
     flex-direction: column;
     font-family: Pretendard;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     line-height: 120%;
     color: #EDEDE0;
@@ -60,8 +60,8 @@ export const ExamPractice = styled.div`
     margin-top: 60px;
     margin-left: 40px;
     margin-bottom: 10px;
-    width: 160px;
-    height: 180px;
+    width: 140px;
+    height: 160px;
 `
 
 export const RoadmapProblem = styled.div`
@@ -70,7 +70,7 @@ export const RoadmapProblem = styled.div`
     justify-content: space-between;
     flex-direction: column;
     font-family: Pretendard;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     line-height: 120%;
     color: #28424F;
@@ -81,8 +81,8 @@ export const RoadmapProblem = styled.div`
     margin-top: 60px;
     margin-left: 40px;
     margin-bottom: 10px;
-    width: 160px;
-    height: 180px;
+    width: 140px;
+    height: 160px;
 `
 
 export const SejongRanking = styled.div`
@@ -91,7 +91,7 @@ export const SejongRanking = styled.div`
     justify-content: space-between;
     flex-direction: column;
     font-family: Pretendard;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     line-height: 120%;
     color: #28424F;
@@ -102,15 +102,15 @@ export const SejongRanking = styled.div`
     margin-top: 60px;
     margin-left: 40px;
     margin-bottom: 10px;
-    width: 160px;
-    height: 180px;
+    width: 140px;
+    height: 160px;
 `
 
 export const ClusteringProblemTitle = styled.div`
     display: flex;
     flex-direction: column;
     font-family: Pretendard;
-    font-size: 20pt;
+    font-size: 24px;
     font-weight: 700;
     line-height: 1.5;
     padding-top: 60px;
@@ -131,8 +131,8 @@ export const ClusteringProblem = styled.div`
     margin-top: 32px;
     margin-right: 40px;
     margin-bottom: 10px;
-    min-width: 180px;
-    min-height: 200px;
+    min-width: 160px;
+    min-height: 180px;
     scroll-snap-align: start;
     cursor: pointer;
 `
@@ -140,24 +140,25 @@ export const ClusteringProblem = styled.div`
 export const Tag = styled.div`
     display: flex;
     flex-direction: column;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 600;
     color: #28424F;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    padding-left: 12px;
-    padding-right: 12px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
     background: #E9E9E9;
     border-radius: 20px;
     margin-right: 8px;
     margin-top: 8px;
     height: 10pt;
+    justify-content: center;
 `
 
 export const ProblemTitle = styled.div`
     display: flex;
     flex-direction: column;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 700;
     color: #28424F;
     padding-top: 20px;

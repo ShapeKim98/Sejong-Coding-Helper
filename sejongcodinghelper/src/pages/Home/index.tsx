@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect} from 'react';
+import React, { useState, useEffect} from 'react';
 import {
     Title,
     SearchButton,
@@ -6,11 +6,7 @@ import {
     ExamPractice,
     RoadmapProblem,
     SejongRanking,
-    ClusteringProblemTitle,
-    ClusteringProblem,
-    Tag,
-    ProblemTitle,
-    ProblemID
+    ClusteringProblemTitle
 } from './style';
 import HStack from '../../components/HStack';
 import VStack from '../../components/VStack';
@@ -19,6 +15,9 @@ import { Link } from 'react-router-dom';
 import ClusteringProblemModel from '../../models/ClusteringProblem';
 import { GetProblemFindID } from '../../api/Problem/ProblemAPI';
 import { GetMostSolvedProblem } from '../../api/ClusteringProblem/ClusteringProblemAPI';
+import ProblemCell from '../../components/ProblemCell';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/Store';
 
 interface ButtonInfo {
     title: string,
@@ -30,7 +29,7 @@ function SimilarProblemButton({buttonInfo}: {buttonInfo: ButtonInfo}): React.Rea
         <SimilarProblem>
             <p>{buttonInfo.description}</p>
 
-            <p style={{fontSize: '12pt', fontWeight: '600'}}>{buttonInfo.title}</p>
+            <p style={{fontSize: '16px', fontWeight: '600'}}>{buttonInfo.title}</p>
         </SimilarProblem>
     );
 }
@@ -40,7 +39,7 @@ function ExamPracticeButton({buttonInfo}: {buttonInfo: ButtonInfo}): React.React
         <ExamPractice>
             <p>{buttonInfo.description}</p>
 
-            <p style={{fontSize: '12pt', fontWeight: '600'}}>{buttonInfo.title}</p>
+            <p style={{fontSize: '16px', fontWeight: '600'}}>{buttonInfo.title}</p>
         </ExamPractice>
     );
 }
@@ -50,7 +49,7 @@ function RoadmapProblemButton({buttonInfo}: {buttonInfo: ButtonInfo}): React.Rea
         <RoadmapProblem>
             <p>{buttonInfo.description}</p>
 
-            <p style={{fontSize: '12pt', fontWeight: '600', flexWrap: 'wrap'}}>{buttonInfo.title}</p>
+            <p style={{fontSize: '16px', fontWeight: '600', flexWrap: 'wrap'}}>{buttonInfo.title}</p>
         </RoadmapProblem>
     )
 }
@@ -60,56 +59,23 @@ function SejongRankingButton({buttonInfo}: {buttonInfo: ButtonInfo}): React.Reac
         <SejongRanking>
             <p>{buttonInfo.description}</p>
 
-            <p style={{fontSize: '12pt', fontWeight: '600'}}>{buttonInfo.title}</p>
+            <p style={{fontSize: '16px', fontWeight: '600'}}>{buttonInfo.title}</p>
         </SejongRanking>
     )
 }
 
 function ClusteringProblems({problems}: {problems: ClusteringProblemModel[]}): React.ReactElement {
+    const user = useSelector((state: RootState) => state.user)
+
     return (
         <HStack style={{
             overscrollBehaviorX: 'contain', 
             overflowX: 'scroll', 
             paddingLeft: 'calc(-268.46154px + 28.36538vw + 24px)'
             }}>
-            {problems.map((problem: ClusteringProblemModel): React.ReactElement => <ClusteringProblemButton problemID={problem.problemId} />)}
+            {problems.map((problem: ClusteringProblemModel): React.ReactElement => 
+            <ProblemCell key={problem.problemId} bojHandle={user.bojHandle ?? ''} problemID={problem.problemId} />)}
         </HStack>
-    );
-}
-
-function ClusteringProblemButton({problemID}: {problemID: number}): React.ReactElement {
-    const [problem, setProblem] = useState<Problem | null>(null);
-    const [imageUrl, setImageUrl] = useState('');
-    
-    const handleProblem = (data: Problem | null) => {
-        setProblem(data)
-    }
-
-    GetProblemFindID(problemID, handleProblem);
-
-    useEffect(() => {
-          setImageUrl(`https://static.solved.ac/tier_small/${problem?.level}.svg`);
-      }, [problem]);
-
-    const openNewTab = () => {
-        window.open('https://www.acmicpc.net/problem/' + problemID)
-    }
-
-    return (
-        <ClusteringProblem onClick={openNewTab}>
-            <VStack>
-                <HStack style={{alignItems: 'center'}}>
-                    <img style={{width: '20px', height: '20px', aspectRatio: '1 / 1'}} alt={problem?.titleKo} src={imageUrl}></img>
-                    <ProblemID style={{marginLeft: '16px'}}>{problem?.problemId}</ProblemID>
-                </HStack>
-
-                <ProblemTitle>{problem?.titleKo}</ProblemTitle>
-            </VStack>
-
-            <HStack style={{flexWrap: 'wrap'}}>
-                {problem?.tags.map((tag: string): React.ReactElement => <Tag>{tag}</Tag>)}
-            </HStack>
-        </ClusteringProblem>
     );
 }
 

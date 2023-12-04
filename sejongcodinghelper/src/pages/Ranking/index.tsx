@@ -10,7 +10,6 @@ import HStack from '../../components/HStack';
 import VStack from '../../components/VStack';
 import UserProfile from '../../models/UserProfile';
 import { GetRankMostSolved } from '../../api/Ranking/RankingAPI';
-import { FaChevronRight, FaChevronLeft } from 'react-icons/fa';
 
 function Ranker(info: {userProfile: UserProfile | null, ranking: string}): React.ReactElement {
     const [imageUrl, setImageUrl] = useState('');
@@ -24,7 +23,7 @@ function Ranker(info: {userProfile: UserProfile | null, ranking: string}): React
     }, [info.userProfile]);
     return (
         <Background style={{
-            width: '274px',
+            width: '240px',
             marginRight: info.ranking != "3rd" ? '40px' : '0px',
             cursor: 'pointer'
         }} onClick={openNewTab}>
@@ -35,8 +34,8 @@ function Ranker(info: {userProfile: UserProfile | null, ranking: string}): React
                 }}>
                 <HStack style={{alignItems: 'end'}}>
                 <img style={{
-                    width: '100px', 
-                    height: '100px', 
+                    width: '80px', 
+                    height: '80px', 
                     aspectRatio: '1 / 1',
                     overflow: 'hidden',
                     borderRadius: '50%'
@@ -91,7 +90,7 @@ function RankingCell(info: {userProfile: UserProfile, ranking: number}): React.R
             <HStack style={{
                 alignItems: 'center'
                 }}>
-                <RankerName style={{fontSize: '20px'}}>
+                <RankerName style={{fontSize: '16px'}}>
                     {info.ranking + 'th'}
                 </RankerName>
                     <img style={{
@@ -107,7 +106,7 @@ function RankingCell(info: {userProfile: UserProfile, ranking: number}): React.R
                             (info.userProfile.profileImg ?? 
                             'https://static.solved.ac/misc/64x64/default_profile.png') : 
                             'https://static.solved.ac/misc/64x64/default_profile.png'}></img>
-                <RankerName style={{marginLeft: '12px', fontSize: '20px'}}>
+                <RankerName style={{marginLeft: '12px', fontSize: '16px'}}>
                     {info.userProfile.bojHandle}
                 </RankerName>
 
@@ -170,36 +169,45 @@ function Ranking(): React.ReactElement {
       });
 
     return (
-        <VStack style={{overflowY: 'auto', 
-        paddingTop: '80px', 
-        paddingLeft: 'calc(-268.46154px + 28.36538vw + 24px)',
-        paddingRight: 'calc(-268.46154px + 28.36538vw + 24px)'
+        <VStack style={{
+            overflowX: 'hidden',
+            overflowY: 'auto', 
+            paddingTop: '80px', 
+            paddingLeft: 'calc(-268.46154px + 28.36538vw + 24px)',
+            paddingRight: 'calc(-268.46154px + 28.36538vw + 24px)'
         }}>
             <Title>
                 학교 랭킹
             </Title>
-            <HStack style={{
-                marginTop: '60px',
-                marginLeft: 'auto',
-                marginRight: 'auto'
-                }}>
-                <Ranker userProfile={rankers[0] ?? null} ranking={"1st"} />
-                <Ranker userProfile={rankers[1] ?? null} ranking={"2nd"} />
-                <Ranker userProfile={rankers[2] ?? null} ranking={"3rd"} />
-            </HStack>
+            <VStack style={{
+              alignItems: 'center', 
+              justifyContent: 'center'
+            }}>
+                <HStack style={{
+                    marginTop: '60px'
+                    }}>
+                    <Ranker userProfile={rankers[0] ?? null} ranking={"1st"} />
+                    <Ranker userProfile={rankers[1] ?? null} ranking={"2nd"} />
+                    <Ranker userProfile={rankers[2] ?? null} ranking={"3rd"} />
+                </HStack>
 
-            <Background 
-                style={{
-                    width: '100%',
-                    marginTop: '36px',
-                    padding: '24px'
-                }}>
-                <VStack>
-                    {userProfiles?.filter((value: UserProfile, index: number) => (index >= 3))?.map((userProfile: UserProfile, index: number): React.ReactElement =>
-                        <RankingCell userProfile={userProfile} ranking={index + 4}/>
-                        )}
-                </VStack>
-            </Background>
+                <Background 
+                    style={{
+                        width: '100%',
+                        marginTop: '36px',
+                        padding: '24px'
+                    }}>
+                    <VStack>
+                        {userProfiles?.filter((
+                            value: UserProfile, 
+                            index: number) => (index >= 3))?.map((
+                                userProfile: UserProfile, 
+                                index: number): React.ReactElement =>
+                            <RankingCell key={index} userProfile={userProfile} ranking={index + 4}/>
+                            )}
+                    </VStack>
+                </Background>
+            </VStack>
         </VStack>
     );
 }

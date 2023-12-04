@@ -3,7 +3,8 @@ import HStack from '../../components/HStack';
 import VStack from '../../components/VStack';
 import { Link, NavigateFunction } from 'react-router-dom';
 import {
-    Header, Title
+    Header, 
+    Title
 } from './style';
 import { SimilarProblem } from '../Home/style';
 import { useNavigate } from 'react-router-dom';
@@ -87,7 +88,7 @@ function HeaderBarElements({
             return (
                 <HStack style={{alignItems: 'center'}}>
                     <Link to={'/'}>
-                    <Title>Solved Sejong</Title>
+                    <Title>Univps</Title>
                     </Link>
                     <HeaderButton title={'문제 추천'} currentHover={hover} handleHover={setRecomendProblem} />
                     <HeaderButton title={'시험 연습'} currentHover={hover} handleHover={setTestPractice} />
