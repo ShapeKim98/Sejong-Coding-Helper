@@ -87,10 +87,14 @@ function ClusteringProblemButton({problemID}: {problemID: number}): React.ReactE
           setImageUrl(`https://static.solved.ac/tier_small/${problem?.level}.svg`);
       }, [problem]);
 
+    const openNewTab = () => {
+        window.open('https://www.acmicpc.net/problem/' + problemID)
+    }
+
     return (
-        <ClusteringProblem>
+        <ClusteringProblem onClick={openNewTab}>
             <VStack>
-                <HStack>
+                <HStack style={{alignItems: 'center'}}>
                     <img style={{width: '20px', height: '20px', aspectRatio: '1 / 1'}} alt={problem?.titleKo} src={imageUrl}></img>
                     <p style={{marginLeft: '16px'}}>{problem?.problemId}</p>
                 </HStack>
@@ -98,7 +102,7 @@ function ClusteringProblemButton({problemID}: {problemID: number}): React.ReactE
                 <ProblemTitle>{problem?.titleKo}</ProblemTitle>
             </VStack>
 
-            <HStack>
+            <HStack style={{flexWrap: 'wrap'}}>
                 {problem?.tags.map((tag: string): React.ReactElement => <Tag>{tag}</Tag>)}
             </HStack>
         </ClusteringProblem>
@@ -112,7 +116,7 @@ function Home(): React.ReactElement {
         setClusteringProblems(data);
     }
 
-    // GetMostSolvedProblem(handleClusteringProblem);
+    GetMostSolvedProblem(handleClusteringProblem);
     
     return (
         <VStack style={{overflow: 'hidden', paddingTop: '80px'}}>

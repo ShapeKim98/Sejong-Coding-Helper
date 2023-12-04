@@ -33,10 +33,10 @@ export const TextFieldStyle = styled.input`
     font-weight: 600;
     line-height: normal;
     text-align: left;
-    display: 'flex';
-    alignItems: 'center';
-    border: 'none';
-    outline: 'none';
+    display: flex;
+    alignItems: center;
+    border: none;
+    outline: none;
 `
 
 export const LoginButton = styled.button`
@@ -54,6 +54,6 @@ export const LoginButton = styled.button`
     line-height: normal;
     cursor: pointer;
     text-align: center;
-    display: 'flex';
-    alignItems: 'center';
+    border: none;
+    outline: none;
 `

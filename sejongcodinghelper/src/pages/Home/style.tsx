@@ -134,6 +134,7 @@ export const ClusteringProblem = styled.div`
     min-width: 200px;
     min-height: 220px;
     scroll-snap-align: start;
+    cursor: pointer;
 `
 
 export const Tag = styled.div`
@@ -149,6 +150,7 @@ export const Tag = styled.div`
     background: #E9E9E9;
     border-radius: 20px;
     margin-right: 16px;
+    margin-top: 8px;
     height: 10pt;
 `
 
