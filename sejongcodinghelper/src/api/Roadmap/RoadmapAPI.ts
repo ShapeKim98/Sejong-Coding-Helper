@@ -14,13 +14,12 @@ export const GetRoadmapSearchAll = (handleRoadmap: (data: Lecture[] | null) => v
             }
         })
         .catch(error => {
-            console.error(error);
+            console.log(error);
         })
     }, []);
 }
 
 export const GetRoadmapSearchID = (params: number, handleRoadmap: (data: Lecture | null) => void) => {
-    console.log(axios.defaults.headers.common['Access_Token'])
     useEffect(() => {
         axios.get<Lecture | null>('/api/v1/roadmap/search/?roadmapId=' + params)
         .then(result => {
@@ -31,7 +30,7 @@ export const GetRoadmapSearchID = (params: number, handleRoadmap: (data: Lecture
             }
         })
         .catch(error => {
-            console.error(error)
+            console.log(error)
         })
 
     }, [params]);
@@ -41,7 +40,6 @@ export const GetRoadmapProblemSearchWeek = (params: {
     roadmapId: number,
     week: number
 }, handleRoadmapProblem: (data: RoadmapProblemModel[] | null) => void) => {
-    console.log(axios.defaults.headers.common['Access_Token'])
     useEffect(() => {
         axios.get<RoadmapProblemModel[] | null>('/api/v1/roadmap/problem/search/weekly?roadmapId=' + params.roadmapId + '&week=' + params.week)
         .then(result => {
@@ -52,7 +50,7 @@ export const GetRoadmapProblemSearchWeek = (params: {
             }
         })
         .catch(error => {
-            console.error(error);
+            console.log(error);
         })
     }, [params.week]);
 }

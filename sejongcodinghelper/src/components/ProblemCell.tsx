@@ -20,7 +20,9 @@ const Background = styled.div`
     margin-right: 40px;
     margin-bottom: 10px;
     min-width: 160px;
+    max-width: 160px;
     min-height: 180px;
+    max-height: 180px;
     scroll-snap-align: start;
     cursor: pointer;
 `
@@ -94,7 +96,7 @@ function ProblemCell(params: {bojHandle: string, problemID: number}): React.Reac
       }, [problem]);
 
     const openNewTab = () => {
-        window.open('https://www.acmicpc.net/problem/' + params)
+        window.open('https://www.acmicpc.net/problem/' + params.problemID)
     }
 
     return (

@@ -88,11 +88,13 @@ function HeaderBarElements({
             return (
                 <HStack style={{alignItems: 'center'}}>
                     <Link to={'/'}>
-                    <Title>Univps</Title>
+                        <Title>Univps</Title>
                     </Link>
                     <HeaderButton title={'문제 추천'} currentHover={hover} handleHover={setRecomendProblem} />
                     <HeaderButton title={'시험 연습'} currentHover={hover} handleHover={setTestPractice} />
-                    <HeaderButton title={'랭킹'} currentHover={hover} handleHover={setRanking} />
+                    <Link to={'/ranking'}>
+                        <HeaderButton title={'랭킹'} currentHover={hover} handleHover={setRanking} />
+                    </Link>
                     <HeaderButton title={'검색하기'} currentHover={hover} handleHover={setSearch} />
                 </HStack>
             );

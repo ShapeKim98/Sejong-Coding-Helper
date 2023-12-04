@@ -27,9 +27,9 @@ interface ButtonInfo {
 function SimilarProblemButton({buttonInfo}: {buttonInfo: ButtonInfo}): React.ReactElement {
     return (
         <SimilarProblem>
-            <p>{buttonInfo.description}</p>
+            <span>{buttonInfo.description}</span>
 
-            <p style={{fontSize: '16px', fontWeight: '600'}}>{buttonInfo.title}</p>
+            <span style={{fontSize: '16px', fontWeight: '600'}}>{buttonInfo.title}</span>
         </SimilarProblem>
     );
 }
@@ -37,9 +37,9 @@ function SimilarProblemButton({buttonInfo}: {buttonInfo: ButtonInfo}): React.Rea
 function ExamPracticeButton({buttonInfo}: {buttonInfo: ButtonInfo}): React.ReactElement {
     return (
         <ExamPractice>
-            <p>{buttonInfo.description}</p>
+            <span>{buttonInfo.description}</span>
 
-            <p style={{fontSize: '16px', fontWeight: '600'}}>{buttonInfo.title}</p>
+            <span style={{fontSize: '16px', fontWeight: '600'}}>{buttonInfo.title}</span>
         </ExamPractice>
     );
 }
@@ -47,9 +47,9 @@ function ExamPracticeButton({buttonInfo}: {buttonInfo: ButtonInfo}): React.React
 function RoadmapProblemButton({buttonInfo}: {buttonInfo: ButtonInfo}): React.ReactElement {
     return (
         <RoadmapProblem>
-            <p>{buttonInfo.description}</p>
+            <span>{buttonInfo.description}</span>
 
-            <p style={{fontSize: '16px', fontWeight: '600', flexWrap: 'wrap'}}>{buttonInfo.title}</p>
+            <span style={{fontSize: '16px', fontWeight: '600', flexWrap: 'wrap'}}>{buttonInfo.title}</span>
         </RoadmapProblem>
     )
 }
@@ -57,9 +57,9 @@ function RoadmapProblemButton({buttonInfo}: {buttonInfo: ButtonInfo}): React.Rea
 function SejongRankingButton({buttonInfo}: {buttonInfo: ButtonInfo}): React.ReactElement {
     return (
         <SejongRanking>
-            <p>{buttonInfo.description}</p>
+            <span>{buttonInfo.description}</span>
 
-            <p style={{fontSize: '16px', fontWeight: '600'}}>{buttonInfo.title}</p>
+            <span style={{fontSize: '16px', fontWeight: '600'}}>{buttonInfo.title}</span>
         </SejongRanking>
     )
 }

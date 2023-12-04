@@ -50,12 +50,16 @@ function RoadmapDetail(): React.ReactElement {
     GetRoadmapSearchID(roadmapID, hadleRoadmap);
 
     return (
-        <VStack style={{overflow: 'hidden', paddingTop: '80px'}}>
+        <VStack style={{
+            overflow: 'hidden', 
+            paddingTop: '80px',
+            paddingRight: 'calc(-268.46154px + 28.36538vw + 24px)'}}>
             <Title>
                 {roadmap?.name}
             </Title>
 
             <HStack style={{
+                overflow: 'hidden',
                 marginTop: '60px',
                 overscrollBehaviorX: 'contain', 
                 overflowX: 'scroll',

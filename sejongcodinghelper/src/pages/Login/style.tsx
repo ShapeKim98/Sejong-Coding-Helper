@@ -7,7 +7,7 @@ export const Title = styled.div`
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    margin-top: 290px ;
+    margin-top: 290px;
 `
 
 export const TextFieldTitle = styled.div`
