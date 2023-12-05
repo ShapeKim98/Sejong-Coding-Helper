@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/Store';
 import { userLogout } from '../../api/User/User';
 import { getHeaderRefreshTokenConfing, logoutProc } from '../../api/Auth/Auth';
+import Search from './Search';
 
 interface HeaderButtonInfo {
     title: string
@@ -226,7 +227,13 @@ function HeaderBarElements({
             );
         case HeaderElements.Search:
             return (
-                <Elements />
+                <VStack>
+                    <Elements />
+                    <span style={{paddingTop: '40px'}} onMouseOver={setSearch}>
+                        <Search />
+                    </span>
+                </VStack>
+                
             );
         case HeaderElements.MyPage:
             return (
