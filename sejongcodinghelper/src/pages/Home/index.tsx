@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect, useRef, WheelEvent, useCallback} from 'react';
 import {
     Title,
     SearchButton,
@@ -18,6 +18,7 @@ import { GetMostSolvedProblem } from '../../api/ClusteringProblem/ClusteringProb
 import ProblemCell from '../../components/ProblemCell';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/Store';
+import jQuery from 'jquery';
 
 interface ButtonInfo {
     title: string,
@@ -64,16 +65,27 @@ function SejongRankingButton({buttonInfo}: {buttonInfo: ButtonInfo}): React.Reac
     )
 }
 
-function ClusteringProblems({problems}: {problems: ClusteringProblemModel[]}): React.ReactElement {
+function ClusteringProblems(info: {
+    problems: ClusteringProblemModel[],
+    scrollRef: React.MutableRefObject<HTMLDivElement | null>,
+    handleWheelScroll: (e: WheelEvent<HTMLDivElement>) => void,
+    handlHoverTrue: () => void,
+    hadleHoverFalse: () => void}
+): React.ReactElement {
     const user = useSelector((state: RootState) => state.user)
-
+    
     return (
-        <HStack style={{
-            overscrollBehaviorX: 'contain', 
-            overflowX: 'scroll', 
-            paddingLeft: 'calc(-268.46154px + 28.36538vw + 24px)'
-            }}>
-            {problems.map((problem: ClusteringProblemModel): React.ReactElement => 
+        <HStack 
+            ref={info.scrollRef}
+            onWheel={info.handleWheelScroll}
+            onMouseOver={info.handlHoverTrue}
+            onMouseOut={info.hadleHoverFalse}
+            style={{
+                overscrollBehaviorX: 'contain', 
+                overflowX: 'scroll', 
+                paddingLeft: 'calc(-268.46154px + 28.36538vw + 24px)'
+                }}>
+            {info.problems.map((problem: ClusteringProblemModel): React.ReactElement => 
             <ProblemCell key={problem.problemId} bojHandle={user.bojHandle ?? ''} problemID={problem.problemId} />)}
         </HStack>
     );
@@ -81,6 +93,24 @@ function ClusteringProblems({problems}: {problems: ClusteringProblemModel[]}): R
 
 function Home(): React.ReactElement {
     const [clusteringProblems, setClusteringProblems] = useState<ClusteringProblemModel[] | null>(null);
+    const scrollRef = useRef<HTMLDivElement | null>(null);
+
+    const handleWheelScroll = (e: WheelEvent<HTMLDivElement>) => {
+        if (scrollRef.current) {
+            const delta = (e.deltaY || e.deltaX)
+            scrollRef.current.scrollLeft += delta;
+        }
+    };
+
+    const handlHoverTrue = useCallback(() => {
+        document.body.style.overflowY = 'hidden'
+        document.body.style.overflowX = 'hidden'
+    }, [])
+
+    const hadleHoverFalse = useCallback(() => {
+        document.body.style.overflowY = 'auto'
+        document.body.style.overflowX = 'auto'
+    }, [])
 
     const handleClusteringProblem = (data: ClusteringProblemModel[] | null) => {
         setClusteringProblems(data);
@@ -89,7 +119,9 @@ function Home(): React.ReactElement {
     GetMostSolvedProblem(handleClusteringProblem);
     
     return (
-        <VStack style={{overflow: 'hidden', paddingTop: '80px'}}>
+        <VStack style={{
+            overflow: 'hidden', 
+            paddingTop: '80px'}}>
             <Title>
                 수업에서 배운 내용을 알려주세요!<br />
                 문제를 추천해 드릴게요
@@ -146,7 +178,13 @@ function Home(): React.ReactElement {
                 종이들이 많이 찾는 문제
             </ClusteringProblemTitle>
 
-            {clusteringProblems && <ClusteringProblems problems={clusteringProblems} />}
+            {clusteringProblems && 
+            <ClusteringProblems 
+            problems={clusteringProblems} 
+            scrollRef={scrollRef}
+            handleWheelScroll={handleWheelScroll}
+            handlHoverTrue={handlHoverTrue}
+            hadleHoverFalse={hadleHoverFalse} />}
         </VStack>
     );
 }

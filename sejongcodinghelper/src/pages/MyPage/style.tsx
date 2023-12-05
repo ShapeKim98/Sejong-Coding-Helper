@@ -83,6 +83,6 @@ export const Background = styled.div`
     padding: 24px;
     background: white;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
-    border-radius: 30px;
+    border-radius: 20px;
     cursor: pointer;
 `

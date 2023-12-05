@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback} from 'react';
+import React, { useState, useEffect, useCallback, WheelEvent, useRef} from 'react';
 import VStack from '../../components/VStack';
 import HStack from '../../components/HStack';
 import { Background, LogoutButton, Progress, ProgressName, RoadmapDetailButton, SubTitle, Title, TotalSolvedCount, UserName } from './style';
@@ -17,10 +17,16 @@ import ProblemCell from '../../components/ProblemCell';
 import StreakGrass from '../../models/StreakGress';
 import Streak from '../../components/Streak';
 
-function TodaySolvedProblemList({solvedProblems}: {solvedProblems: SolvedProblem[]}): React.ReactElement {
+function TodaySolvedProblemList(info: {
+    solvedProblems: SolvedProblem[],
+    scrollRef: React.MutableRefObject<HTMLDivElement | null>,
+    handleWheelScroll: (e: WheelEvent<HTMLDivElement>) => void,
+    handlHoverTrue: () => void,
+    hadleHoverFalse: () => void
+}): React.ReactElement {
     const user = useSelector((state: RootState) => state.user)
 
-    if (solvedProblems.length !== 0) {
+    if (info.solvedProblems.length !== 0) {
         return(
             <VStack style={{
                 marginTop: '32px',
@@ -29,13 +35,18 @@ function TodaySolvedProblemList({solvedProblems}: {solvedProblems: SolvedProblem
                     marginLeft: 'calc(-268.46154px + 28.36538vw + 24px)',
                     marginBottom: '0px'
                     }}>오늘 푼 문제</SubTitle>
-                <HStack style={{
-                    overscrollBehaviorX: 'contain', 
-                    overflowX: 'scroll', 
-                    paddingLeft: 'calc(-268.46154px + 28.36538vw + 24px)'
-                    }}>
-                    {solvedProblems && solvedProblems.map((problem: SolvedProblem) => 
-                    <ProblemCell key={problem.problemId} bojHandle={user.bojHandle ?? ''} problemID={problem.problemId} />)}
+                <HStack 
+                    ref={info.scrollRef} 
+                    onWheel={info.handleWheelScroll}
+                    onMouseOver={info.handlHoverTrue}
+                    onMouseOut={info.hadleHoverFalse}
+                    style={{
+                        overscrollBehaviorX: 'contain', 
+                        overflowX: 'scroll', 
+                        paddingLeft: 'calc(-268.46154px + 28.36538vw + 24px)'
+                        }}>
+                        {info.solvedProblems && info.solvedProblems.map((problem: SolvedProblem) => 
+                        <ProblemCell key={problem.problemId} bojHandle={user.bojHandle ?? ''} problemID={problem.problemId} />)}
                 </HStack>
             </VStack>
         );
@@ -144,6 +155,14 @@ function MyPage(): React.ReactElement {
     const user = useSelector((state: RootState) => state.user)
     const config = getHeaderRefreshTokenConfing();
     const dispatch = useDispatch();
+    const scrollRef = useRef<HTMLDivElement | null>(null);
+
+    const handleWheelScroll = (e: WheelEvent<HTMLDivElement>) => {
+        if (scrollRef.current) {
+            const delta = (e.deltaY || e.deltaX)
+            scrollRef.current.scrollLeft += delta;
+        }
+    };
 
     const handleRoadmapProgress = (data: RoadmapProgress[] | null) => {
         setRoadmapProgress(data);
@@ -151,6 +170,16 @@ function MyPage(): React.ReactElement {
     const handleSolvedProblems = (data: SolvedProblem[] | null) => {
         setSolvedProblems(data);
     }
+
+    const handlHoverTrue = useCallback(() => {
+        document.body.style.overflowY = 'hidden'
+        document.body.style.overflowX = 'hidden'
+    }, [])
+
+    const hadleHoverFalse = useCallback(() => {
+        document.body.style.overflowY = 'auto'
+        document.body.style.overflowX = 'auto'
+    }, [])
 
     useEffect(() => {
         getUserInfo({bojHandle: user.bojHandle ?? ''})
@@ -198,7 +227,13 @@ function MyPage(): React.ReactElement {
             <RoadmapProgressList roadmapProgress={roadmapProgress} />
             
 
-            {solvedProblems && <TodaySolvedProblemList solvedProblems={solvedProblems} />}
+            {solvedProblems && 
+            <TodaySolvedProblemList 
+            solvedProblems={solvedProblems}
+            scrollRef={scrollRef}
+            handleWheelScroll={handleWheelScroll}
+            handlHoverTrue={handlHoverTrue}
+            hadleHoverFalse={hadleHoverFalse} />}
         </VStack>
     )
 }
