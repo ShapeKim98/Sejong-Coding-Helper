@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 
 export const Title = styled.div`
     display: flex;
-    // flex-direction: column;
     font-family: Pretendard;
     font-size: 28pt;
     font-weight: 700;

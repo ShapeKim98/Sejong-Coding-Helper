@@ -2,6 +2,7 @@ import React, { useEffect} from 'react';
 import axios from 'axios';
 import Lecture from '../../models/Lecture';
 import { RoadmapProblemModel } from '../../models/RoadmapProblem';
+import RoadmapProgress from '../../models/RoadmapProgress';
 
 export const GetRoadmapSearchAll = (handleRoadmap: (data: Lecture[] | null) => void) => {
     useEffect(() => {
@@ -53,4 +54,22 @@ export const GetRoadmapProblemSearchWeek = (params: {
             console.log(error);
         })
     }, [params.week]);
+}
+
+export const GetRoadmapProgres = (
+    params: string, 
+    handleRoadmapProgress: (data: RoadmapProgress[] | null) => void) => {
+        useEffect(() => {
+            axios.get<RoadmapProgress[] | null>(`api/v1/roadmap/progress/user?bojHandle=${params}`)
+            .then(result => {
+                if (result.status == 200) {
+                    handleRoadmapProgress(result.data)
+                } else {
+                    handleRoadmapProgress(null)
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        }, [params])
 }

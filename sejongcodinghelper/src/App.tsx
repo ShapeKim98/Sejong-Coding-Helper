@@ -14,6 +14,7 @@ import User from './models/User';
 import PrivateRoute from './components/PrivateRoute';
 import Login from './pages/Login';
 import Ranking from './pages/Ranking';
+import MyPage from './pages/MyPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -52,6 +53,7 @@ function App() {
               <Route path='/roadmap' element={<Roadmap />} />
               <Route path='/roadmapdetail' element={<RoadmapDetail />} />
               <Route path='/ranking' element={<Ranking />} />
+              <Route path='/myPage' element={<MyPage />} />
               <Route path='*' element={<Navigate to='/home' />} />
             </Route>
           </Routes>

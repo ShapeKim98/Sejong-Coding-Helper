@@ -4,8 +4,8 @@ export const Header = styled.div`
     position: fixed;
     background: rgba(255, 255, 255, 0.4);
     box-shadow: 0 0px 10px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(50px);
-    -webkit-backdrop-filter: blur(50px);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
     border: 1px solid rgba(255, 255, 255, 0.16);
     color: '#28424F';
     font-size: 16px;

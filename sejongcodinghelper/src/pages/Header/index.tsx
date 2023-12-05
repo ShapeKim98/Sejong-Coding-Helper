@@ -128,7 +128,10 @@ function HeaderButton({title, currentHover, handleHover}: HeaderButtonInfo): Rea
             <p style={{
               marginLeft: 'auto',
               color: currentHover == title ? '#C8001E' : '#28424F', 
-              cursor: 'pointer'}} 
+              cursor: 'pointer',
+              fontSize: '18px',
+              fontWeight: '700'
+            }} 
               onMouseOver={handleHover}>{`${user.bojHandle}님 반가워요!`}</p>
           );
     } else {
@@ -151,7 +154,6 @@ function HeaderBarElements({
     setSearch,
     setMyPage
 }: HoverHandlings): React.ReactElement {
-
         const [recomendProblemMenuHover, setRecomendProblemMenuHover] = useState<RecomendProblemMenuElements>();
 
         const [myPageMenuHover, setMyPageMenuHover] = useState<MyPageMenuElements>();
@@ -231,7 +233,7 @@ function HeaderBarElements({
                 <VStack>
                     <Elements /> 
                     <span style={{paddingTop: '40px'}} onMouseOver={setMyPage}>
-                        <MyPageMenu title='마이페이지 가기' currentHover={myPageMenuHover} handleHover={setGoToMyPage} path='' />
+                        <MyPageMenu title='마이페이지 가기' currentHover={myPageMenuHover} handleHover={setGoToMyPage} path='myPage' />
                         <MyPageMenu title='로그아웃' currentHover={myPageMenuHover} handleHover={setLogout} path={null} />
                     </span>
                 </VStack>
@@ -271,7 +273,7 @@ function HeaderBar(): React.ReactElement {
     }
 
     return (
-        <Header onMouseOut={outHover}>
+        <Header onMouseLeave={outHover}>
             <HeaderBarElements 
             hover={hover} 
             setRecomendProblem={setRecomendProblem} 

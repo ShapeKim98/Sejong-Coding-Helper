@@ -118,7 +118,7 @@ export const ClusteringProblemTitle = styled.div`
     display: flex;
     flex-direction: column;
     font-family: Pretendard;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 700;
     line-height: 1.5;
     padding-top: 60px;
