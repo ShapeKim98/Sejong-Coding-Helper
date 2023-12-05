@@ -15,6 +15,7 @@ import {
     TextFieldStyle,
     LoginButton
  } from './style';
+import { ReactComponent as SejongLogo } from '../../assets/Image/SejongLogo.svg';
 
 const JWT_EXPIRY_TIME = 60 * 1000;
 
@@ -105,6 +106,8 @@ function Login(): React.ReactElement {
           alignItems: 'center', 
           justifyContent: 'center'
           }}>
+          <SejongLogo style={{marginTop: '100px'}} />
+
           <Title style={{marginBottom: '76px'}}>
               Univps
           </Title>

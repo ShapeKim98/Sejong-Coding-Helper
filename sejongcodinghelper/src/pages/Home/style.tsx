@@ -8,7 +8,7 @@ export const Title = styled.div`
     font-weight: 700;
     line-height: 1.5;
     padding-top: 28px;
-    padding-left: calc(-268.46154px + 28.36538vw + 24px);
+    margin-left: calc(-268.46154px + 28.36538vw + 24px);
     color: #28424F;
 `
 
@@ -20,7 +20,7 @@ export const SearchButton = styled.div`
     font-weight: 700;
     color: #C8001E;
     padding-top: 36px;
-    padding-left: calc(-268.46154px + 28.36538vw + 24px);
+    margin-left: calc(-268.46154px + 28.36538vw + 24px);
 `
 
 export const SimilarProblem = styled.div`
@@ -39,8 +39,10 @@ export const SimilarProblem = styled.div`
     border-radius: 30px;
     margin-top: 60px;
     margin-bottom: 10px;
-    width: 140px;
-    height: 160px;
+    min-width: 140px;
+    min-height: 160px;
+    max-width: 140px;
+    max-height: 160px;
 `
 
 export const ExamPractice = styled.div`
@@ -60,8 +62,10 @@ export const ExamPractice = styled.div`
     margin-top: 60px;
     margin-left: 40px;
     margin-bottom: 10px;
-    width: 140px;
-    height: 160px;
+    min-width: 140px;
+    min-height: 160px;
+    max-width: 140px;
+    max-height: 160px;
 `
 
 export const RoadmapProblem = styled.div`
@@ -81,8 +85,10 @@ export const RoadmapProblem = styled.div`
     margin-top: 60px;
     margin-left: 40px;
     margin-bottom: 10px;
-    width: 140px;
-    height: 160px;
+    min-width: 140px;
+    min-height: 160px;
+    max-width: 140px;
+    max-height: 160px;
 `
 
 export const SejongRanking = styled.div`
@@ -102,18 +108,20 @@ export const SejongRanking = styled.div`
     margin-top: 60px;
     margin-left: 40px;
     margin-bottom: 10px;
-    width: 140px;
-    height: 160px;
+    min-width: 140px;
+    min-height: 160px;
+    max-width: 140px;
+    max-height: 160px;
 `
 
 export const ClusteringProblemTitle = styled.div`
     display: flex;
     flex-direction: column;
     font-family: Pretendard;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 700;
     line-height: 1.5;
     padding-top: 60px;
-    padding-left: calc(-268.46154px + 28.36538vw + 24px);
+    margin-left: calc(-268.46154px + 28.36538vw + 24px);
     color: #28424F;
 `;

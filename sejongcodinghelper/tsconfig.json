@@ -26,6 +26,7 @@
   },
   "include": [
     "src",
-    "src/components"
+    "src/components",
+    "custom.d.ts"
   ]
 }
