@@ -1,13 +1,16 @@
 import React, { useCallback, useState} from 'react';
 import HStack from '../../components/HStack';
 import VStack from '../../components/VStack';
-import { Link, NavigateFunction } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
     Header, 
     Title
 } from './style';
-import { SimilarProblem } from '../Home/style';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../redux/Store';
+import { userLogout } from '../../api/User/User';
+import { getHeaderRefreshTokenConfing, logoutProc } from '../../api/Auth/Auth';
 
 interface HeaderButtonInfo {
     title: string
@@ -21,6 +24,7 @@ interface HoverHandlings {
     setTestPractice: () => void
     setRanking: () => void
     setSearch: () => void
+    setMyPage: () => void
 }
 
 interface RecomendProblemMenuButtonInfo {
@@ -30,11 +34,19 @@ interface RecomendProblemMenuButtonInfo {
     path: string
 }
 
+interface MyPageMenuButtonInfo {
+    title: string
+    currentHover: MyPageMenuElements | undefined
+    handleHover: () => void
+    path: string | null
+}
+
 enum HeaderElements {
     RecomendProblem = '문제 추천',
     TestPractice = '시험 연습',
     Ranking = '랭킹',
-    Search = '검색하기'
+    Search = '검색하기',
+    MyPage = '마이페이지'
 }
 
 enum RecomendProblemMenuElements {
@@ -42,16 +54,66 @@ enum RecomendProblemMenuElements {
     SimilarProblem = '비슷한 문제 풀어보기',
     PracticeProblem = '실습문제와 비슷한 문제 찾기'
 }
+
+enum MyPageMenuElements {
+    MyPage = '마이페이지 가기',
+    Logout = '로그아웃'
+}
+
+function MyPageMenu({title, currentHover, handleHover, path}: MyPageMenuButtonInfo): React.ReactElement {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const user = useSelector((state: RootState) => state.user)
+    const config = getHeaderRefreshTokenConfing();
+
+    const onClick = useCallback(() => {
+        if (path) {
+            navigate(path)
+        } else {
+            userLogout({bojHandle: user.bojHandle ?? ''}, config)
+            .then(result => {
+                logoutProc(dispatch)
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        }
+    }, [])
+
+    return (
+        <VStack 
+        onMouseOver={handleHover} 
+        onClick={onClick} 
+        style={{
+            cursor: 'pointer',
+            marginLeft: 'calc(-268.46154px + 28.36538vw + 24px)',
+            marginRight: 'calc(-268.46154px + 28.36538vw + 24px)'
+            }}>
+            <span style={{
+                color: currentHover == title ? '#C8001E' : '#28424F',
+                marginLeft: 'auto'
+                }}>{title}</span>
+            <span style={{borderBottom: '1px solid #EDEDED', marginBottom: '12px', marginTop: '12px'}} />
+        </VStack>
+    );
+}
   
 function RecomendProblemMenu({title, currentHover, handleHover, path}: RecomendProblemMenuButtonInfo): React.ReactElement {
     const navigate = useNavigate();
 
-    const onClick = () => {
+    const onClick = useCallback(() => {
         navigate(path)
-    }
+    }, [])
 
     return (
-        <VStack onMouseOver={handleHover} onClick={onClick} style={{cursor: 'pointer'}}>
+        <VStack 
+        onMouseOver={handleHover} 
+        onClick={onClick} 
+        style={{
+            cursor: 'pointer',
+            marginLeft: 'calc(-268.46154px + 28.36538vw + 24px)',
+            marginRight: 'calc(-268.46154px + 28.36538vw + 24px)'
+            }}>
             <span style={{color: currentHover == title ? '#C8001E' : '#28424F'}}>{title}</span>
             <span style={{borderBottom: '1px solid #EDEDED', marginBottom: '12px', marginTop: '12px'}} />
         </VStack>
@@ -59,18 +121,40 @@ function RecomendProblemMenu({title, currentHover, handleHover, path}: RecomendP
 }
 
 function HeaderButton({title, currentHover, handleHover}: HeaderButtonInfo): React.ReactElement {
-    return (
-      <p style={{marginRight: '40px', color: currentHover == title ? '#C8001E' : '#28424F', cursor: 'pointer'}} onMouseOver={handleHover}>{title}</p>
-    );
+    const user = useSelector((state: RootState) => state.user)
+
+    if (title == '마이페이지') {
+        return (
+            <p style={{
+              marginLeft: 'auto',
+              color: currentHover == title ? '#C8001E' : '#28424F', 
+              cursor: 'pointer'}} 
+              onMouseOver={handleHover}>{`${user.bojHandle}님 반가워요!`}</p>
+          );
+    } else {
+        return (
+            <p style={{
+              marginRight: '40px', 
+              color: currentHover == title ? '#C8001E' : '#28424F', 
+              cursor: 'pointer'}} 
+              onMouseOver={handleHover}>{title}</p>
+          );
+    }
+    
 }
 
 function HeaderBarElements({
     hover,
     setRecomendProblem, 
     setTestPractice, 
-    setRanking, 
-    setSearch}: HoverHandlings): React.ReactElement {
+    setRanking,
+    setSearch,
+    setMyPage
+}: HoverHandlings): React.ReactElement {
+
         const [recomendProblemMenuHover, setRecomendProblemMenuHover] = useState<RecomendProblemMenuElements>();
+
+        const [myPageMenuHover, setMyPageMenuHover] = useState<MyPageMenuElements>();
 
         const setRoadmap = () => {
             setRecomendProblemMenuHover(RecomendProblemMenuElements.Roadmap)
@@ -84,9 +168,22 @@ function HeaderBarElements({
             setRecomendProblemMenuHover(RecomendProblemMenuElements.PracticeProblem)
         }
 
+        const setGoToMyPage = () => {
+            setMyPageMenuHover(MyPageMenuElements.MyPage)
+        }
+
+        const setLogout = () => {
+            setMyPageMenuHover(MyPageMenuElements.Logout)
+        }
+
         function Elements(): React.ReactElement {
             return (
-                <HStack style={{alignItems: 'center'}}>
+                <HStack 
+                style={{
+                    alignItems: 'center',
+                    marginLeft: 'calc(-268.46154px + 28.36538vw + 24px)',
+                    marginRight: 'calc(-268.46154px + 28.36538vw + 24px)'
+                    }}>
                     <Link to={'/'}>
                         <Title>Univps</Title>
                     </Link>
@@ -96,6 +193,11 @@ function HeaderBarElements({
                         <HeaderButton title={'랭킹'} currentHover={hover} handleHover={setRanking} />
                     </Link>
                     <HeaderButton title={'검색하기'} currentHover={hover} handleHover={setSearch} />
+
+                    <HeaderButton 
+                    title={'마이페이지'} 
+                    currentHover={hover} 
+                    handleHover={setMyPage} />
                 </HStack>
             );
         }
@@ -105,7 +207,7 @@ function HeaderBarElements({
             return (
                 <VStack>
                    <Elements /> 
-                    <span style={{paddingTop: '40px'}} onMouseOver={setRecomendProblem}>
+                   <span style={{paddingTop: '40px'}} onMouseOver={setRecomendProblem}>
                         <RecomendProblemMenu title='과목별 문제 로드맵 보러가기' currentHover={recomendProblemMenuHover} handleHover={setRoadmap} path='/roadmap' />
                         <RecomendProblemMenu title='비슷한 문제 풀어보기' currentHover={recomendProblemMenuHover} handleHover={setSimilarProblem} path='' />
                         <RecomendProblemMenu title='실습문제와 비슷한 문제 찾기' currentHover={recomendProblemMenuHover} handleHover={setPracticeProblem} path='' />
@@ -124,6 +226,16 @@ function HeaderBarElements({
             return (
                 <Elements />
             );
+        case HeaderElements.MyPage:
+            return (
+                <VStack>
+                    <Elements /> 
+                    <span style={{paddingTop: '40px'}} onMouseOver={setMyPage}>
+                        <MyPageMenu title='마이페이지 가기' currentHover={myPageMenuHover} handleHover={setGoToMyPage} path='' />
+                        <MyPageMenu title='로그아웃' currentHover={myPageMenuHover} handleHover={setLogout} path={null} />
+                    </span>
+                </VStack>
+            )
         default:
             return (
                 <Elements />
@@ -150,6 +262,10 @@ function HeaderBar(): React.ReactElement {
         setHover(HeaderElements.Search)
     }
 
+    const setMyPage = () => {
+        setHover(HeaderElements.MyPage);
+    }
+
     const outHover = () => {
         setHover(undefined)
     }
@@ -161,7 +277,9 @@ function HeaderBar(): React.ReactElement {
             setRecomendProblem={setRecomendProblem} 
             setTestPractice={setTestPractice}
             setRanking={setRanking}
-            setSearch={setSearch} />
+            setSearch={setSearch}
+            setMyPage = {setMyPage}
+             />
         </Header>
     )
 }

@@ -13,10 +13,9 @@ export const Header = styled.div`
     font-weight: 500;
     padding-top: 16px;
     padding-bottom: 16px;
-    padding-left: calc(-268.46154px + 28.36538vw + 24px);
-    width: 100%;
-    transition-property: width, height;
-    transition-duration: 1s, 1s;
+    transition-property: height;
+    transition-duration: 1s;
+    width: 100vw;
 `
 
 export const Title = styled.div`

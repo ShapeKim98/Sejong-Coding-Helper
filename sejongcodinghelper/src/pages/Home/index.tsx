@@ -101,8 +101,7 @@ function Home(): React.ReactElement {
             <HStack style={{ 
                 overscrollBehaviorX: 'contain', 
                 overflowX: 'scroll', 
-                paddingLeft: 'calc(-268.46154px + 28.36538vw + 24px)', 
-                maxWidth: '1200px'}}>
+                paddingLeft: 'calc(-268.46154px + 28.36538vw + 24px)'}}>
                 <SimilarProblemButton buttonInfo={{
                     title: '문제 추천 받으러 가기',
                     description: <p>
