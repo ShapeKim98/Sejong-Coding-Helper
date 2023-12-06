@@ -17,6 +17,9 @@ import Ranking from './pages/Ranking';
 import MyPage from './pages/MyPage';
 import Join from './pages/Join';
 import ProblemRecommend from './pages/ProblemRecomnend';
+import Board from './pages/Board';
+import BoardWrite from './pages/Board/Write';
+import BoardDetail from './pages/Detail';
 
 function App() {
   const dispatch = useDispatch();
@@ -56,7 +59,13 @@ function App() {
             <Route path="/roadmapdetail" element={<RoadmapDetail />} />
             <Route path="/ranking" element={<Ranking />} />
             <Route path="/myPage" element={<MyPage />} />
-            <Route path='problemRecommend' element={<ProblemRecommend />} />
+            <Route path="problemRecommend" element={<ProblemRecommend />} />
+            <Route path="/board">
+              <Route index element={<Board />} />
+              <Route path="write" element={<BoardWrite />} />
+              <Route path="write/:id" element={<BoardWrite />} />
+              <Route path=":id" element={<BoardDetail />} />
+            </Route>
             <Route path="*" element={<Navigate to="/home" />} />
           </Route>
         </Routes>
