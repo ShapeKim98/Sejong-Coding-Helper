@@ -9,7 +9,6 @@ import VStack from '../../components/VStack';
 import HStack from '../../components/HStack';
 import {
   Background,
-  Card,
   LogoutButton,
   NoPosts,
   PageWrapper,
@@ -43,6 +42,7 @@ import Pagination from '../../components/Pagination';
 import BoardTable from '../../components/BoardTable';
 import { isEmpty } from 'lodash';
 import { getPostsByUser } from '../../api/Board/boardAPI';
+import PasswordChangeModal from './PasswordChangeModal';
 
 function TodaySolvedProblemList(info: {
   solvedProblems: SolvedProblem[];
@@ -161,7 +161,7 @@ function UserProfileComponent({
       .catch((error) => {
         console.log(error);
       });
-  });
+  }, [userProfile?.bojHandle]);
 
   return (
     <HStack
@@ -338,6 +338,8 @@ function MyPage(): React.ReactElement {
   GetRoadmapProgres(user.bojHandle ?? '', handleRoadmapProgress);
   GetSolvedProblem(user.bojHandle ?? '', handleSolvedProblems);
 
+  const [showPasswordModal, setShowPasswordModal] = useState(false);
+
   return (
     <VStack
       style={{
@@ -350,10 +352,24 @@ function MyPage(): React.ReactElement {
           marginRight: 'calc(-268.46154px + 28.36538vw + 24px)',
           marginTop: '72px',
           alignItems: 'center',
+          justifyContent: 'space-between',
         }}
       >
         <Title>내 정보</Title>
-        <LogoutButton onClick={onClickLogout}>로그아웃</LogoutButton>
+        <HStack
+          style={{
+            gap: '1rem',
+          }}
+        >
+          <LogoutButton
+            onClick={() => {
+              setShowPasswordModal(true);
+            }}
+          >
+            비밀번호 변경
+          </LogoutButton>
+          <LogoutButton onClick={onClickLogout}>로그아웃</LogoutButton>
+        </HStack>
       </HStack>
 
       <UserProfileComponent userProfile={userProfile} />
@@ -371,6 +387,12 @@ function MyPage(): React.ReactElement {
       )}
 
       <UserBoard />
+      <PasswordChangeModal
+        showModal={showPasswordModal}
+        closeModal={() => {
+          setShowPasswordModal(false);
+        }}
+      />
     </VStack>
   );
 }
