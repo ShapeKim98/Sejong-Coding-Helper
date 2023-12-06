@@ -9,8 +9,7 @@ import { Provider } from 'react-redux';
 import Store from './redux/Store';
 
 // axios설정
-// axios.defaults.baseURL = 'https://univps.kr'
-axios.defaults.baseURL = 'http://localhost:8080';
+axios.defaults.baseURL = 'https://univps.kr';
 axios.defaults.withCredentials = true;
 axios.interceptors.response.use(
   (response) => {
