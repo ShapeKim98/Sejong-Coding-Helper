@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import axios from 'axios'
+import axios from 'axios';
 import { logoutProc } from './api/Auth/Auth';
 import { Provider } from 'react-redux';
 import Store from './redux/Store';
 
 // axios설정
-axios.defaults.baseURL = 'https://univps.kr'
+// axios.defaults.baseURL = 'https://univps.kr'
+axios.defaults.baseURL = 'http://localhost:8080';
 axios.defaults.withCredentials = true;
 axios.interceptors.response.use(
   (response) => {
@@ -21,7 +22,7 @@ axios.interceptors.response.use(
       logoutProc(null);
     }
     return Promise.reject(error);
-  },
+  }
 );
 
 const root = ReactDOM.createRoot(
