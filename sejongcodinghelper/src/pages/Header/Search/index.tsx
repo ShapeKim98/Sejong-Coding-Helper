@@ -137,7 +137,9 @@ function Search() {
       <HStack style={{
         alignItems: 'center'
         }}>
-        <Title>수업에서 배운 내용을 자유롭게 알려주세요!</Title>
+        <Title>
+          풀었던 문제의 제목이나 번호를 알려주세요!<br />
+        </Title>
 
         <SwitchWrapper style={{marginLeft: 'auto'}}>
             <HStack>
@@ -212,7 +214,7 @@ function Search() {
                 <TextFieldStyle
                         onChange={changeKeyword} 
                         value={keyword} 
-                        placeholder={'ex) 오늘 연결리스트에 대해 배웠어'} />
+                        placeholder={'ex) "Hello World", "2557"'} />
                 <SearchButton>검색하기</SearchButton>
             </HStack>
         </VStack>

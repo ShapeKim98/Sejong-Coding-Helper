@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react';
+import React, { useCallback, useEffect} from 'react';
 import axios from 'axios';
 
 interface RecommendedProlemRequest {
@@ -16,7 +16,6 @@ export const GetFindSimilarQuestion = (
         useEffect(() => {
             axios.get<RecommendedProlemResponse>(`/api/v1/recommend/solved/recommend?title=${params}`)
             .then(result => {
-                    console.log(result.data)
                 if (result.status == 200) {
                     handleRecommendedProblems(result.data.result)
                 }
@@ -24,7 +23,7 @@ export const GetFindSimilarQuestion = (
             .catch(error => {
                 console.log(error);
             })
-        }, [handleRecommendedProblems])
+        }, [params])
 }
 
 export const GetRecommededProblem = (
@@ -33,7 +32,6 @@ export const GetRecommededProblem = (
         useEffect(() => {
             axios.get<RecommendedProlemResponse>(`/api/v1/recommend/solved/clustering?bojHandle=${params}`)
             .then(result => {
-                    console.log(result.data)
                 if (result.status == 200) {
                     handleRecommendedProblems(result.data.recommeneded_problems)
                 }
@@ -41,5 +39,5 @@ export const GetRecommededProblem = (
             .catch(error => {
                 console.log(error);
             })
-        }, [handleRecommendedProblems])
+        }, [params])
 }

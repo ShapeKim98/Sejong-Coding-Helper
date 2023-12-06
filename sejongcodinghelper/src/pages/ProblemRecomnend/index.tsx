@@ -9,7 +9,7 @@ import { GetSolvedProblemRecommend } from '../../api/SolvedProblem/SolvedProblem
 import { GetFindSimilarQuestion, GetRecommededProblem } from '../../api/RecommendedProblem/RecommendedProblemAPI';
 
 function RecommendedProblems(info: {
-    title: string | null,
+    problem: SolvedProblemRecommend | null,
     scrollRef: React.MutableRefObject<HTMLDivElement | null>,
     handleWheelScroll: (e: WheelEvent<HTMLDivElement>) => void,
     handlHoverTrue: () => void,
@@ -22,26 +22,41 @@ function RecommendedProblems(info: {
         setRecomendProblems(data);
     }
 
-    if (info.title) {
-        GetFindSimilarQuestion(info.title, handleRecommendedProblem);
+    if (info.problem) {
+        GetFindSimilarQuestion(info.problem.titleKo ?? '', handleRecommendedProblem);
     } else {
         GetRecommededProblem(user.bojHandle ?? '', handleRecommendedProblem);
     }
     
     
     return (
-        <HStack 
-            ref={info.scrollRef}
-            onWheel={info.handleWheelScroll}
-            onMouseOver={info.handlHoverTrue}
-            onMouseOut={info.hadleHoverFalse}
-            style={{
-                overscrollBehaviorX: 'contain', 
-                overflowX: 'scroll', 
-                paddingLeft: 'calc(-268.46154px + 28.36538vw + 24px)'
-                }}>
-            {recommendedProblems?.map((problem: RecommendedProlem): React.ReactElement => 
-            <ProblemCell key={problem.number} bojHandle={user.bojHandle ?? ''} problemID={problem.number} />)}
+        <HStack style={{
+            paddingLeft: 'calc(-268.46154px + 28.36538vw + 24px)'
+        }}>
+            {info.problem && <ProblemCell 
+                key={info.problem.problemId} 
+                bojHandle={user.bojHandle ?? ''}
+                problemID={info.problem.problemId ?? 0} />}
+
+            {info.problem && <p style={{
+                marginTop: '32px',
+                marginRight: '40px'
+            }} />}
+            <HStack 
+                ref={info.scrollRef}
+                onWheel={info.handleWheelScroll}
+                onMouseOver={info.handlHoverTrue}
+                onMouseOut={info.hadleHoverFalse}
+                style={{
+                    overscrollBehaviorX: 'contain', 
+                    overflowX: 'scroll',
+                    }}>
+                {recommendedProblems?.map((problem: RecommendedProlem): React.ReactElement => 
+                    <ProblemCell 
+                    key={problem.number} 
+                    bojHandle={user.bojHandle ?? ''} 
+                    problemID={problem.number} />)}
+            </HStack>
         </HStack>
     );
 }
@@ -83,7 +98,7 @@ function ProblemTitle(): React.ReactElement {
             </ProblemRecommendTitle>
 
             {solveProblemRecommend && <RecommendedProblems 
-            title={solveProblemRecommend.titleKo}
+            problem={solveProblemRecommend}
             scrollRef={scrollRef}
             handleWheelScroll={handleWheelScroll}
             handlHoverTrue={handlHoverTrue}
@@ -124,7 +139,7 @@ function ProblemRecommend(): React.ReactElement {
                 님을 위한 문제에요!
             </ProblemRecommendTitle>
             <RecommendedProblems 
-            title={null}
+            problem={null}
             scrollRef={scrollRef3}
             handleWheelScroll={handleWheelScroll3}
             handlHoverTrue={handlHoverTrue}
