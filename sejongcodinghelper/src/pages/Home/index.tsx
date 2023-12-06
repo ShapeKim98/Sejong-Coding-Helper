@@ -134,14 +134,16 @@ function Home(): React.ReactElement {
                 overscrollBehaviorX: 'contain', 
                 overflowX: 'scroll', 
                 paddingLeft: 'calc(-268.46154px + 28.36538vw + 24px)'}}>
-                <SimilarProblemButton buttonInfo={{
-                    title: '문제 추천 받으러 가기',
-                    description: <p>
-                        연습하고 싶은<br />
-                        알고리즘이<br />
-                        있나요?<br />
-                        </p>
-                }} />
+                <Link to={'/problemRecommend'}>
+                    <SimilarProblemButton buttonInfo={{
+                        title: '문제 추천 받으러 가기',
+                        description: <p>
+                            연습하고 싶은<br />
+                            알고리즘이<br />
+                            있나요?<br />
+                            </p>
+                    }} />
+                </Link>
 
                 <ExamPracticeButton buttonInfo={{
                     title: '연습하러 가기',
