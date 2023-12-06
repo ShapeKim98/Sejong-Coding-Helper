@@ -6,10 +6,10 @@ import ProblemCell from '../../components/ProblemCell';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/Store';
 import { GetSolvedProblemRecommend } from '../../api/SolvedProblem/SolvedProblemAPI';
-import { GetFindSimilarQuestion } from '../../api/RecommendedProblem/RecommendedProblemAPI';
+import { GetFindSimilarQuestion, GetRecommededProblem } from '../../api/RecommendedProblem/RecommendedProblemAPI';
 
 function RecommendedProblems(info: {
-    solveProblemRecommend: SolvedProblemRecommend,
+    title: string | null,
     scrollRef: React.MutableRefObject<HTMLDivElement | null>,
     handleWheelScroll: (e: WheelEvent<HTMLDivElement>) => void,
     handlHoverTrue: () => void,
@@ -22,7 +22,12 @@ function RecommendedProblems(info: {
         setRecomendProblems(data);
     }
 
-    GetFindSimilarQuestion(info.solveProblemRecommend.titleKo, handleRecommendedProblem);
+    if (info.title) {
+        GetFindSimilarQuestion(info.title, handleRecommendedProblem);
+    } else {
+        GetRecommededProblem(user.bojHandle ?? '', handleRecommendedProblem);
+    }
+    
     
     return (
         <HStack 
@@ -41,21 +46,60 @@ function RecommendedProblems(info: {
     );
 }
 
-function ProblemRecommend(): React.ReactElement {
+function ProblemTitle(): React.ReactElement {
     const [solveProblemRecommend, setSolvedProblemRecommend] = useState<SolvedProblemRecommend | null>(null);
-    const scrollRef = useRef<HTMLDivElement | null>(null);
     const user = useSelector((state: RootState) => state.user)
+    const scrollRef = useRef<HTMLDivElement | null>(null);
 
     const handleSolvedProblemRecommend = (data: SolvedProblemRecommend | null) => {
         setSolvedProblemRecommend(data)
     }
 
-    
+    const handlHoverTrue = useCallback(() => {
+        document.body.style.overflowY = 'hidden'
+        document.body.style.overflowX = 'hidden'
+    }, [])
+
+    const hadleHoverFalse = useCallback(() => {
+        document.body.style.overflowY = 'auto'
+        document.body.style.overflowX = 'auto'
+    }, [])
 
     const handleWheelScroll = (e: WheelEvent<HTMLDivElement>) => {
         if (scrollRef.current) {
             const delta = (e.deltaY || e.deltaX)
             scrollRef.current.scrollLeft += delta;
+        }
+    };
+
+    GetSolvedProblemRecommend(user.bojHandle ?? '', handleSolvedProblemRecommend)
+
+    return (
+        <VStack>
+            <ProblemRecommendTitle>
+                내가 푼 문제
+                <TitleHighlight style={{marginLeft: '0.5em'}}>{solveProblemRecommend?.titleKo}</TitleHighlight>
+                에 관한 문제에요.
+            </ProblemRecommendTitle>
+
+            {solveProblemRecommend && <RecommendedProblems 
+            title={solveProblemRecommend.titleKo}
+            scrollRef={scrollRef}
+            handleWheelScroll={handleWheelScroll}
+            handlHoverTrue={handlHoverTrue}
+            hadleHoverFalse={hadleHoverFalse} />}
+        </VStack>
+    );
+}
+
+function ProblemRecommend(): React.ReactElement {
+    const scrollRef3 = useRef<HTMLDivElement | null>(null);
+    const user = useSelector((state: RootState) => state.user)
+
+    const handleWheelScroll3= (e: WheelEvent<HTMLDivElement>) => {
+        if (scrollRef3.current) {
+            const delta = (e.deltaY || e.deltaX)
+            scrollRef3.current.scrollLeft += delta;
         }
     };
 
@@ -68,9 +112,6 @@ function ProblemRecommend(): React.ReactElement {
         document.body.style.overflowY = 'auto'
         document.body.style.overflowX = 'auto'
     }, [])
-
-    GetSolvedProblemRecommend(user.bojHandle ?? '', handleSolvedProblemRecommend)
-    
     
     return (
         <VStack style={{
@@ -79,16 +120,17 @@ function ProblemRecommend(): React.ReactElement {
             <Title>나에게 맞는 문제를 추천해드려요</Title>
 
             <ProblemRecommendTitle>
-                내가 푼 문제 
-                <TitleHighlight>{solveProblemRecommend?.titleKo}</TitleHighlight>
-                에 관한 문제에요.
+                <TitleHighlight>{user.bojHandle}</TitleHighlight>
+                님을 위한 문제에요!
             </ProblemRecommendTitle>
-            {solveProblemRecommend && <RecommendedProblems 
-            solveProblemRecommend={solveProblemRecommend}
-            scrollRef={scrollRef}
-            handleWheelScroll={handleWheelScroll}
+            <RecommendedProblems 
+            title={null}
+            scrollRef={scrollRef3}
+            handleWheelScroll={handleWheelScroll3}
             handlHoverTrue={handlHoverTrue}
-            hadleHoverFalse={hadleHoverFalse} />}
+            hadleHoverFalse={hadleHoverFalse} />
+
+            <ProblemTitle />
         </VStack>
     );
 }

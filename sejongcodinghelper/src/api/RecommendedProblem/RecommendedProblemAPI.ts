@@ -6,17 +6,15 @@ interface RecommendedProlemRequest {
 }
 
 interface RecommendedProlemResponse {
-    result: RecommendedProlem[]
+    result: RecommendedProlem[] | null
+    recommeneded_problems: RecommendedProlem[] | null
 }
 
 export const GetFindSimilarQuestion = (
     params: string, 
     handleRecommendedProblems: (data: RecommendedProlem[] | null) => void) => {
         useEffect(() => {
-            const request: RecommendedProlemRequest = {title: params}
-            axios.post<RecommendedProlemResponse>('/ml/find_similar_question', request, {headers: {
-                'Content-Type': 'application/json'
-            }})
+            axios.get<RecommendedProlemResponse>(`/api/v1/recommend/solved/recommend?title=${params}`)
             .then(result => {
                     console.log(result.data)
                 if (result.status == 200) {
@@ -26,5 +24,22 @@ export const GetFindSimilarQuestion = (
             .catch(error => {
                 console.log(error);
             })
-        }, [params])
+        }, [handleRecommendedProblems])
+}
+
+export const GetRecommededProblem = (
+    params: string, 
+    handleRecommendedProblems: (data: RecommendedProlem[] | null) => void) => {
+        useEffect(() => {
+            axios.get<RecommendedProlemResponse>(`/api/v1/recommend/solved/clustering?bojHandle=${params}`)
+            .then(result => {
+                    console.log(result.data)
+                if (result.status == 200) {
+                    handleRecommendedProblems(result.data.recommeneded_problems)
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        }, [handleRecommendedProblems])
 }
