@@ -123,8 +123,8 @@ function Home(): React.ReactElement {
             overflow: 'hidden', 
             paddingTop: '80px'}}>
             <Title>
-                수업에서 배운 내용을 알려주세요!<br />
-                문제를 추천해 드릴게요
+                풀었던 문제를 알려주세요!<br />
+                비슷한 문제를 추천해 드릴게요
             </Title>
             <SearchButton>
                 검색하러 가기
@@ -134,20 +134,22 @@ function Home(): React.ReactElement {
                 overscrollBehaviorX: 'contain', 
                 overflowX: 'scroll', 
                 paddingLeft: 'calc(-268.46154px + 28.36538vw + 24px)'}}>
-                <SimilarProblemButton buttonInfo={{
-                    title: '문제 추천 받으러 가기',
-                    description: <p>
-                        연습하고 싶은<br />
-                        알고리즘이<br />
-                        있나요?<br />
-                        </p>
-                }} />
+                <Link to={'/problemRecommend'}>
+                    <SimilarProblemButton buttonInfo={{
+                        title: '문제 추천 받으러 가기',
+                        description: <p>
+                            연습하고 싶은<br />
+                            알고리즘이<br />
+                            있나요?<br />
+                            </p>
+                    }} />
+                </Link>
 
                 <ExamPracticeButton buttonInfo={{
-                    title: '연습하러 가기',
+                    title: '질문하러 가기',
                     description: <p>
-                        시험때만 되면<br />
-                        실수 하시나요?<br />
+                        모르는게<br />
+                        있으신가요?<br />
                         </p>
                 }} />
 

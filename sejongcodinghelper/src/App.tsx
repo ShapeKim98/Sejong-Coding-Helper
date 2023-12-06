@@ -16,6 +16,7 @@ import Login from './pages/Login';
 import Ranking from './pages/Ranking';
 import MyPage from './pages/MyPage';
 import Join from './pages/Join';
+import ProblemRecommend from './pages/ProblemRecomnend';
 
 function App() {
   const dispatch = useDispatch();
