@@ -145,13 +145,15 @@ function Home(): React.ReactElement {
                     }} />
                 </Link>
 
-                <ExamPracticeButton buttonInfo={{
-                    title: '질문하러 가기',
-                    description: <p>
-                        모르는게<br />
-                        있으신가요?<br />
-                        </p>
-                }} />
+                <Link to={'/board'}>
+                    <ExamPracticeButton buttonInfo={{
+                        title: '질문하러 가기',
+                        description: <p>
+                            모르는게<br />
+                            있으신가요?<br />
+                            </p>
+                    }} />
+                </Link>
 
                 <Link to={'/roadmap'}>
                     <RoadmapProblemButton buttonInfo={{
