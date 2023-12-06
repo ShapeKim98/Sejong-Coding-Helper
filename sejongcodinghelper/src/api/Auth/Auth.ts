@@ -1,6 +1,6 @@
 import Cookies from 'universal-cookie';
 import axios, { AxiosResponse } from 'axios';
-import { isEmpty, result } from 'lodash';
+import { isEmpty } from 'lodash';
 import { refreshToken, parseBoj } from '../User/User';
 import { logout, setUser } from '../../redux/User';
 import { RefreshToken } from '../../models/Token';
