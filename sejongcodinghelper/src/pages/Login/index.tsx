@@ -80,7 +80,6 @@ function Login(): React.ReactElement {
         .then((response) => {
           const { data } = response;
           const { accessToken, refreshToken } = data.jwt;
-          axios.defaults.headers['Access_Token'] = accessToken
           axios.defaults.headers.common['Access_Token'] = accessToken;
           dispatch(
             setUser({ bojHandle: data.bojHandle, isAdmin: data.manager }),

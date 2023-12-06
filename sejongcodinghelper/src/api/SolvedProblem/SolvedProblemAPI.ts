@@ -1,6 +1,6 @@
 import React, { useEffect, useState} from 'react';
 import axios from 'axios';
-import SolvedProblem from '../../../models/SolvedProblem';
+import SolvedProblem from '../../models/SolvedProblem';
 
 export const GetSolvedProblem = (params: string, handleSolvedProblem: (data: SolvedProblem[] | null) => void) => {
     useEffect(() => {

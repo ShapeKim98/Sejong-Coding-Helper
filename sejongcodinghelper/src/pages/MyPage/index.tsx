@@ -12,7 +12,7 @@ import { GetRoadmapProgres } from '../../api/Roadmap/RoadmapAPI';
 import { getHeaderRefreshTokenConfing, logoutProc } from '../../api/Auth/Auth';
 import { Link } from 'react-router-dom';
 import SolvedProblem from '../../models/SolvedProblem';
-import { GetSolvedProblem } from '../../api/Auth/SolvedProblem/SolvedProblemAPI';
+import { GetSolvedProblem } from '../../api/SolvedProblem/SolvedProblemAPI';
 import ProblemCell from '../../components/ProblemCell';
 import StreakGrass from '../../models/StreakGress';
 import Streak from '../../components/Streak';
