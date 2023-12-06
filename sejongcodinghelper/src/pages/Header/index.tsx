@@ -44,7 +44,7 @@ interface MyPageMenuButtonInfo {
 
 enum HeaderElements {
     RecomendProblem = '문제 추천',
-    TestPractice = '시험 연습',
+    QNABoard = '질문 게시판',
     Ranking = '랭킹',
     Search = '검색하기',
     MyPage = '마이페이지'
@@ -52,8 +52,7 @@ enum HeaderElements {
 
 enum RecomendProblemMenuElements {
     Roadmap = '과목별 문제 로드맵 보러가기',
-    SimilarProblem = '비슷한 문제 풀어보기',
-    PracticeProblem = '실습문제와 비슷한 문제 찾기'
+    SimilarProblem = '맞춤 문제 추천 받기'
 }
 
 enum MyPageMenuElements {
@@ -167,10 +166,6 @@ function HeaderBarElements({
             setRecomendProblemMenuHover(RecomendProblemMenuElements.SimilarProblem)
         }
 
-        const setPracticeProblem = () => {
-            setRecomendProblemMenuHover(RecomendProblemMenuElements.PracticeProblem)
-        }
-
         const setGoToMyPage = () => {
             setMyPageMenuHover(MyPageMenuElements.MyPage)
         }
@@ -191,7 +186,7 @@ function HeaderBarElements({
                         <Title>Univps</Title>
                     </Link>
                     <HeaderButton title={'문제 추천'} currentHover={hover} handleHover={setRecomendProblem} />
-                    <HeaderButton title={'시험 연습'} currentHover={hover} handleHover={setTestPractice} />
+                    <HeaderButton title={'질문 게시판'} currentHover={hover} handleHover={setTestPractice} />
                     <Link to={'/ranking'}>
                         <HeaderButton title={'랭킹'} currentHover={hover} handleHover={setRanking} />
                     </Link>
@@ -212,12 +207,11 @@ function HeaderBarElements({
                    <Elements /> 
                    <span style={{paddingTop: '40px'}} onMouseOver={setRecomendProblem}>
                         <RecomendProblemMenu title='과목별 문제 로드맵 보러가기' currentHover={recomendProblemMenuHover} handleHover={setRoadmap} path='/roadmap' />
-                        <RecomendProblemMenu title='비슷한 문제 풀어보기' currentHover={recomendProblemMenuHover} handleHover={setSimilarProblem} path='' />
-                        <RecomendProblemMenu title='실습문제와 비슷한 문제 찾기' currentHover={recomendProblemMenuHover} handleHover={setPracticeProblem} path='' />
+                        <RecomendProblemMenu title='맞춤 문제 추천 받기' currentHover={recomendProblemMenuHover} handleHover={setSimilarProblem} path='/problemRecommend' />
                     </span>
                 </VStack>
             );
-        case HeaderElements.TestPractice:
+        case HeaderElements.QNABoard:
             return (
                 <Elements />
             )
@@ -260,7 +254,7 @@ function HeaderBar(): React.ReactElement {
     }
 
     const setTestPractice = () => {
-        setHover(HeaderElements.TestPractice)
+        setHover(HeaderElements.QNABoard)
     }
 
     const setRanking = () => {

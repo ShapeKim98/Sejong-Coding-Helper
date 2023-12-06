@@ -15,6 +15,7 @@ import PrivateRoute from './components/PrivateRoute';
 import Login from './pages/Login';
 import Ranking from './pages/Ranking';
 import MyPage from './pages/MyPage';
+import ProblemRecommend from './pages/ProblemRecomnend';
 
 function App() {
   const dispatch = useDispatch();
@@ -54,6 +55,7 @@ function App() {
               <Route path='/roadmapdetail' element={<RoadmapDetail />} />
               <Route path='/ranking' element={<Ranking />} />
               <Route path='/myPage' element={<MyPage />} />
+              <Route path='problemRecommend' element={<ProblemRecommend />} />
               <Route path='*' element={<Navigate to='/home' />} />
             </Route>
           </Routes>
