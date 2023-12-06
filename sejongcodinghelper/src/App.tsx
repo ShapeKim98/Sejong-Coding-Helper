@@ -56,6 +56,7 @@ function App() {
             <Route path="/roadmapdetail" element={<RoadmapDetail />} />
             <Route path="/ranking" element={<Ranking />} />
             <Route path="/myPage" element={<MyPage />} />
+            <Route path='problemRecommend' element={<ProblemRecommend />} />
             <Route path="*" element={<Navigate to="/home" />} />
           </Route>
         </Routes>
