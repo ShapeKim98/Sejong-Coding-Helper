@@ -7,7 +7,7 @@ interface RecommendedProlemRequest {
 
 interface RecommendedProlemResponse {
     result: RecommendedProlem[] | null
-    recommeneded_problems: RecommendedProlem[] | null
+    recommended_problems: RecommendedProlem[] | null
 }
 
 export const GetFindSimilarQuestion = (
@@ -33,7 +33,7 @@ export const GetRecommededProblem = (
             axios.get<RecommendedProlemResponse>(`/api/v1/recommend/solved/clustering?bojHandle=${params}`)
             .then(result => {
                 if (result.status == 200) {
-                    handleRecommendedProblems(result.data.recommeneded_problems)
+                    handleRecommendedProblems(result.data.recommended_problems)
                 }
             })
             .catch(error => {
