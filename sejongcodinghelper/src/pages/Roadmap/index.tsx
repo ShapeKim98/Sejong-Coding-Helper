@@ -61,7 +61,7 @@ function Roadmap(): React.ReactElement {
                 주차 별로 문제를 추천해 드릴게요
             </Title>
             <Graduate>
-                1학년
+                수업 목록
             </Graduate>
             {roadmap && <LectureButtons lectures={roadmap} />}
         </VStack>
