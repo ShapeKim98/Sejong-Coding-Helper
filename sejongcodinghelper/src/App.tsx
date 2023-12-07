@@ -1,8 +1,8 @@
 import React, { ReactElement, useEffect, useRef, useState } from 'react';
 import GlobalStyle from './style/globalStyle';
-import Home from './pages/Home';
-import ProblemResult from './pages/ProblemResult';
-import HeaderBar from './pages/Header';
+import Home from './pages/Home'
+import ProblemResult from './pages/ProblemResult'
+import HeaderBar from './pages/Header'
 import './App.css';
 import Roadmap from './pages/Roadmap';
 import RoadmapDetail from './pages/RoadmapDetail';
@@ -15,15 +15,11 @@ import PrivateRoute from './components/PrivateRoute';
 import Login from './pages/Login';
 import Ranking from './pages/Ranking';
 import MyPage from './pages/MyPage';
-import Join from './pages/Join';
 import ProblemRecommend from './pages/ProblemRecomnend';
-import Board from './pages/Board';
-import BoardWrite from './pages/Board/Write';
-import BoardDetail from './pages/Detail';
 
 function App() {
   const dispatch = useDispatch();
-  const user = useSelector((state: { user: User }) => state.user);
+  const user = useSelector((state: {user: User}) => state.user);
 
   useEffect(() => {
     onSilentRefresh(dispatch);
@@ -31,7 +27,7 @@ function App() {
       return Promise.all(
         keyList.map((key) => {
           return caches.delete(key);
-        })
+        }),
       );
     });
   }, []);
@@ -40,35 +36,29 @@ function App() {
   if (isEmpty(user.bojHandle) && !isEmpty(refreshToken)) {
     return <></>;
   }
-
+  
   return (
-    <div style={{ width: '100%', height: '100%' }}>
+    <div style={{width: '100%', 
+                height: '100%'}}>
       <GlobalStyle />
       <BrowserRouter>
         {!isEmpty(refreshToken) && <HeaderBar />}
         <Routes>
-          <Route element={<PrivateRoute userAuthentication={false} />}>
-            <Route path="/login" element={<Login />} />
-            <Route path="/join" element={<Join />} />
-          </Route>
-
-          <Route element={<PrivateRoute userAuthentication={true} />}>
-            <Route path="/home" element={<Home />} />
-            <Route path="/problemresult" element={<ProblemResult />} />
-            <Route path="/roadmap" element={<Roadmap />} />
-            <Route path="/roadmapdetail" element={<RoadmapDetail />} />
-            <Route path="/ranking" element={<Ranking />} />
-            <Route path="/myPage" element={<MyPage />} />
-            <Route path="problemRecommend" element={<ProblemRecommend />} />
-            <Route path="/board">
-              <Route index element={<Board />} />
-              <Route path="write" element={<BoardWrite />} />
-              <Route path="write/:id" element={<BoardWrite />} />
-              <Route path=":id" element={<BoardDetail />} />
+            <Route element={<PrivateRoute userAuthentication={false} />}>
+                <Route path="/login" element={<Login />} />
             </Route>
-            <Route path="*" element={<Navigate to="/home" />} />
-          </Route>
-        </Routes>
+
+            <Route element={<PrivateRoute userAuthentication={true} />}>
+              <Route path='/home' element={<Home />} />
+              <Route path='/problemresult' element={<ProblemResult />} />
+              <Route path='/roadmap' element={<Roadmap />} />
+              <Route path='/roadmapdetail' element={<RoadmapDetail />} />
+              <Route path='/ranking' element={<Ranking />} />
+              <Route path='/myPage' element={<MyPage />} />
+              <Route path='/problemRecommend' element={<ProblemRecommend />} />
+              <Route path='*' element={<Navigate to='/home' />} />
+            </Route>
+          </Routes>
       </BrowserRouter>
     </div>
   );
