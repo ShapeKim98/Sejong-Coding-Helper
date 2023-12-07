@@ -24,6 +24,7 @@ import { RootState } from '../../redux/Store';
 import Problem from '../../models/Problem';
 import BoardProblemCard from '../Board/BoardProblemCard';
 import { Container } from '../Board/style';
+import VStack from '../../components/VStack';
 
 /**
  * 게시판 글 상세 컴포넌트
@@ -130,10 +131,10 @@ function BoardDetail() {
           </WriteInfo>
         </Toolbar>
         {!isEmpty(problemInfo) && <BoardProblemCard problem={problemInfo} />}
-        <Content data-color-mode="light">
+        <Content 
+        data-color-mode='light'>
           <MDEditor.Markdown
             style={{
-              padding: 10,
               backgroundColor: 'transparent',
             }}
             source={post.content}

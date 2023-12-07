@@ -241,7 +241,7 @@ function BoardWrite() {
                   backgroundColor: boardColor ? '#d6e3ef' : '',
                   fontWeight: 'normal',
                 }}
-                data-color-mode="light"
+                data-color-mode='dark'
               />
             </FileDrop>
           </div>

@@ -2,13 +2,33 @@ import styled from "@emotion/styled";
 
 export const Title = styled.div`
     display: flex;
+    flex-direction: column;
     font-family: Pretendard;
-    font-size: 28pt;
+    font-size: 24px;
     font-weight: 700;
     line-height: 1.5;
-    padding-top: 36px;
-    padding-left: calc(-268.46154px + 28.36538vw + 24px);
+    padding-top: 28px;
+    margin-left: calc(-268.46154px + 28.36538vw + 24px);
     color: #28424F;
+`
+
+export const ProblemRecommendTitle = styled.div`
+    display: flex;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-weight: 700;
+    padding-top: 60px;
+    margin-left: calc(-268.46154px + 28.36538vw + 24px);
+    color: #28424F;
+`;
+
+export const TitleHighlight = styled.p`
+    display: flex;
+    color: #C8001E;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
 `
 
 export const ResultProblem = styled.div`
@@ -29,14 +49,14 @@ export const ResultProblem = styled.div`
     scroll-snap-align: start;
 `
 
-export const ProblemTitle = styled.div`
-    display: flex;
-    flex-direction: column;
-    font-size: 16pt;
-    font-weight: 700;
-    color: #28424F;
-    padding-top: 20px;
-`
+// export const ProblemTitle = styled.div`
+//     display: flex;
+//     flex-direction: column;
+//     font-size: 16pt;
+//     font-weight: 700;
+//     color: #28424F;
+//     padding-top: 20px;
+// `
 
 export const Tag = styled.div`
     display: flex;

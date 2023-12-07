@@ -140,7 +140,7 @@ function Join() {
 
   // 비밀번호 유효성 검사
   const passwordRegExp =
-    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{9,20}$/g;
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&#.~_-])[A-Za-z\d@$!%*?&#.~_-]{9,20}$/g;
   useDidMountEffect(() => {
     // 비밀번호
     let isError = false;

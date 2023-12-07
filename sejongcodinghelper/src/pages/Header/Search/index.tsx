@@ -16,6 +16,7 @@ import { RootState } from '../../../redux/Store';
 import { MarkObj } from 'rc-slider/lib/Marks';
 import HStack from '../../../components/HStack';
 import VStack from '../../../components/VStack';
+import { Link } from 'react-router-dom';
 
 interface Problem {
   id: number;
@@ -138,10 +139,10 @@ function Search() {
         alignItems: 'center'
         }}>
         <Title>
-          풀었던 문제의 제목이나 번호를 알려주세요!<br />
+          풀었던 문제의 번호를 알려주세요!<br />
         </Title>
 
-        <SwitchWrapper style={{marginLeft: 'auto'}}>
+        {/* <SwitchWrapper style={{marginLeft: 'auto'}}>
             <HStack>
                 <div style={{marginRight: '12px'}}>한국어 문제만 추천 받기</div>
 
@@ -157,12 +158,12 @@ function Search() {
                     className="switch"
                 />
             </HStack>
-        </SwitchWrapper>
+        </SwitchWrapper> */}
       </HStack>
       
       <Form onSubmit={onSubmitForm}>
         <VStack style={{marginTop: '32px'}}>
-            <HStack>
+            {/* <HStack>
                 <Label style={{marginRight: '8px'}}>
                     난이도
                 </Label>
@@ -208,14 +209,16 @@ function Search() {
                     height: '24px'
                 }
             }}
-          />
+          /> */}
 
             <HStack>
                 <TextFieldStyle
                         onChange={changeKeyword} 
                         value={keyword} 
-                        placeholder={'ex) "Hello World", "2557"'} />
-                <SearchButton>검색하기</SearchButton>
+                        placeholder={'ex) "2557"'} />
+                <Link to={'/problemresult'} state={{problemID: parseInt(keyword)}}>
+                  <SearchButton>검색하기</SearchButton>
+                </Link>
             </HStack>
         </VStack>
       </Form>
