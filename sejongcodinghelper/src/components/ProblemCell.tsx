@@ -21,8 +21,8 @@ const Background = styled.div`
     margin-bottom: 10px;
     min-width: 160px;
     max-width: 160px;
-    min-height: 180px;
-    max-height: 180px;
+    min-height: 200px;
+    max-height: 200px;
     scroll-snap-align: start;
     cursor: pointer;
 `
@@ -43,7 +43,17 @@ const ProblemTitle = styled.div`
     font-size: 16px;
     font-weight: 700;
     color: #28424F;
-    padding-top: 20px;
+    margin-top: 16px;
+`
+
+export const Similar = styled.p`
+    display: flex;
+    color: #C8001E;
+    font-family: Pretendard;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    margin-top: 12px;
 `
 
 const Tag = styled.div`
@@ -81,7 +91,7 @@ const IsSolved = styled.div`
     margin-left: auto;
 `
 
-function ProblemCell(params: {bojHandle: string, problemID: number}): React.ReactElement {
+function ProblemCell(params: {bojHandle: string, problemID: number, similar: number | null}): React.ReactElement {
     const [problem, setProblem] = useState<Problem | null>(null);
     const [imageUrl, setImageUrl] = useState('');
     
@@ -123,6 +133,8 @@ function ProblemCell(params: {bojHandle: string, problemID: number}): React.Reac
                 </HStack>
 
                 <ProblemTitle>{problem?.titleKo}</ProblemTitle>
+
+                {params.similar && <Similar>유사도 : {(100 * (params.similar / 2)).toFixed(2)}%</Similar>}
             </VStack>
 
             <HStack style={{flexWrap: 'wrap'}}>

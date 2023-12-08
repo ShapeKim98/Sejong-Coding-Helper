@@ -47,7 +47,9 @@ function RecommendedProblems(info: {
             <ProblemCell 
                 key={info.problem.problemId} 
                 bojHandle={user.bojHandle ?? ''}
-                problemID={parseInt(info.problem.problemId) ?? 0} />
+                problemID={parseInt(info.problem.problemId) ?? 0}
+                similar={null}
+                 />
 
             <p style={{
                 marginTop: '32px',
@@ -66,7 +68,9 @@ function RecommendedProblems(info: {
                     <ProblemCell 
                     key={problem.number} 
                     bojHandle={user.bojHandle ?? ''} 
-                    problemID={problem.number} />)}
+                    problemID={problem.number} 
+                    similar={problem.similar}
+                    />)}
             </HStack>
         </HStack>
     );

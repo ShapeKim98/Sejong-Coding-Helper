@@ -1,4 +1,5 @@
 interface RecommendedProlem {
     number: number,
-    title: string
+    title: string,
+    similar: number | null
 }

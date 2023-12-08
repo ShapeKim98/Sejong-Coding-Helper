@@ -320,6 +320,10 @@ function HeaderBarElements({
 function HeaderBar(): React.ReactElement {
   const [hover, setHover] = useState<HeaderElements>();
 
+  useCallback(() => {
+
+  }, [])
+
   const setRecomendProblem = () => {
     setHover(HeaderElements.RecomendProblem);
   };

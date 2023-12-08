@@ -24,6 +24,11 @@ import BoardDetail from './pages/Detail';
 function App() {
   const dispatch = useDispatch();
   const user = useSelector((state: {user: User}) => state.user);
+  const [isSearching, setIsSearching] = useState<boolean>(false);
+
+  const handleSetIsSearching = (flag: boolean) => {
+    setIsSearching(flag);
+  }
 
   useEffect(() => {
     onSilentRefresh(dispatch);

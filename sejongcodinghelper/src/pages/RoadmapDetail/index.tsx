@@ -32,7 +32,13 @@ function ProblemList({currentWeek}: {currentWeek: number}): React.ReactElement {
             flexWrap: 'wrap', 
             marginLeft: 'calc(-268.46154px + 28.36538vw + 24px)'}}>
             {roadmapProblems && roadmapProblems.map((problem: RoadmapProblemModel): React.ReactElement =>
-                problem && <ProblemCell key={problem.problemId} bojHandle={user.bojHandle ?? ''} problemID={problem.problemId} />
+                problem && 
+                <ProblemCell 
+                key={problem.problemId} 
+                bojHandle={user.bojHandle ?? ''} 
+                problemID={problem.problemId} 
+                similar={null}
+                />
             )}
         </HStack>
     );

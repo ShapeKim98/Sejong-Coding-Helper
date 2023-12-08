@@ -85,6 +85,7 @@ function TodaySolvedProblemList(info: {
                 key={problem.problemId}
                 bojHandle={user.bojHandle ?? ''}
                 problemID={problem.problemId}
+                similar={null}
               />
             ))}
         </HStack>

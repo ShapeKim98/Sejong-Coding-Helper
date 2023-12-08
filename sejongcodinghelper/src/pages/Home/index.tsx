@@ -86,7 +86,11 @@ function ClusteringProblems(info: {
                 paddingLeft: 'calc(-268.46154px + 28.36538vw + 24px)'
                 }}>
             {info.problems.map((problem: ClusteringProblemModel): React.ReactElement => 
-            <ProblemCell key={problem.problemId} bojHandle={user.bojHandle ?? ''} problemID={problem.problemId} />)}
+            <ProblemCell 
+            key={problem.problemId} 
+            bojHandle={user.bojHandle ?? ''} 
+            problemID={problem.problemId} 
+            similar={null}/>)}
         </HStack>
     );
 }
