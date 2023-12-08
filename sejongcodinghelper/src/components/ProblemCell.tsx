@@ -50,7 +50,7 @@ export const Similar = styled.p`
     display: flex;
     color: #C8001E;
     font-family: Pretendard;
-    font-size: 12px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 700;
     margin-top: 12px;
