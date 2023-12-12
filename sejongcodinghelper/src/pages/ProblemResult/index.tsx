@@ -38,14 +38,14 @@ function RecommendedProblems(info: {
     }
 
     GetFindSimilarQuestion(info.problem.titleKo ?? '', handleRecommendedProblem);
-    
-    
+
+
     return (
         <HStack style={{
             paddingLeft: 'calc(-268.46154px + 28.36538vw + 24px)'
         }}>
-            <ProblemCell 
-                key={info.problem.problemId} 
+            <ProblemCell
+                key={info.problem.problemId}
                 bojHandle={user.bojHandle ?? ''}
                 problemID={parseInt(info.problem.problemId) ?? 0}
                 similar={null}
@@ -55,20 +55,20 @@ function RecommendedProblems(info: {
                 marginTop: '32px',
                 marginRight: '40px'
             }} />
-            <HStack 
+            <HStack
                 ref={info.scrollRef}
                 onWheel={info.handleWheelScroll}
                 onMouseOver={info.handlHoverTrue}
                 onMouseOut={info.hadleHoverFalse}
                 style={{
-                    overscrollBehaviorX: 'contain', 
+                    overscrollBehaviorX: 'contain',
                     overflowX: 'scroll',
                     }}>
-                {recommendedProblems?.map((problem: RecommendedProlem): React.ReactElement => 
-                    <ProblemCell 
-                    key={problem.number} 
-                    bojHandle={user.bojHandle ?? ''} 
-                    problemID={problem.number} 
+                {recommendedProblems?.map((problem: RecommendedProlem): React.ReactElement =>
+                    <ProblemCell
+                    key={problem.number}
+                    bojHandle={user.bojHandle ?? ''}
+                    problemID={problem.number}
                     similar={problem.similar}
                     />)}
             </HStack>
@@ -97,7 +97,7 @@ function ProblemTitle({problem}: {problem: Problem| null}): React.ReactElement {
 
     return (
         <VStack>
-            {problem && <RecommendedProblems 
+            {problem && <RecommendedProblems
             problem={problem}
             scrollRef={scrollRef}
             handleWheelScroll={handleWheelScroll}
@@ -197,9 +197,9 @@ function ProblemResult(): React.ReactElement {
                 </p>
                 에 대한 결과에요.
             </Title>
-            <SearchButton>
+            {/* <SearchButton>
                 다시 검색하기
-            </SearchButton>
+            </SearchButton> */}
 
             {/* <ResultProblemTitle style={{marginLeft: 'calc(-268.46154px + 28.36538vw + 24px)'}}>
                 <p style={{color: '#C8001E'}}>searchedProblem.titleKo</p>

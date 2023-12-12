@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useRef, useState } from 'react';
+import React, { ReactElement, useCallback, useEffect, useRef, useState } from 'react';
 import GlobalStyle from './style/globalStyle';
 import Home from './pages/Home';
 import ProblemResult from './pages/ProblemResult';
@@ -26,10 +26,6 @@ function App() {
   const user = useSelector((state: {user: User}) => state.user);
   const [isSearching, setIsSearching] = useState<boolean>(false);
 
-  const handleSetIsSearching = (flag: boolean) => {
-    setIsSearching(flag);
-  }
-
   useEffect(() => {
     onSilentRefresh(dispatch);
     caches.keys().then((keyList) => {
@@ -45,13 +41,13 @@ function App() {
   if (isEmpty(user.bojHandle) && !isEmpty(refreshToken)) {
     return <></>;
   }
-  
+
   return (
-    <div style={{width: '100%', 
+    <div style={{width: '100%',
                 height: '100%'}}>
       <GlobalStyle />
       <BrowserRouter>
-        {!isEmpty(refreshToken) && <HeaderBar />}
+        {!isEmpty(refreshToken) && <HeaderBar isSearching={isSearching} setSearching={setIsSearching}/>}
         <Routes>
             <Route element={<PrivateRoute userAuthentication={false} />}>
               <Route path="/login" element={<Login />} />
@@ -59,7 +55,7 @@ function App() {
             </Route>
 
             <Route element={<PrivateRoute userAuthentication={true} />}>
-            <Route path="/home" element={<Home />} />
+            <Route path="/home" element={<Home setIsSearching={setIsSearching}/>} />
             <Route path="/problemresult" element={<ProblemResult />} />
             <Route path="/roadmap" element={<Roadmap />} />
             <Route path="/roadmapdetail" element={<RoadmapDetail />} />

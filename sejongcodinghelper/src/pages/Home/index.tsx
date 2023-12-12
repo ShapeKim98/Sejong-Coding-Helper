@@ -73,31 +73,35 @@ function ClusteringProblems(info: {
     hadleHoverFalse: () => void}
 ): React.ReactElement {
     const user = useSelector((state: RootState) => state.user)
-    
+
     return (
-        <HStack 
+        <HStack
             ref={info.scrollRef}
             onWheel={info.handleWheelScroll}
             onMouseOver={info.handlHoverTrue}
             onMouseOut={info.hadleHoverFalse}
             style={{
-                overscrollBehaviorX: 'contain', 
-                overflowX: 'scroll', 
+                overscrollBehaviorX: 'contain',
+                overflowX: 'scroll',
                 paddingLeft: 'calc(-268.46154px + 28.36538vw + 24px)'
                 }}>
-            {info.problems.map((problem: ClusteringProblemModel): React.ReactElement => 
-            <ProblemCell 
-            key={problem.problemId} 
-            bojHandle={user.bojHandle ?? ''} 
-            problemID={problem.problemId} 
+            {info.problems.map((problem: ClusteringProblemModel): React.ReactElement =>
+            <ProblemCell
+            key={problem.problemId}
+            bojHandle={user.bojHandle ?? ''}
+            problemID={problem.problemId}
             similar={null}/>)}
         </HStack>
     );
 }
 
-function Home(): React.ReactElement {
+function Home({setIsSearching}: {setIsSearching: React.Dispatch<React.SetStateAction<boolean>>}): React.ReactElement {
     const [clusteringProblems, setClusteringProblems] = useState<ClusteringProblemModel[] | null>(null);
     const scrollRef = useRef<HTMLDivElement | null>(null);
+
+    const handleIsSearching = useCallback(() => {
+        setIsSearching(true);
+    }, [])
 
     const handleWheelScroll = (e: WheelEvent<HTMLDivElement>) => {
         if (scrollRef.current) {
@@ -121,22 +125,22 @@ function Home(): React.ReactElement {
     }
 
     GetMostSolvedProblem(handleClusteringProblem);
-    
+
     return (
         <VStack style={{
-            overflow: 'hidden', 
+            overflow: 'hidden',
             paddingTop: '80px'}}>
             <Title>
                 풀었던 문제를 알려주세요!<br />
                 비슷한 문제를 추천해 드릴게요
             </Title>
-            <SearchButton>
+            <SearchButton onClick={handleIsSearching} style={{cursor: 'pointer'}}>
                 검색하러 가기
             </SearchButton>
 
-            <HStack style={{ 
-                overscrollBehaviorX: 'contain', 
-                overflowX: 'scroll', 
+            <HStack style={{
+                overscrollBehaviorX: 'contain',
+                overflowX: 'scroll',
                 paddingLeft: 'calc(-268.46154px + 28.36538vw + 24px)'}}>
                 <Link to={'/problemRecommend'}>
                     <SimilarProblemButton buttonInfo={{
@@ -186,9 +190,9 @@ function Home(): React.ReactElement {
                 종이들이 많이 찾는 문제
             </ClusteringProblemTitle>
 
-            {clusteringProblems && 
-            <ClusteringProblems 
-            problems={clusteringProblems} 
+            {clusteringProblems &&
+            <ClusteringProblems
+            problems={clusteringProblems}
             scrollRef={scrollRef}
             handleWheelScroll={handleWheelScroll}
             handlHoverTrue={handlHoverTrue}

@@ -208,13 +208,13 @@ function UserProfileComponent({
           {'푼 문제 : ' + userProfile?.totalSolved}
         </TotalSolvedCount>
       </VStack>
-      <Streak
+      {/* <Streak
         randomStreak={randomStreak}
         maxStreak={102}
         line={3}
         width={680}
         height={65}
-      />
+      /> */}
     </HStack>
   );
 }

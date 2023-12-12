@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import HStack from '../../components/HStack';
 import VStack from '../../components/VStack';
 import { Link } from 'react-router-dom';
@@ -317,12 +317,16 @@ function HeaderBarElements({
   }
 }
 
-function HeaderBar(): React.ReactElement {
+function HeaderBar(info: {
+  isSearching: boolean,
+  setSearching: React.Dispatch<React.SetStateAction<boolean>>}): React.ReactElement {
   const [hover, setHover] = useState<HeaderElements>();
 
-  useCallback(() => {
-
-  }, [])
+  useEffect(() => {
+    if (info.isSearching) {
+      setSearch();
+    }
+  }, [info.isSearching])
 
   const setRecomendProblem = () => {
     setHover(HeaderElements.RecomendProblem);
@@ -346,6 +350,7 @@ function HeaderBar(): React.ReactElement {
 
   const outHover = () => {
     setHover(undefined);
+    info.setSearching(false);
   };
 
   return (
